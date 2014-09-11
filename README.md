@@ -5,6 +5,6 @@ Opencart 2.0
 
 
 Feature:
-1. Forum \n
+1. Forum
 2. Language
 3. APIs
