@@ -13,6 +13,10 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
+// OAuth 2.0
+require_once(DIR_SYSTEM . 'oauth-server/src/OAuth2/Autoloader.php');
+OAuth2\Autoloader::register();
+
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
@@ -228,6 +232,9 @@ $registry->set('encryption', new Encryption($config->get('config_encryption')));
 
 //OpenBay Pro
 $registry->set('openbay', new Openbay($registry));
+
+// OAuth
+$registry->set('oauth2', new Oauth2($registry));
 
 // Event
 $event = new Event($registry);

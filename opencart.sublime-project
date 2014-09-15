@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Applications/MAMP/htdocs/Projects/Opencart/Present/2.0/"
+		}
+	],
+    "settings":
+    {
+        "xdebug": {
+            "url": "http://localhost/Projects/Opencart/Present/2.0/index.php",
+            "super_globals": true,
+            "close_on_stop": true
+        }
+    }
+}

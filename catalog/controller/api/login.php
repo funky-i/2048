@@ -1,6 +1,7 @@
 <?php
 class ControllerApiLogin extends Controller {
 	public function index() {
+		
 		$this->load->language('api/login');
 
 		// Delete old login so not to cause any issues if there is an error
