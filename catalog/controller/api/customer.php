@@ -1,6 +1,25 @@
 <?php
 class ControllerApiCustomer extends Controller {
+	private $error;
+
 	public function index() {
+		$json = array();
+
+		$this->load->model('account/customer');
+
+		$json['error'] = 'Token expire!';			
+
+		if ($this->oauth2->verifyResourceRequest()) {
+
+			$json = $this->oauth2->getUser();
+			
+		}	
+
+		$this->response->setOutput(json_encode($json));
+
+	}
+
+	public function add() {
 		$this->load->language('api/customer');
 
 		// Delete past customer in case there is an error

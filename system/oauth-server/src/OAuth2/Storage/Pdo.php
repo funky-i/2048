@@ -62,7 +62,7 @@ class Pdo implements
             'access_token_table' => 'oauth_access_tokens',
             'refresh_token_table' => 'oauth_refresh_tokens',
             'code_table' => 'oauth_authorization_codes',
-            'user_table' => 'oauth_users',
+            'user_table' => 'oauth_users',            
             'jwt_table'  => 'oauth_jwt',
             'scope_table'  => 'oauth_scopes',
             'public_key_table'  => 'oauth_public_keys',
@@ -299,13 +299,19 @@ class Pdo implements
     // plaintext passwords are bad!  Override this for your application
     protected function checkPassword($user, $password)
     {
-        return $user['password'] == sha1($password);
+
+        $stmt = $this->db->prepare($sql = sprintf('SELECT password FROM %s WHERE password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1(:password)))))', $this->config['user_table']));
+        $stmt->execute(array('password' => $password));
+        $origin_password = $stmt->fetch();
+        
+        return $user['password'] == $origin_password['password'];
     }
 
     public function getUser($username)
     {        
 
-        $stmt = $this->db->prepare($sql = sprintf('SELECT * from %s where username=:username', $this->config['user_table']));
+        // $stmt = $this->db->prepare($sql = sprintf('SELECT * from %s where username=:username', $this->config['user_table']));
+        $stmt = $this->db->prepare($sql = sprintf('SELECT * from %s where email=:username', $this->config['user_table']));
         $stmt->execute(array('username' => $username));
 
         if (!$userInfo = $stmt->fetch()) {

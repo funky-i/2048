@@ -47,8 +47,9 @@ class Scope implements ScopeInterface
     {
         $required_scope = explode(' ', trim($required_scope));
         $available_scope = explode(' ', trim($available_scope));
-
+        
         return (count(array_diff($required_scope, $available_scope)) == 0);
+
     }
 
     /**
@@ -66,6 +67,7 @@ class Scope implements ScopeInterface
         $scope = explode(' ', trim($scope));
         $reservedScope = $this->getReservedScopes();
         $nonReservedScopes = array_diff($scope, $reservedScope);
+        
         if (count($nonReservedScopes) == 0) {
             return true;
         } else {

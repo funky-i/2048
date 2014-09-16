@@ -3,21 +3,29 @@ class ControllerApiOauth extends Controller {
 	public function index() {		
 		$json = $this->oauth2->handleTokenRequest();
 
-		// $this->response->addHeader('Content-Type: application/json');
+		if (isset($json['access_token']))
+			$this->logged();
+
 		$this->response->setOutput(json_encode($json));
+		
 	}
 
 	public function verify() {
 		$isVerify = $this->oauth2->verifyResourceRequest();
-		if ($isVerify) {
-			echo "You accessed my APIs!";
-		} else {
-			echo "Die";
-		}
+		$this->response->setOutput(json_encode($isVerify));
 	}
 
 	public function token() {
 		$json = $this->oauth2->getToken();
 		$this->response->setOutput(json_encode($json));
 	}
+
+	private function logged() {
+		$user = $this->oauth2->getUser();
+		$this->customer->login($user['username'], null, true);
+
+		if ($this->customer->isLogged())
+			return true;
+	}
+
 }
