@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.product', 'starter.account'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -48,15 +48,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-    .state('tab.friends', {
-      url: '/friends',
+      .state('tab.cart', {
+          url: '/cart',
+          views: {
+              'tab-cart': {
+                  templateUrl: 'templates/tab-cart.html',
+                  controller: ''
+              }
+          }
+      })
+
+    .state('tab.products', {
+      url: '/products',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
+        'tab-products': {
+          templateUrl: 'templates/tab-products.html',
+          controller: 'ProductCtrl'
         }
       }
     })
+
+//      .state('tab.information', {
+//          url: '/information',
+//          views: {
+//              'tab-information': {
+//                  templateUrl: 'templates/tab-information.html',
+//                  controller: ''
+//              }
+//          }
+//      })
+
     .state('tab.friend-detail', {
       url: '/friend/:friendId',
       views: {
@@ -72,7 +93,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'tab-account': {
           templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+          controller: 'Account'
         }
       }
     });
