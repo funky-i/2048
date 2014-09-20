@@ -1,29 +1,33 @@
 <ion-view title="Login" ng-controller="AccountCtrl" >
-  <ion-content class="padding" ng-show="{{ !token }}">
-    <h1>Login</h1>
-      <div class="row">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      </div>
 
-      <form name="loginForm" ng-submit="loginForm.$valid && Login(input)">
-      <div class="list">
-          <label class="item item-input">
-              <span class="input-label">Username:</span>
-              <input ng-model="input.username" type="text" >
-          </label>
-          <label class="item item-input">
-              <span class="input-label">Password:</span>
-              <input ng-model="input.password" type="password" >
-          </label>
-      </div>
-      <div class="row">Validate: {{ loginForm.$valid }}</div>
+  <ion-content class="padding" ng-show="{{ !token }}">
+
+          <h1>Login {{ isShow }}</h1>
           <div class="row">
-          <button class="button button-block button-positive activated">Login</button>
-      </div>
-      </form>
-  </ion-content>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </div>
+
+          <form name="loginForm" ng-submit="loginForm.$valid && Login(input)" onvalidate>
+              <div class="list">
+                  <label class="item item-input">
+                      <span class="input-label">Username:</span>
+                      <input ng-model="input.username" type="text" required>
+                  </label>
+                  <label class="item item-input">
+                      <span class="input-label">Password:</span>
+                      <input ng-model="input.password" type="password" required>
+                  </label>
+              </div>
+              <div class="row">Validate: {{ loginForm.$valid }}</div>
+              <div class="row">
+                  <button class="button button-block button-positive activated">Login</button>
+              </div>
+          </form>
+
+    </ion-content>
     <ion-content class="padding" ng-show="{{ token }}">
-        <h1>Profile</h1>
+
+        <h1>Profile {{ isShow }}</h1>
         <div class="row">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </div>
@@ -69,7 +73,6 @@
         <div class="list">
             <label class="item item-input">
                 <span class="input-label">Firstname: </span>
-
             </label>
         </div>
         <div class="list">
@@ -81,13 +84,11 @@
                 <span class="input-label">Scope: </span>
                 {{ token.scope }}
             </label>
-            <label class="item item-input">
-                <span class="input-label">Expire: </span>
-                {{ token.expires_in | date : 'yyyy/MM/dd' }}
-            </label>
+
         </div>
         <div class="row">
-            <button class="button button-block button-positive activated" ng-click="">Logout</button>
+            <button class="button button-block button-positive activated" ng-click="Logout();">Logout</button>
         </div>
     </ion-content>
 </ion-view>
+

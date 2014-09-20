@@ -1,6 +1,6 @@
 angular.module('starter.account', [])
 
-.controller("AccountCtrl", function($scope, Restangular, $cookieStore, $location) {
+.controller("AccountCtrl", function($scope, Restangular, $cookieStore, $ionicPopup, $timeout, $location) {
         var apps = {
             client_id : '4',
             secret : 'abc',
@@ -10,7 +10,6 @@ angular.module('starter.account', [])
         var inputData = {};
 
         if ($cookieStore!==null) {
-            console.log("token: " + $cookieStore.get('token').access_token);
 //            $location.path('/tab/profile');
         };
 
@@ -39,12 +38,34 @@ angular.module('starter.account', [])
             if (data.error!=null) {
                 console.log("Err: " + data.error_description);
             } else {
-                $location.path('/tab/profile');
-                console.log( data);
                 $cookieStore.put('token', data);
+                $location.path('/tab/account');
             }
 
         }
+    };
+       
+    $scope.Logout = function() {
+
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Logout',
+                template: 'Are you sure you want sign-out?'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $cookieStore.remove('token');
+                    $location.path('/tab/dash');
+                } else {
+                    console.log('You are not sure');
+                }
+            });
+
+        $timeout(function() {
+            confirmPopup.close();
+        }, 3000);
+
+//        $cookieStore.remove('token');
+//        $location.path('/tab/account');
     }
 
 })
