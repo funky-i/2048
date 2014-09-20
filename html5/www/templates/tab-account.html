@@ -2,23 +2,26 @@
   <ion-content class="padding">
     <h1>Account</h1>
       <div class="row">
-        {{ customers.firstname + " " + customers.lastname }}
+        ClientID: {{ apps.client_id }} <br />
+        SecretID: {{ apps.secret }} <br />
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       </div>
 
+      <form name="loginForm" ng-submit="loginForm.$valid && Login(input)">
       <div class="list">
           <label class="item item-input">
               <span class="input-label">Username:</span>
-              <input type="text">
+              <input ng-model="input.username" type="text" >
           </label>
           <label class="item item-input">
               <span class="input-label">Password:</span>
-              <input type="password">
+              <input ng-model="input.password" type="password" >
           </label>
       </div>
-
-      <div class="row">
+<div class="row">Validate: {{ loginForm.$valid }}</div>
+          <div class="row">
           <button class="button button-block button-positive activated">Login</button>
       </div>
+      </form>
   </ion-content>
 </ion-view>

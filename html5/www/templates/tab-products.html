@@ -2,11 +2,15 @@
     <ion-content >
         <h1 class="padding">Products</h1>
 
-        <ion-list ng-repeat="product in products">
-            <ion-item>
-                {{ product.name }}
-            </ion-item>
-        </ion-list>
+        <div class="list">
+            <div ng-repeat="product in products">
+                <a class="item item-thumbnail-left" href="#">
+                    <img ng-src="{{ product.image }}" ng-show="product.image.length">
+                    <h2>{{ product.product_id }} : {{ product.name }}</h2>
+                    <p>{{ product.description }}</p>
+                </a>
+            </div>
+        </div>
 
     </ion-content>
 </ion-view>

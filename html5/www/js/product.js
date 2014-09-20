@@ -1,23 +1,14 @@
 angular.module('starter.product', [])
 
-.controller("ProductCtrl", function($scope) {
-    var products = [{
-          product_id : 1,
-          name : 'Product',
-          price : 200,
-          quantity : 10
-        },
-        {
-            product_id : 2,
-            name : 'Product',
-            price : 200,
-            quantity : 10
-        }]
+.controller("ProductCtrl", function($scope, $http, $stateParams, Products, Restangular) {
 
-        this.list = function() {
-            return products;
-        }
 
-    $scope.products = this.list();
+//        $scope.products = Products.all().then(function(result) {
+//           $scope.products = result;
+//        });
+//        Products.all().then(function(result) {
+//           $scope.products = result;
+//        });
 
+        $scope.products = Restangular.all("api/product").getList().$object;
 });
