@@ -1,35 +1,38 @@
 angular.module('starter.account', [])
 
-.controller("AccountCtrl", function($scope, Restangular, $cookieStore, $ionicPopup, $timeout, $location) {
-        var apps = {
-            client_id : '4',
-            secret : 'abc',
-            grant_type : 'password'
-        };
+.controller("AccountCtrl", function($scope, Restangular, $cookieStore, $ionicPopup, $timeout, $location, AppConfig) {
+
 
         var inputData = {};
 
-        if ($cookieStore!==null) {
-//            $location.path('/tab/profile');
+        var isLog = false;
+
+        isLog = ($cookieStore.get('token')!=null)? true : false;
+        $scope.token = ($cookieStore.get('token')!=null)? $cookieStore.get('token') : '';
+        $scope.Show = function(status) {
+            isLog = status;
+        }
+
+        $scope.IsLogged = function(status) {
+            return isLog == status;
         };
 
-    $scope.token = ($cookieStore!==null)? $cookieStore.get('token') : null;
-    $scope.apps = apps;
     $scope.Login = function (input) {
 
-        var fillter = {
-            username : 'mr.kaewdok@gmail.com',
-            password : 'demo',
-            client_id : apps.client_id,
-            client_secret : apps.secret,
-            grant_type : apps.grant_type
+        var filter = {
+            username : input.username,
+            password : input.password,
+            client_id : AppConfig.client_id,
+            client_secret : AppConfig.secret,
+            grant_type : AppConfig.grant_type
         }
 
         input = {};
+        console.log(filter);
 
         var AccountObj = Restangular.all('api/oauth');
 
-        AccountObj.post(fillter).then(function (data) {
+        AccountObj.post(filter).then(function (data) {
             SuccessCallback(data);
         });
 
@@ -38,13 +41,14 @@ angular.module('starter.account', [])
             if (data.error!=null) {
                 console.log("Err: " + data.error_description);
             } else {
+                isLog = true;
+                console.log(data);
                 $cookieStore.put('token', data);
-                $location.path('/tab/account');
             }
 
         }
     };
-       
+
     $scope.Logout = function() {
 
             var confirmPopup = $ionicPopup.confirm({

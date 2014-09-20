@@ -7,6 +7,15 @@ angular.module('starter.services', [])
 //        $httpProvider.defaults.useXDomain = true;
 //        delete $httpProvider.defaults.headers.common['X-Requested-With'];
 //    })
+    .factory('AppConfig', function() {
+        var apps = {
+            client_id : '4',
+            secret : 'abc',
+            grant_type : 'password'
+        };
+
+        return apps;
+    })
     .factory('Products', function($http) {
         var products = {};
         var status = false;
