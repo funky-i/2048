@@ -1,5 +1,5 @@
-<ion-view title="Login" ng-controller="Account">
-  <ion-content class="padding">
+<ion-view title="Login" ng-controller="AccountCtrl" >
+  <ion-content class="padding" ng-show="{{ !token }}">
     <h1>Login</h1>
       <div class="row">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -16,10 +16,78 @@
               <input ng-model="input.password" type="password" >
           </label>
       </div>
-<div class="row">Validate: {{ loginForm.$valid }}</div>
+      <div class="row">Validate: {{ loginForm.$valid }}</div>
           <div class="row">
           <button class="button button-block button-positive activated">Login</button>
       </div>
       </form>
   </ion-content>
+    <ion-content class="padding" ng-show="{{ token }}">
+        <h1>Profile</h1>
+        <div class="row">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </div>
+        <!-- Menu -->
+        <div class="list">
+
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-chatbubble-working"></i>
+                Notification
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-person-stalker"></i>
+                Friends
+                <span class="badge badge-assertive">2</span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-bag"></i>
+                Orders
+                <span class="badge badge-assertive"></span>
+            </a>
+
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-heart"></i>
+                Wish List
+                <span class="badge badge-assertive">2</span>
+            </a>
+
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-bookmark"></i>
+                Services
+                <span class="badge badge-assertive"></span>
+            </a>
+
+            <div class="item item-button-right">
+                Services
+                <button class="button  button-positive">
+                    <i class="icon ion-ios7-telephone"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Firstname: </span>
+
+            </label>
+        </div>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Firstname: </span>
+                {{ token.access_token }}
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Scope: </span>
+                {{ token.scope }}
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Expire: </span>
+                {{ token.expires_in | date : 'yyyy/MM/dd' }}
+            </label>
+        </div>
+        <div class="row">
+            <button class="button button-block button-positive activated" ng-click="">Logout</button>
+        </div>
+    </ion-content>
 </ion-view>

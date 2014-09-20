@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'starter.controllers', 'starter.services', 'starter.product', 'starter.account'])
+angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'starter.controllers', 'starter.services', 'starter.product', 'starter.account'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,11 +20,18 @@ angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'starter.control
     }
   });
 })
-
-.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
+//.config($routeProvider, function($routeProvider) {
+//    $routeProvider.
+//        when('/home', {templateUrl: 'home.html',   controller: HomeCtrl}).
+//        otherwise({redirectTo: '/home'});
+//});
+.config(function($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
         var index = 'index.php?route=';
         RestangularProvider.setBaseUrl('http://192.168.1.34/Projects/Opencart/Present/2.0/' + index);
+
+//        $routeProvider
+//            .when('/profile', {templateUrl: 'templates/account.html',   controller: 'ProductCtrl'})
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -38,6 +45,16 @@ angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'starter.control
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
+
+      .state('tab.profile', {
+          url: "/profile",
+          views: {
+              'tab-account': {
+                  templateUrl: 'templates/account/transaction.html',
+                  controller: 'DashCtrl'
+              }
+          }
+      })
 
     // Each tab has its own nav history stack:
 
@@ -71,6 +88,8 @@ angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'starter.control
       }
     })
 
+
+
 //      .state('tab.information', {
 //          url: '/information',
 //          views: {
@@ -96,7 +115,7 @@ angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'starter.control
       views: {
         'tab-account': {
           templateUrl: 'templates/tab-account.html',
-          controller: 'Account'
+          controller: 'AccountCtrl'
         }
       }
     });

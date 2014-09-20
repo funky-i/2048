@@ -1,6 +1,6 @@
 angular.module('starter.product', [])
 
-.controller("ProductCtrl", function($scope, $http, $stateParams, Products, Restangular) {
+.controller("ProductCtrl", function($scope, $http, $stateParams, Products, Restangular, $cookieStore) {
 
 
 //        $scope.products = Products.all().then(function(result) {
