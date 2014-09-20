@@ -1,6 +1,8 @@
 <?php
 class ControllerApiOauth extends Controller {
-	public function index() {		
+	public function index() {
+		initHeader();
+		
 		$json = $this->oauth2->handleTokenRequest();
 
 		if (isset($json['access_token']))
