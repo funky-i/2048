@@ -6,8 +6,6 @@ angular.module('starter.account', [])
             secret : 'abc',
             grant_type : 'password'
         };
-        
-        var url = 'http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=api/oauth';
 
         var inputData = {};
 
@@ -22,32 +20,18 @@ angular.module('starter.account', [])
             grant_type : apps.grant_type
         }
 
-        console.log("OAuth LOGIN");
-        console.log(fillter);
         input = {};
 
-//        Restangular.post('api/oauth', fillter).getList().$object;
+        var AccountObj = Restangular.all('api/oauth');
+        AccountObj.post(fillter).then(function (data) {
+            SuccessCallback(data);
+        });
 
-        $http({method: 'POST', url: url, data: fillter})
-            .success(function(data, status) {
-                console.log(data);
-            })
-            .error(function(data, status){
-                console.log("Error: " + data);
-            })
+        SuccessCallback = function(data) {
+            console.log("Success");
+            console.log(data);
+        }
 
-//        Restangular.post('api/oauth', fillter).then(function() {
-//
-//            console.log("Object Save");
-//        }, function() {
-//            console.log("There was an error saving");
-//        });
-
-//        console.log(callback);
     }
-//        this.login = function(login) {
-//            console.log(login);
-////            var newAccount = {name: "Gonto's account"};
-////            baseAccounts.post(newAccount);
-//        };
+
 });
