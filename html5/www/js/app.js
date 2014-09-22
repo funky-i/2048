@@ -5,27 +5,25 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'starter.controllers', 'starter.services', 'starter.product', 'starter.account'])
+angular.module('starter', ['ionic',
+    'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
+    'starter.controllers', 'starter.services', 'starter.product', 'starter.account'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-//.config($routeProvider, function($routeProvider) {
-//    $routeProvider.
-//        when('/home', {templateUrl: 'home.html',   controller: HomeCtrl}).
-//        otherwise({redirectTo: '/home'});
-//});
-.config(function($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
+    .run(function ($ionicPlatform) {
+        $ionicPlatform.ready(function () {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
+        });
+    })
+
+    .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
         var index = 'index.php?route=';
         RestangularProvider.setBaseUrl('http://192.168.1.34/Projects/Opencart/Present/2.0/' + index);
@@ -33,61 +31,60 @@ angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'ngRoute', 'ngSt
 //        $routeProvider
 //            .when('/profile', {templateUrl: 'templates/account.html',   controller: 'ProductCtrl'})
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
+        $stateProvider
 
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/tabs.html"
-    })
+            // setup an abstract state for the tabs directive
+            .state('tab', {
+                url: "/tab",
+                abstract: true,
+                templateUrl: "templates/tabs.html"
+            })
 
-      .state('tab.profile', {
-          url: "/profile",
-          views: {
-              'tab-account': {
-                  templateUrl: 'templates/account/transaction.html',
-                  controller: 'DashCtrl'
-              }
-          }
-      })
+            .state('tab.profile', {
+                url: "/profile",
+                views: {
+                    'tab-account': {
+                        templateUrl: 'templates/account/transaction.html',
+                        controller: 'DashCtrl'
+                    }
+                }
+            })
 
-    // Each tab has its own nav history stack:
+            // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
-      url: '/dash',
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
-        }
-      }
-    })
+            .state('tab.dash', {
+                url: '/dash',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'templates/tab-dash.html',
+                        controller: 'DashCtrl'
+                    }
+                }
+            })
 
-      .state('tab.cart', {
-          url: '/cart',
-          views: {
-              'tab-cart': {
-                  templateUrl: 'templates/tab-cart.html',
-                  controller: ''
-              }
-          }
-      })
+            .state('tab.cart', {
+                url: '/cart',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/tab-cart.html',
+                        controller: ''
+                    }
+                }
+            })
 
-    .state('tab.products', {
-      url: '/products',
-      views: {
-        'tab-products': {
-          templateUrl: 'templates/tab-products.html',
-          controller: 'ProductCtrl'
-        }
-      }
-    })
-
+            .state('tab.products', {
+                url: '/products',
+                views: {
+                    'tab-products': {
+                        templateUrl: 'templates/tab-products.html',
+                        controller: 'ProductCtrl'
+                    }
+                }
+            })
 
 
 //      .state('tab.information', {
@@ -100,28 +97,28 @@ angular.module('starter', ['ionic', 'restangular', 'ngCookies', 'ngRoute', 'ngSt
 //          }
 //      })
 
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
+            .state('tab.friend-detail', {
+                url: '/friend/:friendId',
+                views: {
+                    'tab-friends': {
+                        templateUrl: 'templates/friend-detail.html',
+                        controller: 'FriendDetailCtrl'
+                    }
+                }
+            })
 
-    .state('tab.account', {
-      url: '/account',
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
-        }
-      }
+            .state('tab.account', {
+                url: '/account',
+                views: {
+                    'tab-account': {
+                        templateUrl: 'templates/tab-account.html',
+                        controller: 'AccountCtrl'
+                    }
+                }
+            });
+
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/tab/dash');
+
     });
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
-
-});
 
