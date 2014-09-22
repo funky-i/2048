@@ -5,6 +5,20 @@ function removeHtml($string) {
 	return $text;
 }
 
+function getParams() {
+
+	if (!empty($_POST)) {		
+		$params['data'] = $_POST;	
+	} else {
+		$handle = fopen('php://input','r');
+		$jsonInput = fgets($handle);
+		$decoded = json_decode($jsonInput,true);
+		$params['data'] = $decoded;			
+	}	
+
+	return $params;
+}
+
 function initHeader() {
 	
 	// $this->response->addHeader('Access-Control-Allow-Headers:*');
@@ -15,6 +29,7 @@ function initHeader() {
 
 	// header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 	// header('Access-Control-Allow-Credentials, true');
+
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');	
 }
