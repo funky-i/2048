@@ -236,6 +236,9 @@ $registry->set('openbay', new Openbay($registry));
 // OAuth
 $registry->set('oauth2', new Oauth2($registry));
 
+// Image Resize
+$registry->set('image', new Resize($registry));
+
 // Event
 $event = new Event($registry);
 $registry->set('event', $event);

@@ -28,8 +28,16 @@ function initHeader() {
 	// header('Access-Control-Allow-Headers:*');
 
 	// header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+	// header('Access-Control-Allow-Headers:*');
+	// header('Access-Control-Allow-Headers: Origin, Content-Type');
 	// header('Access-Control-Allow-Credentials, true');
 
-	header('Access-Control-Allow-Origin:*');
-	header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');	
+	// header('Access-Control-Allow-Origin: *');
+	// header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+	// header('Access-Control-Allow-Credentials, true');
+
+	header('Access-Control-Allow-Origin: http://localhost:8100');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+    header('Access-Control-Allow-Headers: Accept, X-Requested-With,Content-Type');
+    header('Access-Control-Allow-Credentials: true');
 }
