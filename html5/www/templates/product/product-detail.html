@@ -1,0 +1,42 @@
+<ion-view title="{{ productInfo.name }}">
+    <ion-content has-header="true" padding="true" class="padding">
+
+
+        <h1>{{ productInfo.name }}</h1>
+
+        <div class="row padding-bottom" >
+            <img ng-src="{{ productInfo.thumb }}">
+        </div>
+
+        <div class="row">
+            {{ productInfo.description }}
+        </div>
+
+
+        <div class="list">
+            <form name="loginForm" ng-submit="loginForm.$valid && Login(input)" onvalidate>
+            </form>
+        </div>
+
+        <div>
+            <h1>Specification</h1>
+            <div  ng-repeat="attr in productInfo.attribute">
+                <div class="item item-divider">
+                    {{ attr.name }}
+                </div>
+                <div class="list" ng-repeat="attrList in attr.attribute">
+                    <label class="item item-input">
+                        <span class="input-label">{{ attrList.name }}: </span>
+                        {{ attrList.text }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-controller="CartCtrl">
+            <button class="button button-block button-positive activated" ng-click="CartAdd( productInfo.product_id )">Add Cart</button>
+        </div>
+
+
+    </ion-content>
+</ion-view>

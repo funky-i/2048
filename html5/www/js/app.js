@@ -7,7 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
-    'starter.controllers', 'starter.services', 'starter.product', 'starter.account'])
+    'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
+    'starter.checkout'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -25,8 +26,15 @@ angular.module('starter', ['ionic',
 
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
-        var index = 'index.php?route=';
+        var index = 'index.php?route=api';
         RestangularProvider.setBaseUrl('http://192.168.1.34/Projects/Opencart/Present/2.0/' + index);
+        RestangularProvider.setDefaultHeaders({
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        });
+        RestangularProvider.setDefaultHttpFields({
+            'withCredentials': true
+        });
 
 //        $routeProvider
 //            .when('/profile', {templateUrl: 'templates/account.html',   controller: 'ProductCtrl'})
@@ -71,17 +79,74 @@ angular.module('starter', ['ionic',
                 views: {
                     'tab-cart': {
                         templateUrl: 'templates/tab-cart.html',
-                        controller: ''
+                        controller: 'OrderCtrl'
+                    }
+                }
+            })
+
+            // Checkout
+            .state('tab.billing', {
+                url: '/order/billing',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/payment.html',
+                        controller: 'CheckoutCtrl'
+                    }
+                }
+            })
+            .state('tab.shipping', {
+                url: '/order/shipping',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/shipping.html',
+                        controller: 'CheckoutCtrl'
+                    }
+                }
+            })
+            .state('tab.shippingmethod', {
+                url: '/order/shippingmethod',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/shipping_method.html',
+                        controller: 'CheckoutCtrl'
+                    }
+                }
+            })
+            .state('tab.paymentmethod', {
+                url: '/order/paymentmethod',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/payment_method.html',
+                        controller: 'CheckoutCtrl'
+                    }
+                }
+            })
+            .state('tab.confirm', {
+                url: '/order/confirm',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/confirm.html',
+                        controller: 'CheckoutCtrl'
                     }
                 }
             })
 
             .state('tab.products', {
-                url: '/products',
+                url: '/product',
                 views: {
-                    'tab-products': {
+                    'tab-product': {
                         templateUrl: 'templates/tab-products.html',
                         controller: 'ProductCtrl'
+                    }
+                }
+            })
+
+            .state('tab.product-detail', {
+                url: '/product/:productId',
+                views: {
+                    'tab-product': {
+                        templateUrl: 'templates/product/product-detail.html',
+                        controller: 'ProductDetailCtrl'
                     }
                 }
             })
@@ -96,16 +161,6 @@ angular.module('starter', ['ionic',
 //              }
 //          }
 //      })
-
-            .state('tab.friend-detail', {
-                url: '/friend/:friendId',
-                views: {
-                    'tab-friends': {
-                        templateUrl: 'templates/friend-detail.html',
-                        controller: 'FriendDetailCtrl'
-                    }
-                }
-            })
 
             .state('tab.account', {
                 url: '/account',

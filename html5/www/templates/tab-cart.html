@@ -1,5 +1,31 @@
-<ion-view title="Cart">
+<ion-view title="Cart" ng-controller="CartCtrl">
     <ion-content class="padding">
         <h1>Cart</h1>
+
+        <div class="list">
+            <div ng-repeat="product in products">
+                <a class="item item-icon-left" href="#/tab/product/{{ product.product_id }}">
+                    <i class="icon ion-bag"></i>
+                    {{ product.name }} : {{ product.quantity }}
+                    <span class="badge">{{ product.price | currency }}</span>
+                </a>
+            </div>
+        </div>
+        <div class="list">
+            <label class="item item-input" ng-repeat="total in totals">
+                <span class="input-label">{{ total.title }}:</span>
+                <span class="badge">{{ total.text }}</span>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col col-20" ><button class="button button-block button-positive activated" ng-click="Clear()">-</button></div>
+        </div>
+
+        <div class="row" ng-controller="CheckoutCtrl">
+            <button class="button button-block button-positive activated" ng-click="Next(1)">Check-Out</button>
+        </div>
+
     </ion-content>
 </ion-view>

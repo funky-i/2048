@@ -1,12 +1,12 @@
 <ion-view title="Products">
     <ion-content >
-        <h1 class="padding">Products: {{ token }}</h1>
+        <h1 class="padding">Products</h1>
 
         <div class="list">
             <div ng-repeat="product in products">
-                <a class="item item-thumbnail-left" href="#">
-                    <img ng-src="{{ product.image }}" ng-show="product.image.length">
-                    <h2>{{ product.product_id }} : {{ product.name }}</h2>
+                <a class="item item-thumbnail-left" href="#/tab/product/{{ product.product_id }}" ng-show="{{ product.product_id != null}}">
+                    <img ng-src="{{ product.image }}">
+                    <h2>{{ product.name }}</h2>
                     <p>{{ product.description }}</p>
                 </a>
             </div>

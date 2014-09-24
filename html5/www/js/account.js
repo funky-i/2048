@@ -1,9 +1,9 @@
 angular.module('starter.account', [])
 
-    .controller("AccountCtrl", function ($scope, $cookieStore, $ionicPopup, $timeout, $location, AppConfig, Restangular, localStorageService, webStorage) {
+    .controller("AccountCtrl", function ($scope, $cookieStore, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage) {
 
         var isLog = false;
-        var AccountObj = Restangular.all('api/oauth');
+        var AccountObj = Restangular.all('oauth');
 
 
         if (webStorage.local.get('token') != null) {
@@ -28,19 +28,19 @@ angular.module('starter.account', [])
             console.log(webStorage.local.get('token'));
         }
 
-
         $scope.Login = function (input) {
-
+            var apps = AppConfig.apps();
             var inputData = {
                 username: 'mr.kaewdok@gmail.com',//input.username,
                 password: 'demo',//input.password,
-                client_id: AppConfig.client_id,
-                client_secret: AppConfig.secret,
-                grant_type: AppConfig.grant_type
+                client_id: apps.client_id,
+                client_secret: apps.secret,
+                grant_type: apps.grant_type
             }
 
             AccountObj.post(inputData).then(function (data) {
                 SuccessCallback(data);
+                console.log(data);
             });
 
             SuccessCallback = function (data) {
