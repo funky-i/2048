@@ -1,7 +1,6 @@
 <h2>Opencart-2.0</h2>
 ============
 
-Opencart 2.0
 
 
 <strong>Feature:</strong>
