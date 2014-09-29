@@ -325,9 +325,7 @@ class ControllerApiOrder extends Controller {
 			// Set the order history
 			$order_status_id = $this->config->get('config_order_status_id');
 			$json['order_id'] = 23;
-			
-			
-			
+						
 			$this->model_checkout_order->addOrderHistory($json['order_id'], $order_status_id);
 			
 		}

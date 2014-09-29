@@ -4,7 +4,7 @@ angular.module('starter.checkout', [])
         var checkoutState = AppConfig.checkout();
 
         Restangular.all('cart/products').post().then(function (data) {
-            if (data.products!=null) {
+            if (data.products != null) {
                 OrderCallback(data);
             }
         });
@@ -16,35 +16,39 @@ angular.module('starter.checkout', [])
         }
 
         var inputData = {
-            payment_address : Addresses.get(webStorage.session.get('billing_address_id')),
-            payment_method : PaymentMethods.get(webStorage.session.get('payment_method_code')),
-            shipping_address : Addresses.get(webStorage.session.get('shipping_address_id')),
-            shipping_method : ShippingMethods.get(webStorage.session.get('shipping_method_code'))
+            payment_address: Addresses.get(webStorage.session.get('billing_address_id')),
+            payment_method: PaymentMethods.get(webStorage.session.get('payment_method_code')),
+            shipping_address: Addresses.get(webStorage.session.get('shipping_address_id')),
+            shipping_method: ShippingMethods.get(webStorage.session.get('shipping_method_code'))
         }
 
         $ionicModal.fromTemplateUrl('templates/payment/' + inputData.payment_method.code + '.html', {
             scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal) {
+            animation: 'slide-in-up',
+            backdropClickToClose: true
+        }).then(function (modal) {
             $scope.modal = modal;
         });
 
-        $scope.openModal = function() {
+        $scope.openModal = function () {
+            console.log(inputData.payment_method);
             $scope.modal.show();
         };
-        $scope.closeModal = function() {
+        $scope.closeModal = function () {
             $scope.modal.hide();
         };
 
-        $scope.AddOrder = function() {
+        $scope.AddOrder = function () {
 
-            console.log(inputData.payment_method);
+            OrderObj.all('add').post(inputData).then(function (data) {
+                console.log(data);
+//                if (data.success!=null) {
+//                    webStorage.session.add('order_id', data.order_id);
+//                }
 
-//            OrderObj.all('add').post(inputData).then(function(data) {
-//                console.log(data);
-//            })
+            })
 
-            $scope.openModal();
+//            $scope.openModal();
 
         }
 

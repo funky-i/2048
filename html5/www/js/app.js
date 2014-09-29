@@ -9,7 +9,8 @@ angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
     'ionic',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
-    'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment'])
+    'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment',
+    'cod'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -161,8 +162,6 @@ angular.module('starter', ['ionic',
                     }
                 }
             })
-
-
 
 
 //      .state('tab.information', {

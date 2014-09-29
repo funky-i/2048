@@ -3,6 +3,7 @@ angular.module('starter.cart', [])
     .controller("CartCtrl", function ($scope, $http, $location, $ionicPopup, Restangular, webStorage, AppConfig) {
         var CartObj = Restangular.all('cart');
         var checkoutState = AppConfig.checkout();
+
         $scope.CartAdd = function (productId) {
             var inputData = {
                 'product_id': productId
