@@ -3,20 +3,47 @@ class ControllerApiCustomer extends Controller {
 	private $error;
 
 	public function index() {
-		$json = array();
+		initHeader();
+		$Params = getParams();
+
+		$json = [];
 
 		$this->load->model('account/customer');
 
-		$json['error'] = 'Token expire!';			
-
-		if ($this->oauth2->verifyResourceRequest()) {
-
-			$json = $this->oauth2->getUser();
-			
-		}	
+		// if ($this->oauth2->verifyResourceRequest()) {
+		// $json = $this->oauth2->getUser();
+		if ($this->customer->isLogged()) {			
+			$customer = $this->model_account_customer->getCustomer($this->customer->getId());
+			$customer['token'] = $Params['data']['token'];
+			$json = $this->pattern($customer);
+		} else {
+			$json['error'] = 'Token expire!';
+		}
 
 		$this->response->setOutput(json_encode($json));
 
+	}
+
+	private function pattern($data = array()) {
+		$rewards = $this->customer->getRewardPoints();
+		$balance = $this->customer->getBalance();
+
+		$customer = array(
+			'customer_id' => $data['customer_id'],
+			'firstname' => $data['firstname'],
+			'lastname' => $data['lastname'],
+			'email' => $data['email'],
+			'points' => $rewards,
+			'balance' => $balance,
+			'address_id' => $data['address_id'],
+			'ip' => $data['ip'],
+			'status' => $data['status'],
+			'approved' => $data['approved'],
+			'date_added' => $data['date_added'],
+			'token' => $this->oauth2->getToken()
+		);
+
+		return $customer;
 	}
 
 	public function add() {

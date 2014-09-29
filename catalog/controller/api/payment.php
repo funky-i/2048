@@ -1,5 +1,74 @@
 <?php
 class ControllerApiPayment extends Controller {
+	public function index() {
+		initHeader();
+		$Params = getParams();
+		$json = [];
+
+		if (isset($Params['data']['payment_address'])) {
+			$this->session->data['payment_address'] = $Params['data']['payment_address'];
+		}
+
+		$this->load->language('api/payment');
+
+		// Delete past shipping methods and method just in case there is an error
+		unset($this->session->data['payment_methods']);
+		unset($this->session->data['payment_method']);
+
+		// Payment Address
+		if (!isset($this->session->data['payment_address'])) {
+			$json['error'] = $this->language->get('error_address');
+		}
+
+		if (!$json) {
+			// Totals
+			$total = $this->cart->getSubTotal();
+
+			// Payment Methods
+			$json['payment_methods'] = array();
+
+			$this->load->model('setting/extension');
+
+			$results = $this->model_setting_extension->getExtensions('payment');
+
+			$recurring = $this->cart->hasRecurringProducts();
+
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('payment/' . $result['code']);
+
+					$method = $this->{'model_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+
+					if ($method) {
+						if ($recurring) {
+							if (method_exists($this->{'model_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_payment_' . $result['code']}->recurringPayments()) {
+								$json['payment_methods'][$result['code']] = $method;
+							}
+						} else {
+							$json['payment_methods'][$result['code']] = $method;
+						}
+					}
+				}
+			}
+
+			$sort_order = array();
+
+			foreach ($json['payment_methods'] as $key => $value) {
+				$sort_order[$key] = $value['sort_order'];
+			}
+
+			array_multisort($sort_order, SORT_ASC, $json['payment_methods']);
+
+			if ($json['payment_methods']) {
+				$this->session->data['payment_methods'] = $json['payment_methods'];
+			} else {
+				$json['error'] = $this->language->get('error_no_payment');
+			}
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}
+	/*
 	public function address() {
 		initHeader();
 		$Params = getParams();
@@ -237,4 +306,5 @@ class ControllerApiPayment extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+	*/
 }
