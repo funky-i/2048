@@ -26,9 +26,9 @@ class ControllerApiShipping extends Controller {
 				// Shipping Methods
 				$json['shipping_methods'] = array();
 
-				$this->load->model('setting/extension');
+				$this->load->model('extension/extension');
 
-				$results = $this->model_setting_extension->getExtensions('shipping');
+				$results = $this->model_extension_extension->getExtensions('shipping');
 
 				foreach ($results as $result) {
 					if ($this->config->get($result['code'] . '_status')) {
@@ -223,9 +223,9 @@ class ControllerApiShipping extends Controller {
 				// Shipping Methods
 				$json['shipping_methods'] = array();
 
-				$this->load->model('setting/extension');
+				$this->load->model('extension/extension');
 
-				$results = $this->model_setting_extension->getExtensions('shipping');
+				$results = $this->model_extension_extension->getExtensions('shipping');
 
 				foreach ($results as $result) {
 					if ($this->config->get($result['code'] . '_status')) {
