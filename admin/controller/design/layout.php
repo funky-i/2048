@@ -180,7 +180,8 @@ class ControllerDesignLayout extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
 
@@ -249,7 +250,7 @@ class ControllerDesignLayout extends Controller {
 		$data['order'] = $order;
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('design/layout_list.tpl', $data));
@@ -259,14 +260,24 @@ class ControllerDesignLayout extends Controller {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_default'] = $this->language->get('text_default');
+		$data['text_enabled'] = $this->language->get('text_enabled');
+		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_content_top'] = $this->language->get('text_content_top');
+		$data['text_content_bottom'] = $this->language->get('text_content_bottom');
+		$data['text_column_left'] = $this->language->get('text_column_left');
+		$data['text_column_right'] = $this->language->get('text_column_right');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_store'] = $this->language->get('entry_store');
 		$data['entry_route'] = $this->language->get('entry_route');
+		$data['entry_module'] = $this->language->get('entry_module');
+		$data['entry_position'] = $this->language->get('entry_position');
+		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_route_add'] = $this->language->get('button_route_add');
+		$data['button_module_add'] = $this->language->get('button_module_add');
 		$data['button_remove'] = $this->language->get('button_remove');
 
 		if (isset($this->error['warning'])) {
@@ -338,9 +349,56 @@ class ControllerDesignLayout extends Controller {
 		} else {
 			$data['layout_routes'] = array();
 		}
-
+		
+		if (isset($this->request->post['layout_module'])) {
+			$data['layout_modules'] = $this->request->post['layout_module'];
+		} elseif (isset($this->request->get['layout_id'])) {
+			$data['layout_modules'] = $this->model_design_layout->getLayoutModules($this->request->get['layout_id']);
+		} else {
+			$data['layout_modules'] = array();
+		}
+		
+		$this->load->model('extension/extension');
+		
+		$data['modules'] = array();
+		
+		// Get a list of installed modules
+		$extensions = $this->model_extension_extension->getInstalled('module');
+				
+		// Add all the modules which have multiple settings for each module
+		foreach ($extensions as $code) {
+			$this->load->language('module/' . $code);
+		
+			$i = 1;
+			
+			$module_data = array();
+			
+			if ($this->config->has($code . '_module')) {
+				$modules = $this->config->get($code . '_module');
+				
+				foreach (array_keys($modules) as $key) {
+					$module_data[] = array(
+						'name' => $this->language->get('heading_title') . ' ' . $i++,
+						'code' => $code . '.' . $key
+					);
+				}
+			} else {
+				$module_data[] = array(
+					'name' => $this->language->get('heading_title'),
+					'code' => $code
+				);
+			}
+			
+			if ($module_data) {
+				$data['modules'][] = array(
+					'name'   => $this->language->get('heading_title'),
+					'module' => $module_data
+				);
+			}
+		}
+		
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('design/layout_form.tpl', $data));

@@ -4,7 +4,7 @@ class ControllerOpenbayEtsy extends Controller {
 		$this->load->language('openbay/etsy');
 		$this->load->model('openbay/etsy');
 		$this->load->model('setting/setting');
-		$this->load->model('setting/extension');
+		$this->load->model('extension/extension');
 		$this->load->model('tool/event');
 
 		$this->model_user_user_group->addPermission($this->user->getId(), 'access', 'openbay/etsy_product');
@@ -20,11 +20,11 @@ class ControllerOpenbayEtsy extends Controller {
 	public function uninstall() {
 		$this->load->model('openbay/etsy');
 		$this->load->model('setting/setting');
-		$this->load->model('setting/extension');
+		$this->load->model('extension/extension');
 		$this->load->model('tool/event');
 
 		$this->model_openbay_etsy->uninstall();
-		$this->model_setting_extension->uninstall('openbay', $this->request->get['extension']);
+		$this->model_extension_extension->uninstall('openbay', $this->request->get['extension']);
 		$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 	}
 
@@ -64,7 +64,7 @@ class ControllerOpenbayEtsy extends Controller {
 		$data['links_listings'] = $this->url->link('openbay/etsy_product/listings', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/etsy.tpl', $data));
@@ -171,7 +171,7 @@ class ControllerOpenbayEtsy extends Controller {
 		$data['account_info'] = $this->model_openbay_etsy->verifyAccount();
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/etsy_settings.tpl', $data));
