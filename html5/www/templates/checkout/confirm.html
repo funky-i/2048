@@ -1,11 +1,23 @@
 <ion-view title="Confirm Order">
     <ion-content has-header="true" padding="true" class="padding">
 
-
         <h1>Confirm Order:</h1>
 
-        <div class="row" ng-controller="CheckoutCtrl">
-            <button class="button button-block button-positive activated" ng-click="">Next</button>
+        <div class="list">
+            <label class="item item-input" ng-repeat="product in products">
+                <span class="input-label">{{ product.name }} : {{ product.quantity }}</span>
+                <span class="badge">{{ product.price }}</span>
+            </label>
+        </div>
+        <div class="list">
+            <label class="item item-input" ng-repeat="total in totals">
+                <span class="input-label">{{ total.title }}:</span>
+                <span class="badge">{{ total.text }}</span>
+            </label>
+        </div>
+
+        <div class="row">
+            <button class="button button-block button-positive activated" ng-click="AddOrder()">Confirm</button>
         </div>
 
 

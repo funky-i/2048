@@ -1,13 +1,32 @@
-<ion-view title="Shipping">
+<ion-view title="Shipping Method">
     <ion-content has-header="true" padding="true" class="padding">
 
+        <h1>Delivery Method:</h1>
 
-        <h1>Shipping Method:</h1>
-
-        <div class="row" ng-controller="CheckoutCtrl">
-            <button class="button button-block button-positive activated" ng-click="Next(4)">Next</button>
+        <div class="list">
+            <ion-radio ng-model="shipping_method" ng-click="setShippingMethod(0)" value="0">NONE</ion-radio>
+            <div ng-repeat="(key, shipping) in shipping_methods">
+                <ion-radio ng-model="shipping_method" ng-click="setShippingMethod(key)" value="{{ key }}">
+                    {{ shipping.title }} :
+                    <div class="row no-padding" ng-repeat="methods in shipping.quote">
+                        <div class="col">
+                            <label class="font-10">{{ methods.title }}:</label>
+                        </div>
+                        <div class="col">
+                            <label class="font-10">{{ methods.text }}</label>
+                        </div>
+                    </div>
+                </ion-radio>
+            </div>
         </div>
 
+        <div class="row">
+            Select:
+        </div>
+
+        <div class="row">
+            <button class="button button-block button-positive activated" ng-click="Next(4)">Next</button>
+        </div>
 
     </ion-content>
 </ion-view>

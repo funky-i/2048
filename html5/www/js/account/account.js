@@ -3,14 +3,14 @@ angular.module('starter.account', [])
     .controller("AccountCtrl", function ($scope, $cookieStore, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage) {
 
         var isLog = false;
-        var AccountObj = Restangular.all('oauth');
+        var AccountObj = Restangular.all('login');
 
-
-        if (webStorage.local.get('token') != null) {
+        if (webStorage.local.get('customer') != null) {
             isLog = true;
         };
 
         $scope.token = (webStorage.local.get('token') != null) ? webStorage.local.get('token') : null;
+        $scope.customer = (webStorage.local.get('customer') != null) ? webStorage.local.get('customer') : null;
         $scope.Show = function (status) {
             isLog = status;
         };
@@ -21,35 +21,36 @@ angular.module('starter.account', [])
 
         ClearAll = function () {
             webStorage.local.clear();
-        }
+        };
 
         Authenticate = function (token) {
             console.log('Authentication: ');
-            console.log(webStorage.local.get('token'));
-        }
+            console.log(webStorage.local.get('customer'));
+        };
 
         $scope.Login = function (input) {
-            var apps = AppConfig.apps();
             var inputData = {
                 username: 'mr.kaewdok@gmail.com',//input.username,
                 password: 'demo',//input.password,
-                client_id: apps.client_id,
-                client_secret: apps.secret,
-                grant_type: apps.grant_type
+                token: 'ef9a22c416d5bd5f875407c156db31e59d342acd'
             }
 
             AccountObj.post(inputData).then(function (data) {
                 SuccessCallback(data);
-                console.log(data);
             });
 
             SuccessCallback = function (data) {
-
+                console.log(data.success);
                 if (data.error != null) {
                     console.log("Err: " + data.error_description);
                 } else {
-                    isLog = true;
-                    webStorage.local.add('token', data);
+                    var CustomerObj = Restangular.all('customer');
+                    CustomerObj.post().then(function (data) {
+                        webStorage.local.add('customer', data);
+                        isLog = true;
+                    });
+
+
                 }
 
             }

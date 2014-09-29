@@ -8,7 +8,7 @@
 angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
-    'starter.checkout'])
+    'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -27,7 +27,7 @@ angular.module('starter', ['ionic',
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
         var index = 'index.php?route=api';
-        RestangularProvider.setBaseUrl('http://192.168.1.34/Projects/Opencart/Present/2.0/' + index);
+        RestangularProvider.setBaseUrl('http://localhost/Projects/Opencart/Present/2.0/' + index);
         RestangularProvider.setDefaultHeaders({
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
@@ -74,63 +74,6 @@ angular.module('starter', ['ionic',
                 }
             })
 
-            .state('tab.cart', {
-                url: '/cart',
-                views: {
-                    'tab-cart': {
-                        templateUrl: 'templates/tab-cart.html',
-                        controller: 'OrderCtrl'
-                    }
-                }
-            })
-
-            // Checkout
-            .state('tab.billing', {
-                url: '/order/billing',
-                views: {
-                    'tab-cart': {
-                        templateUrl: 'templates/checkout/payment.html',
-                        controller: 'CheckoutCtrl'
-                    }
-                }
-            })
-            .state('tab.shipping', {
-                url: '/order/shipping',
-                views: {
-                    'tab-cart': {
-                        templateUrl: 'templates/checkout/shipping.html',
-                        controller: 'CheckoutCtrl'
-                    }
-                }
-            })
-            .state('tab.shippingmethod', {
-                url: '/order/shippingmethod',
-                views: {
-                    'tab-cart': {
-                        templateUrl: 'templates/checkout/shipping_method.html',
-                        controller: 'CheckoutCtrl'
-                    }
-                }
-            })
-            .state('tab.paymentmethod', {
-                url: '/order/paymentmethod',
-                views: {
-                    'tab-cart': {
-                        templateUrl: 'templates/checkout/payment_method.html',
-                        controller: 'CheckoutCtrl'
-                    }
-                }
-            })
-            .state('tab.confirm', {
-                url: '/order/confirm',
-                views: {
-                    'tab-cart': {
-                        templateUrl: 'templates/checkout/confirm.html',
-                        controller: 'CheckoutCtrl'
-                    }
-                }
-            })
-
             .state('tab.products', {
                 url: '/product',
                 views: {
@@ -150,6 +93,75 @@ angular.module('starter', ['ionic',
                     }
                 }
             })
+
+            .state('tab.search', {
+                url: '/search',
+                views: {
+                    'tab-search': {
+                        templateUrl: 'templates/tab-search.html',
+                        controller: 'ProductCtrl'
+                    }
+                }
+            })
+
+            .state('tab.cart', {
+                url: '/cart',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/tab-cart.html',
+                        controller: 'OrderCtrl'
+                    }
+                }
+            })
+
+            // Checkout
+            .state('tab.billing', {
+                url: '/order/billing',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/payment.html',
+                        controller: 'AddressCtrl'
+                    }
+                }
+            })
+            .state('tab.shipping', {
+                url: '/order/shipping',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/shipping.html',
+                        controller: 'AddressCtrl'
+                    }
+                }
+            })
+            .state('tab.shippingmethod', {
+                url: '/order/shippingmethod',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/shipping_method.html',
+                        controller: 'ShippingCtrl'
+                    }
+                }
+            })
+            .state('tab.paymentmethod', {
+                url: '/order/paymentmethod',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/payment_method.html',
+                        controller: 'PaymentCtrl'
+                    }
+                }
+            })
+            .state('tab.confirm', {
+                url: '/order/confirm',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/confirm.html',
+                        controller: 'CheckoutCtrl'
+                    }
+                }
+            })
+
+
 
 
 //      .state('tab.information', {

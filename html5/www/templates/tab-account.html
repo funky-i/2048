@@ -1,33 +1,35 @@
-<ion-view title="Login" ng-controller="AccountCtrl" >
+<ion-view title="Login" ng-controller="AccountCtrl">
 
-  <ion-content class="padding" ng-show="IsLogged(false)">
+    <ion-content class="padding" ng-show="IsLogged(false)">
 
-          <h1>Login {{ isShow }}</h1>
-          <div class="row">
-               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </div>
+        <h1>Login</h1>
 
-          <form name="loginForm" ng-submit="loginForm.$valid && Login(input)" onvalidate>
-              <div class="list">
-                  <label class="item item-input">
-                      <span class="input-label">Username:</span>
-                      <input ng-model="input.username" type="text" required>
-                  </label>
-                  <label class="item item-input">
-                      <span class="input-label">Password:</span>
-                      <input ng-model="input.password" type="password" required>
-                  </label>
-              </div>
+        <div class="row">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </div>
 
-              <div class="row">
-                  <button class="button button-block button-positive activated">Login</button>
-              </div>
-          </form>
+        <form name="loginForm" ng-submit="loginForm.$valid && Login(input)" onvalidate>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Username:</span>
+                    <input ng-model="input.username" type="text" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password:</span>
+                    <input ng-model="input.password" type="password" required>
+                </label>
+            </div>
+
+            <div class="row">
+                <button class="button button-block button-positive activated">Login</button>
+            </div>
+        </form>
 
     </ion-content>
     <ion-content class="padding" ng-show="IsLogged(true)">
 
         <h1>Profile</h1>
+
         <div class="row">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </div>
@@ -45,7 +47,7 @@
             </a>
             <a class="item item-icon-left" href="#">
                 <i class="icon ion-bag"></i>
-                Orders
+                Order Transaction
                 <span class="badge badge-assertive"></span>
             </a>
 
@@ -71,18 +73,35 @@
         </div>
 
         <div class="item item-divider">
-            Access
+            Account
         </div>
         <div class="list">
             <label class="item item-input">
-                <span class="input-label">Token: </span>
-                {{ token.access_token }}
+                <span class="input-label">Name: </span>
+                {{ customer.firstname + " " + customer.lastname }}
             </label>
             <label class="item item-input">
-                <span class="input-label">Scope: </span>
-                {{ token.scope }}
+                <span class="input-label">Email: </span>
+                {{ customer.email }}
             </label>
+            <label class="item item-input">
+                <span class="input-label">Points: </span>
+                {{ customer.points }}
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Balance: </span>
+                {{ customer.balance }}
+            </label>
+        </div>
 
+        <div class="item item-divider">
+            Address
+        </div>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">1. </span>
+                {{ customer.address_id }}
+            </label>
         </div>
         <div class="row">
             <button class="button button-block button-positive activated" ng-click="Logout();">Logout</button>

@@ -1,13 +1,30 @@
-<ion-view title="Shipping">
+<ion-view title="Delivery Details">
     <ion-content has-header="true" padding="true" class="padding">
 
+        <h1>Delivery Details:</h1>
 
-        <h1>Shipping:</h1>
+        <div class="list">
+            <ion-radio ng-model="shipping_address" ng-click="setShippingAddress(0)" value="0">NONE</ion-radio>
+            <div ng-repeat="address in addresses">
+                <ion-radio ng-model="shipping_address" ng-click="setShippingAddress(address.address_id)" value="{{ address.address_id }}">
+                    {{ address.address_1 }} {{ address.address_2 }}
+                    <div class="col">
+                        <label class="font-10">
+                            {{ address.city }} {{ address.postcode }} {{ address.country }}
+                        </label>
+                    </div>
+                </ion-radio>
+
+            </div>
+        </div>
+
+        <div class="row">
+            Select
+        </div>
 
         <div class="row">
             <button class="button button-block button-positive activated" ng-click="Next(3)">Next</button>
         </div>
-
 
     </ion-content>
 </ion-view>
