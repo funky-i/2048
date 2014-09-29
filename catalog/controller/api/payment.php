@@ -68,6 +68,28 @@ class ControllerApiPayment extends Controller {
 		
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function callback() {
+		initHeader();
+		$Params = getParams();
+		$json = [];
+
+		if (isset($Params['data']['order_id'])) {
+			$order_id = $Params['data']['order_id'];
+
+			if ($this->session->data['payment_method']['code'] == 'cod') {
+				$this->load->model('checkout/order');
+
+				$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('cod_order_status_id'));
+
+				$json['success'] = $order_id;
+			}
+		}
+		
+		
+		$this->response->setOutput(json_encode($json));
+
+	}
 	/*
 	public function address() {
 		initHeader();
