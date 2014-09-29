@@ -9,6 +9,7 @@
                 <span class="badge">{{ product.price }}</span>
             </label>
         </div>
+
         <div class="list">
             <label class="item item-input" ng-repeat="total in totals">
                 <span class="input-label">{{ total.title }}:</span>
@@ -16,6 +17,13 @@
             </label>
         </div>
 
+        <div class="list">
+
+        </div>
+
+        <div class="row">
+            <button class="button button-block button-positive activated" ng-click="openModal()">Modal</button>
+        </div>
         <div class="row">
             <button class="button button-block button-positive activated" ng-click="AddOrder()">Confirm</button>
         </div>

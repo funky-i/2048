@@ -1,5 +1,5 @@
 angular.module('starter.checkout', [])
-    .controller('CheckoutCtrl', function ($scope, $http, $location, Restangular, webStorage, AppConfig, Addresses, PaymentMethods, ShippingMethods) {
+    .controller('CheckoutCtrl', function ($scope, $http, $location, $ionicModal, Restangular, webStorage, AppConfig, Addresses, PaymentMethods, ShippingMethods) {
         var OrderObj = Restangular.all('order');
         var checkoutState = AppConfig.checkout();
 
@@ -15,20 +15,40 @@ angular.module('starter.checkout', [])
             $scope.totals = data.totals;
         }
 
-        $scope.AddOrder = function() {
-            var inputData = {
-                payment_address : Addresses.get(webStorage.session.get('billing_address_id')),
-                payment_method : PaymentMethods.get(webStorage.session.get('payment_method_code')),
-                shipping_address : Addresses.get(webStorage.session.get('shipping_address_id')),
-                shipping_method : ShippingMethods.get(webStorage.session.get('shipping_method_code'))
-            }
-
-            OrderObj.all('add').post(inputData).then(function(data) {
-                console.log(data);
-            })
+        var inputData = {
+            payment_address : Addresses.get(webStorage.session.get('billing_address_id')),
+            payment_method : PaymentMethods.get(webStorage.session.get('payment_method_code')),
+            shipping_address : Addresses.get(webStorage.session.get('shipping_address_id')),
+            shipping_method : ShippingMethods.get(webStorage.session.get('shipping_method_code'))
         }
 
-        $scope.Next = function () {
+        $ionicModal.fromTemplateUrl('templates/payment/' + inputData.payment_method.code + '.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+
+        $scope.openModal = function() {
+            $scope.modal.show();
+        };
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
+        $scope.AddOrder = function() {
+
+            console.log(inputData.payment_method);
+
+//            OrderObj.all('add').post(inputData).then(function(data) {
+//                console.log(data);
+//            })
+
+            $scope.openModal();
+
+        }
+
+        $scope.Confirm = function () {
             $location.path(checkoutState[0]);
         }
 
