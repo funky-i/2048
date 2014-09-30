@@ -5,6 +5,20 @@ class ControllerApiOrder extends Controller {
 		$Params = getParams();
 		$json = [];
 
+		$this->load->model('checkout/order');
+
+		if (isset($Params['data']['order_id'])) {
+			$order_id = $Params['data']['order_id'];
+
+			$order_info = $this->model_checkout_order->getOrder($order_id);
+
+			$json = $order_info;
+
+			$json['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+		}
+
+		$this->response->setOutput(json_encode($json));
+
 	}
 
 	public function add() {
@@ -319,12 +333,10 @@ class ControllerApiOrder extends Controller {
 			
 			$this->load->model('checkout/order');
 
-			// $json['order_id'] = $this->model_checkout_order->addOrder($order_data);
-			
+			$json['order_id'] = $this->model_checkout_order->addOrder($order_data);			
 
 			// Set the order history
-			$order_status_id = $this->config->get('config_order_status_id');
-			$json['order_id'] = 23;
+			$order_status_id = $this->config->get('config_order_status_id');			
 						
 			$this->model_checkout_order->addOrderHistory($json['order_id'], $order_status_id);
 			
