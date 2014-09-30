@@ -15,14 +15,14 @@ angular.module('starter.checkout', [])
             $scope.totals = data.totals;
         }
 
-        var inputData = {
-            payment_address: Addresses.get(webStorage.session.get('billing_address_id')),
-            payment_method: PaymentMethods.get(webStorage.session.get('payment_method_code')),
-            shipping_address: Addresses.get(webStorage.session.get('shipping_address_id')),
-            shipping_method: ShippingMethods.get(webStorage.session.get('shipping_method_code'))
-        }
+//        var inputData = {
+//            payment_address: Addresses.get(webStorage.session.get('billing_address_id')),
+//            payment_method: PaymentMethods.get(webStorage.session.get('payment_method_code')),
+//            shipping_address: Addresses.get(webStorage.session.get('shipping_address_id')),
+//            shipping_method: ShippingMethods.get(webStorage.session.get('shipping_method_code'))
+//        }
 
-        $ionicModal.fromTemplateUrl('templates/payment/' + inputData.payment_method.code + '.html', {
+        $ionicModal.fromTemplateUrl('templates/payment/pp_standard.html', {
             scope: $scope,
             animation: 'slide-in-up',
             backdropClickToClose: true
@@ -31,7 +31,6 @@ angular.module('starter.checkout', [])
         });
 
         $scope.openModal = function () {
-            console.log(inputData.payment_method);
             $scope.modal.show();
         };
         $scope.closeModal = function () {
@@ -40,15 +39,13 @@ angular.module('starter.checkout', [])
 
         $scope.AddOrder = function () {
 
-            OrderObj.all('add').post(inputData).then(function (data) {
-                console.log(data);
-//                if (data.success!=null) {
+//            OrderObj.all('add').post(inputData).then(function (data) {
+//                if (data.success != null) {
 //                    webStorage.session.add('order_id', data.order_id);
 //                }
+//            })
 
-            })
-
-//            $scope.openModal();
+            $scope.openModal();
 
         }
 

@@ -10,7 +10,7 @@ angular.module('starter', ['ionic',
     'ionic',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
     'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment',
-    'cod'])
+    'cod', 'paypal'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -29,7 +29,7 @@ angular.module('starter', ['ionic',
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
         var index = 'index.php?route=api';
-        RestangularProvider.setBaseUrl('http://localhost/Projects/Opencart/Present/2.0/' + index);
+        RestangularProvider.setBaseUrl('http://192.168.1.34/Projects/Opencart/Present/2.0/' + index);
         RestangularProvider.setDefaultHeaders({
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'

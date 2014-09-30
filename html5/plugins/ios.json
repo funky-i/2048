@@ -34,6 +34,36 @@
                             "xml": "false",
                             "count": 1
                         }
+                    ],
+                    "AVFoundation.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "SystemConfiguration.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "MessageUI.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "libc++.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "CoreLocation.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
                     ]
                 }
             }
