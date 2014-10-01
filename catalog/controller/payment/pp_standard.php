@@ -1,5 +1,6 @@
 <?php
-class ControllerPaymentPPStandard extends Controller {
+class ControllerPaymentPPStandard extends Controller {	
+
 	public function index() {
 		$this->language->load('payment/pp_standard');
 
@@ -112,6 +113,7 @@ class ControllerPaymentPPStandard extends Controller {
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 
 		if ($order_info) {
+
 			$request = 'cmd=_notify-validate';
 
 			foreach ($this->request->post as $key => $value) {

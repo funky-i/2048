@@ -1,5 +1,32 @@
 <?php
 class ModelPaymentPPStandard extends Model {
+	public function getConfig() {
+		$data = [];
+
+		$data['testmode'] = $this->config->get('pp_standard_test');
+		
+		if (!$this->config->get('pp_standard_test')) {
+			$data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
+		} else {
+			$data['action'] = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+		}
+		
+		$data['business'] = $this->config->get('pp_standard_email');
+		$data['degug'] = $this->config->get('pp_standard_debug');
+		$data['total'] = $this->config->get('pp_standard_total');
+		
+		$data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+
+		if (!$this->config->get('pp_standard_transaction')) {
+			$data['paymentaction'] = 'authorization';
+		} else {
+			$data['paymentaction'] = 'sale';
+		}
+
+		return $data;
+
+	}
+
 	public function getMethod($address, $total) {
 		$this->load->language('payment/pp_standard');
 
