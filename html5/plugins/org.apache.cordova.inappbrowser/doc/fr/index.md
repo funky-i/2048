@@ -57,7 +57,7 @@ Ouvre une URL dans une nouvelle `InAppBrowser` instance, l'instance de navigateu
     Android uniquement :
     
     *   **closebuttoncaption**: affectez une chaîne à utiliser comme la **fait** légende du bouton.
-    *   **hidden**: la valeur `yes` pour créer le navigateur et charger la page, mais ne pas le montrer. L'événement loadstop est déclenché lorsque le chargement est terminé. Omettre ou la valeur `no` (par défaut) pour que le navigateur ouvrir et charger normalement.
+    *   **caché**: la valeur `yes` pour créer le navigateur et charger la page, mais ne pas le montrer. L'événement loadstop est déclenché lorsque le chargement est terminé. Omettre ou la valeur `no` (par défaut) pour que le navigateur ouvrir et charger normalement.
     *   **ClearCache**: la valeur `yes` pour que le navigateur du cache de cookie effacé, avant l'ouverture de la nouvelle fenêtre
     *   **clearsessioncache**: la valeur `yes` pour avoir le cache de cookie de session autorisé avant l'ouverture de la nouvelle fenêtre
     
@@ -65,7 +65,7 @@ Ouvre une URL dans une nouvelle `InAppBrowser` instance, l'instance de navigateu
     
     *   **closebuttoncaption**: affectez une chaîne à utiliser comme la **fait** légende du bouton. Notez que vous devrez localiser cette valeur vous-même.
     *   **disallowoverscroll**: la valeur `yes` ou `no` (valeur par défaut est `no` ). Active/désactive la propriété UIWebViewBounce.
-    *   **hidden**: la valeur `yes` pour créer le navigateur et charger la page, mais ne pas le montrer. L'événement loadstop est déclenché lorsque le chargement est terminé. Omettre ou la valeur `no` (par défaut) pour que le navigateur ouvrir et charger normalement.
+    *   **caché**: la valeur `yes` pour créer le navigateur et charger la page, mais ne pas le montrer. L'événement loadstop est déclenché lorsque le chargement est terminé. Omettre ou la valeur `no` (par défaut) pour que le navigateur ouvrir et charger normalement.
     *   **ClearCache**: la valeur `yes` pour que le navigateur du cache de cookie effacé, avant l'ouverture de la nouvelle fenêtre
     *   **clearsessioncache**: la valeur `yes` pour avoir le cache de cookie de session autorisé avant l'ouverture de la nouvelle fenêtre
     *   **barre d'outils**: la valeur `yes` ou `no` pour activer la barre d'outils ou désactiver pour le InAppBrowser (par défaut,`yes`)
@@ -77,10 +77,6 @@ Ouvre une URL dans une nouvelle `InAppBrowser` instance, l'instance de navigateu
     *   **presentationstyle**: la valeur `pagesheet` , `formsheet` ou `fullscreen` pour définir le [style de présentation][1] (par défaut,`fullscreen`).
     *   **transitionstyle**: la valeur `fliphorizontal` , `crossdissolve` ou `coververtical` pour définir le [style de transition][2] (par défaut,`coververtical`).
     *   **toolbarposition**: la valeur `top` ou `bottom` (valeur par défaut est `bottom` ). Causes de la barre d'outils être en haut ou en bas de la fenêtre.
-    
-    Windows uniquement :
-    
-    *   **hidden**: la valeur `yes` pour créer le navigateur et charger la page, mais ne pas le montrer. L'événement loadstop est déclenché lorsque le chargement est terminé. Omettre ou la valeur `no` (par défaut) pour que le navigateur ouvrir et charger normalement.
 
  [1]: http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle
  [2]: http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle
@@ -92,7 +88,6 @@ Ouvre une URL dans une nouvelle `InAppBrowser` instance, l'instance de navigateu
 *   BlackBerry 10
 *   Firefox OS
 *   iOS
-*   Windows 8 et 8.1
 *   Windows Phone 7 et 8
 
 ### Exemple
@@ -177,7 +172,6 @@ L'objet retourné par un appel à`window.open`.
 *   Amazon Fire OS
 *   Android
 *   iOS
-*   Windows 8 et 8.1
 *   Windows Phone 7 et 8
 
 ### Petit exemple
@@ -209,7 +203,6 @@ L'objet retourné par un appel à`window.open`.
 *   Amazon Fire OS
 *   Android
 *   iOS
-*   Windows 8 et 8.1
 *   Windows Phone 7 et 8
 
 ### Petit exemple
@@ -235,7 +228,6 @@ L'objet retourné par un appel à`window.open`.
 *   Android
 *   Firefox OS
 *   iOS
-*   Windows 8 et 8.1
 *   Windows Phone 7 et 8
 
 ### Petit exemple
@@ -258,7 +250,6 @@ L'objet retourné par un appel à`window.open`.
 *   Amazon Fire OS
 *   Android
 *   iOS
-*   Windows 8 et 8.1
 
 ### Petit exemple
 
@@ -290,7 +281,6 @@ L'objet retourné par un appel à`window.open`.
 *   Amazon Fire OS
 *   Android
 *   iOS
-*   Windows 8 et 8.1
 
 ### Petit exemple
 

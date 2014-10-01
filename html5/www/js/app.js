@@ -162,6 +162,15 @@ angular.module('starter', ['ionic',
                     }
                 }
             })
+            .state('tab.complete', {
+                url: '/order/complete',
+                views: {
+                    'tab-cart': {
+                        templateUrl: 'templates/checkout/complete.html',
+                        controller: 'CheckoutCtrl'
+                    }
+                }
+            })
 
 
 //      .state('tab.information', {

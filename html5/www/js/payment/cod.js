@@ -7,8 +7,14 @@ angular.module('cod', [])
         }
 
         $scope.Confirm = function () {
-            PaymentObj.post(inputData).then(function (data) {
-                console.log(data);
-            })
+            $scope.modal.hide();
+//            PaymentObj.post(inputData).then(function (data) {
+//                console.log(data);
+//            })
         }
+
+        $scope.$on('modal.hidden', function() {
+            console.log('modal:  hidden');
+            alert('Modal:: Hidden');
+        });
     });

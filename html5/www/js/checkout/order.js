@@ -32,7 +32,7 @@ angular.module('starter.order', [])
             Restangular.all('cart/clear').post().then(function (data) {
                 $scope.products = {};
                 $scope.vouchers = {};
-//                $scope.totals = {};
+                $scope.totals = {};
 
                 console.log("Cleared");
             })

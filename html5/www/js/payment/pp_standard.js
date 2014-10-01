@@ -1,8 +1,10 @@
 angular.module('paypal', [])
     .controller('PaypalCtrl', function ($scope, $http, $location, Restangular, webStorage, AppConfig) {
-        var OrderObj = Restangular.all('order');
+        var OrderObj = Restangular.all('payment/load');
+        console.log('PaypalCtrl');
+        alert('PaypalCtrl');
 
-        var inputData = {
+        var paypalData = {
             pattern: {
                 cmd: '_cart',
                 upload: 1,
@@ -34,9 +36,13 @@ angular.module('paypal', [])
                 custom: 1,
                 bn: 'OpenCart_2.0_WPS'
             }
-
         }
 
+        var inputData = {
+            order_id: webStorage.session.get('order_id'),
+            payment_method: PaymentMethods.get(webStorage.session.get('payment_method_code'))
+        }
+        console.log(inputData);
         var url = {
             paymentURL: 'https://www.paypal.com/cgi-bin/webscr',
             cancelURL: '',
@@ -44,13 +50,19 @@ angular.module('paypal', [])
             paymentURLDemo: 'http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=api/payment/load'
         };
 
+        OrderObj.post(inputData).then(function (data) {
+
+        })
+
 //        var ref = window.open(url.paymentURLDemo, '_blank', 'location=yes');
 
         $scope.url = url;
 
-        $scope.Confirm = function (input) {
+        $scope.Confirm = function () {
+            console.log("Clicked");
 
-            $scope.modal.hide();
+//            var ref = window.open(url.paymentURLDemo, '_blank', 'location=yes');
+
 //            $http({ method: 'POST', url: url.paymentURL, data: input})
 //                .success(function(data, status){
 //                    console.log(data);

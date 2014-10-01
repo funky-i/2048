@@ -3,109 +3,61 @@
         <h1 class="title">Paypal</h1>
     </ion-header-bar>
     <ion-content>
-        Hello!
+        Loading...!!!!
+        <!--<form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="POST">-->
+        <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="POST">
+            <input type="hidden" name="cmd" value="_cart"/>
+            <input type="hidden" name="upload" value="1"/>
+            <input type="hidden" name="business" value="mr.kaewdok@gmail.com"/>
 
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-            <input type="hidden" name="cmd" value="_cart" />
-            <input type="hidden" name="upload" value="1" />
-            <input type="hidden" name="business" value="mr.kaewdok@gmail.com" />
+            <input type="hidden" name="item_name_1" value="iPhone"/>
+            <input type="hidden" name="item_number_1" value="product 11"/>
+            <input type="hidden" name="amount_1" value="1.00"/>
+            <input type="hidden" name="quantity_1" value="1"/>
+            <input type="hidden" name="weight_1" value="1"/>
 
-            <input type="hidden" name="item_name_1" value="iPhone" />
-            <input type="hidden" name="item_number_1" value="product 11" />
-            <input type="hidden" name="amount_1" value="1.00" />
-            <input type="hidden" name="quantity_1" value="1" />
-            <input type="hidden" name="weight_1" value="1" />
+            <input type="hidden" name="currency_code" value="USD"/>
+            <input type="hidden" name="first_name" value="Chatchai"/>
+            <input type="hidden" name="last_name" value="Kaewdok"/>
+            <input type="hidden" name="address1" value="2355/87"/>
+            <input type="hidden" name="address2" value=""/>
+            <input type="hidden" name="city" value="Bangkok"/>
+            <input type="hidden" name="zip" value="10250"/>
+            <input type="hidden" name="country" value="TH"/>
+            <input type="hidden" name="address_override" value="0"/>
+            <input type="hidden" name="email" value="mr.kaewdok@gmail.com"/>
+            <input type="hidden" name="invoice" value="2 - Chatchai Kaewdok"/>
+            <input type="hidden" name="lc" value="en"/>
+            <input type="hidden" name="rm" value="2"/>
+            <input type="hidden" name="no_note" value="1"/>
+            <input type="hidden" name="no_shipping" value="1"/>
+            <input type="hidden" name="charset" value="utf-8"/>
+            <input type="hidden" name="return" value="#/tab/cart"/>
+            <input type="hidden" name="notify_url"
+                   value="http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=payment/pp_standard/callback"/>
+            <input type="hidden" name="cancel_return" value="#/tab/cart"/>
+            <input type="hidden" name="paymentaction" value="authorization"/>
+            <input type="hidden" name="custom" value="2"/>
+            <input type="hidden" name="bn" value="OpenCart_2.0_WPS"/>
 
-            <input type="hidden" name="currency_code" value="USD" />
-            <input type="hidden" name="first_name" value="Chatchai" />
-            <input type="hidden" name="last_name" value="Kaewdok" />
-            <input type="hidden" name="address1" value="2355/87" />
-            <input type="hidden" name="address2" value="" />
-            <input type="hidden" name="city" value="Bangkok" />
-            <input type="hidden" name="zip" value="10250" />
-            <input type="hidden" name="country" value="TH" />
-            <input type="hidden" name="address_override" value="0" />
-            <input type="hidden" name="email" value="mr.kaewdok@gmail.com" />
-            <input type="hidden" name="invoice" value="2 - Chatchai Kaewdok" />
-            <input type="hidden" name="lc" value="en" />
-            <input type="hidden" name="rm" value="2" />
-            <input type="hidden" name="no_note" value="1" />
-            <input type="hidden" name="no_shipping" value="1" />
-            <input type="hidden" name="charset" value="utf-8" />
-            <input type="hidden" name="return" value="http://localhost:8100/#/tab/cart" />
-            <input type="hidden" name="notify_url" value="http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=payment/pp_standard/callback" />
-            <input type="hidden" name="cancel_return" value="http://localhost:8100/#/tab/cart" />
-            <input type="hidden" name="paymentaction" value="authorization" />
-            <input type="hidden" name="custom" value="2" />
-            <input type="hidden" name="bn" value="OpenCart_2.0_WPS" />
-            <div class="buttons">
-                <!--<div class="pull-right">-->
-                <!--<input type="submit" value="Confirm Order" class="btn btn-primary" />-->
-                <!--</div>-->
-                <div class="row">
-                    <button class="button button-block button-positive activated" type="submit">Pay</button>
-                </div>
+
+            <div class="row">
+                <button class="button button-block button-positive activated" type="submit">Pay</button>
             </div>
+
         </form>
 
-        <!--<form action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay" target="PPDGFrame"-->
-        <!--class="standard">-->
-        <!--</form>-->
         <div class="row">
             <button class="button button-block button-positive activated" ng-click="Confirm()">Close</button>
         </div>
 
-        <!--<form name="paymentForm" ng-submit="Confirm(input)" onvalidate>-->
-        <!--<input type="hidden" ng-model="input.cmd" value="_cart">-->
-        <!--<input type="hidden" ng-model="input.upload" value="1">-->
-        <!--<input type="hidden" ng-model="input.business" value="mr.kaewdok@gmail.com">-->
-        <!--<input type="hidden" ng-model="input.item_name_1" value="iPhone">-->
-        <!--<input type="hidden" ng-model="input.item_number_1" value="product 11">-->
-        <!--<input type="hidden" ng-model="input.amount_1" value="101.00">-->
-        <!--<input type="hidden" ng-model="input.quantity_1" value="1">-->
-        <!--<input type="hidden" ng-model="input.weight_1" value="10">-->
-        <!--<input type="hidden" ng-model="input.item_name_2" value="iMac">-->
-        <!--<input type="hidden" ng-model="input.item_number_2" value="Product 14">-->
-        <!--<input type="hidden" ng-model="input.amount_2" value="100.00">-->
-        <!--<input type="hidden" ng-model="input.quantity_2" value="2">-->
-        <!--<input type="hidden" ng-model="input.weight_2" value="10">-->
-        <!--<input type="hidden" ng-model="input.item_name_3" value="Shipping, Handling, Discounts &amp; Taxes">-->
-        <!--<input type="hidden" ng-model="input.item_number_3" value="">-->
-        <!--<input type="hidden" ng-model="input.amount_3" value="5.00">-->
-        <!--<input type="hidden" ng-model="input.quantity_3" value="1">-->
-        <!--<input type="hidden" ng-model="input.weight_3" value="0">-->
-        <!--<input type="hidden" ng-model="input.currency_code" value="USD">-->
-        <!--<input type="hidden" ng-model="input.first_name" value="Chatchai">-->
-        <!--<input type="hidden" ng-model="input.last_name" value="Kaewdok">-->
-        <!--<input type="hidden" ng-model="input.address1" value="2355/87">-->
-        <!--<input type="hidden" ng-model="input.address2" value="">-->
-        <!--<input type="hidden" ng-model="input.city" value="Bangkok">-->
-        <!--<input type="hidden" ng-model="input.zip" value="10250">-->
-        <!--<input type="hidden" ng-model="input.country" value="TH">-->
-        <!--<input type="hidden" ng-model="input.address_override" value="0">-->
-        <!--<input type="hidden" ng-model="input.email" value="mr.kaewdok@gmail.com">-->
-        <!--<input type="hidden" ng-model="input.invoice" value="1 - Chatchai Kaewdok">-->
-        <!--<input type="hidden" ng-model="input.lc" value="en">-->
-        <!--<input type="hidden" ng-model="input.rm" value="2">-->
-        <!--<input type="hidden" ng-model="input.no_note" value="1">-->
-        <!--<input type="hidden" ng-model="input.no_shipping" value="1">-->
-        <!--<input type="hidden" ng-model="input.charset" value="utf-8">-->
-        <!--<input type="hidden" ng-model="input.return"-->
-        <!--value="http://localhost/Projects/Opencart/Present/2.0/index.php?route=checkout/success">-->
-        <!--<input type="hidden" ng-model="input.notify_url"-->
-        <!--value="http://localhost/Projects/Opencart/Present/2.0/index.php?route=payment/pp_standard/callback">-->
-        <!--<input type="hidden" ng-model="input.cancel_return"-->
-        <!--value="http://localhost/Projects/Opencart/Present/2.0/index.php?route=checkout/checkout">-->
-        <!--<input type="hidden" ng-model="input.paymentaction" value="authorization">-->
-        <!--<input type="hidden" ng-model="input.custom" value="1">-->
-        <!--<input type="hidden" ng-model="input.bn" value="OpenCart_2.0_WPS">-->
-
-
-        <!--<div class="row">-->
-        <!--<button class="button button-block button-positive activated">Close</button>-->
-        <!--</div>-->
-        <!--</form>-->
-
 
     </ion-content>
 </ion-modal-view>
+<script type="text/javascript">
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(device.cordova);
+    }
+</script>
