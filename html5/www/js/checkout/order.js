@@ -2,7 +2,9 @@ angular.module('starter.order', [])
     .controller('OrderCtrl', function ($scope, $http, $location, Restangular, Orders, webStorage, AppConfig) {
         var OrderObj = Restangular.all('cart/products');
         var checkoutState = AppConfig.checkout();
+
         OrderObj.post().then(function (data) {
+
             if (data.products!=null) {
                 OrderCallback(data);
             }
@@ -33,8 +35,6 @@ angular.module('starter.order', [])
                 $scope.products = {};
                 $scope.vouchers = {};
                 $scope.totals = {};
-
-                console.log("Cleared");
             })
         }
 

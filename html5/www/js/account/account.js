@@ -5,11 +5,16 @@ angular.module('starter.account', [])
         var isLog = false;
         var AccountObj = Restangular.all('login');
 
+        $scope.input = {
+            username: 'mr.kaewdok@gmail.com',
+            password: 'demo'
+        };
+
         if (webStorage.local.get('customer') != null) {
             isLog = true;
         };
 
-        $scope.token = (webStorage.local.get('token') != null) ? webStorage.local.get('token') : null;
+//        $scope.token = (webStorage.local.get('token') != null) ? webStorage.local.get('token') : null;
         $scope.customer = (webStorage.local.get('customer') != null) ? webStorage.local.get('customer') : null;
         $scope.Show = function (status) {
             isLog = status;

@@ -36,13 +36,15 @@ angular.module('starter.services', [])
     })
 
     .factory('PaymentMethods', function(webStorage) {
-        payment_methods = webStorage.session.get('payment_methods');
+//        var payment_methods = webStorage.session.get('payment_methods');
 
         return {
             all: function() {
+                var payment_methods = webStorage.session.get('payment_methods');
                 return payment_methods;
             },
             get: function(paymentCode) {
+                var payment_methods = webStorage.session.get('payment_methods');
                 return payment_methods[paymentCode];
             }
         }
@@ -55,6 +57,12 @@ angular.module('starter.services', [])
             grant_type: 'password',
             baseURL: 'http://localhost/Projects/Opencart/Present/2.0/index.php?route=',
             imageURL: 'http://localhost/Projects/Opencart/Present/2.0/image/'
+        };
+
+        var payment_callback = {
+            return: 'http://localhost/#/tab/cart/complete',
+            notify_url: 'http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=payment/pp_standard/callback',
+            cancel_return: 'http://localhost/#/tab/cart/checkout'
         };
 
         var checkout_step = {
@@ -72,38 +80,43 @@ angular.module('starter.services', [])
             },
             checkout: function () {
                 return checkout_step;
+            },
+            payment_callback: function() {
+                return payment_callback;
             }
         }
 
     })
 
-    .factory('ShippingMethods', function (webStorage) {
-        shipping_methods = webStorage.session.get('shipping_methods');
+    .factory('DeliveryMethods', function (webStorage) {
+//        var delivery_methods = webStorage.session.get('delivery_methods');
 
         return {
             all: function () {
-                return shipping_methods;
+                var delivery_methods = webStorage.session.get('delivery_methods');
+                return delivery_methods;
             },
             get: function (shippingCode) {
-                return shipping_methods[shippingCode].quote[shippingCode];
+                var delivery_methods = webStorage.session.get('delivery_methods');
+                return delivery_methods[shippingCode].quote[shippingCode];
             }
         }
     })
+
     .factory('Addresses', function (webStorage) {
 
-        addresses = webStorage.session.get('addresses');
+        var addresses = webStorage.session.get('addresses');
 
         return {
             all: function () {
+                var addresses = webStorage.session.get('addresses');
                 return addresses;
             },
             get: function (addressId) {
+                var addresses = webStorage.session.get('addresses');
                 return addresses[addressId];
             }
         }
-
-//            return null;
-
     })
 
     .factory('Products', function ($http) {

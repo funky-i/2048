@@ -172,6 +172,13 @@ angular.module('starter', ['ionic',
                 }
             })
 
+            .state('paypal', {
+                url: "/payment/paypal/:OrderId/:PaymentCode",
+                templateUrl: 'templates/payment/pp_standard.html',
+                controller: 'PaypalCtrl'
+            })
+
+
 
 //      .state('tab.information', {
 //          url: '/information',

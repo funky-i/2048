@@ -1,5 +1,5 @@
 angular.module('starter.shipping', [])
-    .controller('ShippingCtrl', function ($scope, $http, $location, Restangular, webStorage, Addresses, ShippingMethods, AppConfig) {
+    .controller('ShippingCtrl', function ($scope, $http, $location, Restangular, webStorage, Addresses, AppConfig) {
         var ShippingObj = Restangular.all('shipping');
         var checkoutState = AppConfig.checkout();
         var shipping = {};
@@ -13,7 +13,7 @@ angular.module('starter.shipping', [])
 
         ShippingObj.post(inputData).then(function (data) {
             $scope.shipping_methods = data.shipping_methods;
-            webStorage.session.add('shipping_methods', data.shipping_methods);
+            webStorage.session.add('delivery_methods', data.shipping_methods);
         })
 
         $scope.setShippingMethod = function (shippingCode) {

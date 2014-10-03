@@ -23,7 +23,6 @@ angular.module('starter.address', [])
         }
 
         $scope.Next = function (state) {
-
             $location.path(checkoutState[state]);
 
         }
