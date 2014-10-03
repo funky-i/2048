@@ -12,9 +12,12 @@ class ControllerApiCustomer extends Controller {
 
 		// if ($this->oauth2->verifyResourceRequest()) {
 		// $json = $this->oauth2->getUser();
-		if ($this->customer->isLogged()) {			
+
+
+		if ($this->customer->isLogged()) {
+			
 			$customer = $this->model_account_customer->getCustomer($this->customer->getId());
-			$customer['token'] = $Params['data']['token'];
+			// $customer['token'] = $Params['data']['token'];
 			$json = $this->pattern($customer);
 		} else {
 			$json['error'] = 'Token expire!';
@@ -25,14 +28,20 @@ class ControllerApiCustomer extends Controller {
 	}
 
 	private function pattern($data = array()) {
+		$this->load->model('account/custom_field');
+
 		$rewards = $this->customer->getRewardPoints();
 		$balance = $this->customer->getBalance();
+		$custom_fields = $this->model_account_custom_field->getCustomFields($this->customer->getGroupId());
 
 		$customer = array(
 			'customer_id' => $data['customer_id'],
+			'customer_group_id' => $this->customer->getGroupId(),
 			'firstname' => $data['firstname'],
 			'lastname' => $data['lastname'],
 			'email' => $data['email'],
+			'telephone' => $this->customer->getTelephone(),
+			'fax' => $this->customer->getFax(),
 			'points' => $rewards,
 			'balance' => $balance,
 			'address_id' => $data['address_id'],
@@ -40,8 +49,11 @@ class ControllerApiCustomer extends Controller {
 			'status' => $data['status'],
 			'approved' => $data['approved'],
 			'date_added' => $data['date_added'],
-			'token' => $this->oauth2->getToken()
+			'token' => $this->oauth2->getToken(),
+			'custom_field' => $custom_fields
 		);
+
+		$this->session->data['customer'] = $customer;
 
 		return $customer;
 	}

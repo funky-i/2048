@@ -100,42 +100,48 @@ class ControllerApiPayment extends Controller {
 		$Params = getParams();
 		$json = [];
 
+		$this->load->model('checkout/order');
+		$this->load->model('account/order');
+
 		if (isset($Params['data']['order_id'])) {
 			$order_id = $Params['data']['order_id'];
-			$this->load->model('checkout/order');
+			
 			$order_info = $this->model_checkout_order->getOrder($order_id);
 		}
 
-		if (isset($Params['data']['payment_method'])) {
-			$payment_method = $Params['data']['payment_method'];
-		}
+		if (isset($order_info)) {
+			$SubTotal = 0;
+			$payment_code = $order_info['payment_code'];
 
-		if (isset($order_info) && isset($payment_method)) {
-
-			$this->load->model('payment/' . $payment_method['code']);
-			$data = $this->{'model_payment_' . $payment_method['code']}->getConfig();
+			$this->language->load('payment/' . $payment_code);
+			$this->load->model('payment/' . $payment_code);
+			$data = $this->{'model_payment_' . $payment_code}->getConfig();
 			
 			$data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
 			$data['products'] = array();
+			$products = $this->model_account_order->getOrderProducts($order_id);
 
-			foreach ($this->cart->getProducts() as $product) {
+			// foreach ($this->cart->getProducts() as $product) {
+			foreach ($products as $product) {	
 				$option_data = array();
 
-				foreach ($product['option'] as $option) {
-					if ($option['type'] != 'file') {
-						$value = $option['option_value'];
-					} else {
-						$filename = $this->encryption->decrypt($option['option_value']);
+				if (isset($product['option'])) {
+					foreach ($product['option'] as $option) {
+						if ($option['type'] != 'file') {
+							$value = $option['option_value'];
+						} else {
+							$filename = $this->encryption->decrypt($option['option_value']);
 
-						$value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
+							$value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
+						}
+
+						$option_data[] = array(
+							'name'  => $option['name'],
+							'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+						);
 					}
-
-					$option_data[] = array(
-						'name'  => $option['name'],
-						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-					);
-				}
+				}					
 
 				$data['products'][] = array(
 					'name'     => htmlspecialchars($product['name']),
@@ -143,13 +149,15 @@ class ControllerApiPayment extends Controller {
 					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], false, false),
 					'quantity' => $product['quantity'],
 					'option'   => $option_data,
-					'weight'   => $product['weight']
+					'weight'   => (isset($product['weight']))? $product['weight'] : 0
 				);
+
+				$SubTotal += ($product['price'] * $product['quantity']);
 			}
 
 			$data['discount_amount_cart'] = 0;
 
-			$total = $this->currency->format($order_info['total'] - $this->cart->getSubTotal(), $order_info['currency_code'], false, false);
+			$total = $this->currency->format($order_info['total'] - $SubTotal, $order_info['currency_code'], false, false);
 
 			if ($total > 0) {
 				$data['products'][] = array(
@@ -177,22 +185,18 @@ class ControllerApiPayment extends Controller {
 			$data['lc'] = $this->session->data['language'];
 			$data['return'] = $this->url->link('checkout/success');
 			$data['notify_url'] = $this->url->link('payment/pp_standard/callback', '', 'SSL');
-			$data['cancel_return'] = $this->url->link('checkout/checkout', '', 'SSL');
-
-			if (!$this->config->get('pp_standard_transaction')) {
-				$data['paymentaction'] = 'authorization';
-			} else {
-				$data['paymentaction'] = 'sale';
-			}
+			$data['cancel_return'] = $this->url->link('checkout/checkout', '', 'SSL');	
 
 			$data['custom'] = $order_id;
 
-			$json = $data;
+			$json['payment'] = $data;
 		}
 
 		$this->response->setOutput(json_encode($json));
 
 	}
+	
+	/*
 	public function loaded() {
 		$order_id = 9;
 		$this->language->load('payment/pp_standard');
@@ -294,6 +298,7 @@ class ControllerApiPayment extends Controller {
 			}
 		}
 	}
+	*/
 	/*
 	public function address() {
 		initHeader();

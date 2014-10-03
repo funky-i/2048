@@ -13,7 +13,7 @@ class ModelPaymentPPStandard extends Model {
 		
 		$data['business'] = $this->config->get('pp_standard_email');
 		$data['degug'] = $this->config->get('pp_standard_debug');
-		$data['total'] = $this->config->get('pp_standard_total');
+		// $data['total'] = $this->config->get('pp_standard_total');
 		
 		$data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
