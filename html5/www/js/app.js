@@ -7,24 +7,28 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
-    'ionic',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
     'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment',
     'cod', 'paypal'])
 
-    .run(function ($ionicPlatform) {
-        $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
-            }
-        });
+    .constant('$ionicLoadingConfig', {
+        template: 'Page loading...',
+        duration: 5000
     })
+
+//    .run(function ($ionicPlatform) {
+//        $ionicPlatform.ready(function () {
+//            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+//            // for form inputs)
+//            if (window.cordova && window.cordova.plugins.Keyboard) {
+//                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+//            }
+//            if (window.StatusBar) {
+//                // org.apache.cordova.statusbar required
+//                StatusBar.styleDefault();
+//            }
+//        });
+//    })
 
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
@@ -177,7 +181,6 @@ angular.module('starter', ['ionic',
                 templateUrl: 'templates/payment/pp_standard.html',
                 controller: 'PaypalCtrl'
             })
-
 
 
 //      .state('tab.information', {

@@ -11,6 +11,9 @@ angular.module('starter.order', [])
         });
 
         OrderCallback = function (data) {
+            console.log('OrderCtrl');
+            console.log(data);
+
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;
             $scope.totals = data.totals;
@@ -20,10 +23,6 @@ angular.module('starter.order', [])
             webStorage.session.add('totals', data.totals);
 
         }
-
-//        $scope.products = Orders.getProducts();
-//        $scope.vouchers = Orders.getVouchers();
-//        $scope.totals = Orders.getTotals();
 
         $scope.Next = function (state) {
             $location.path(checkoutState[state]);

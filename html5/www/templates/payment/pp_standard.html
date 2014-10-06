@@ -1,20 +1,7 @@
 <ion-view title="Connecting to Paypal">
     <ion-content class="padding">
-        <h1 class="title">{{ paypalTitle }}</h1>
 
-        <form id="paypalForm" action="{{formActionUrl}}" method="post">
-
-            <input type="hidden" name="{{ key }}" value="{{ value }}" ng-repeat="(key, value) in paypalData"/>
-
-            <div ng-repeat="product in products">
-                <input type="hidden" name="{{ key }}_{{ product.item_number }}" value="{{ value }}" ng-repeat="(key, value) in product" />
-            </div>
-
-
-            <div class="row">
-                <button class="button button-block button-positive activated" >Pay Now</button>
-            </div>
-        </form>
+        <div ng-bind-html="html"></div>
 
     </ion-content>
 </ion-view>

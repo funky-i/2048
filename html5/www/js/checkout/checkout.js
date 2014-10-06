@@ -1,5 +1,5 @@
 angular.module('starter.checkout', [])
-    .controller('CheckoutCtrl', function ($scope, $http, $location, $ionicModal, Restangular, webStorage, DeliveryMethods, AppConfig, Addresses, PaymentMethods) {
+    .controller('CheckoutCtrl', function ($scope, $http, $location, $ionicModal, Restangular, webStorage, DeliveryMethods, AppConfig, Addresses, PaymentMethods, CartSession) {
         var OrderObj = Restangular.all('order');
         var checkoutState = AppConfig.checkout();
         var inputData = {};
@@ -11,6 +11,8 @@ angular.module('starter.checkout', [])
         });
 
         OrderCallback = function (data) {
+            console.log(data);
+
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;
             $scope.totals = data.totals;
@@ -22,26 +24,6 @@ angular.module('starter.checkout', [])
             shipping_address: Addresses.get(webStorage.session.get('shipping_address_id')),
             shipping_method: DeliveryMethods.get(webStorage.session.get('shipping_method_code'))
         };
-
-//        $ionicModal.fromTemplateUrl('http://localhost:8100/#/payment/paypal', {
-//        $ionicModal.fromTemplateUrl('payment/pp_standard.html', {
-//            scope: $scope,
-//            animation: 'slide-in-up',
-//            backdropClickToClose: true
-//        }).then(function (modal) {
-//            $scope.modal = modal;
-//        });
-//
-//        $scope.OnPayPalSubmited = function (input) {
-//            document.getElementById('paypalForm').submit();
-//        }
-//        $scope.OpenModal = function () {
-//            $scope.modal.show();
-////            var ref = window.open('templates/payment/paypal.html','_self', 'location=yes');
-//        };
-//        $scope.CloseModal = function () {
-//            $scope.modal.hide();
-//        };
 
         $scope.OpenURL = function () {
 //            var ref = window.open('http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=api/payment/loaded', '_blank', 'toolbarposition=top');
@@ -82,6 +64,7 @@ angular.module('starter.checkout', [])
 
         $scope.CreateOrderCallback = function (data) {
 
+            console.log(data);
 //            var ref = window.open('templates/payment/' + inputData.payment_method.code + '.html', '_blank', 'location=yes,toolbarposition=top');
             var code = webStorage.session.get('payment_method_code');
             var ref = window.open('http://localhost:8100/#/payment/paypal/' + data.order_id + '/' + code , '_blank', 'location=yes,toolbarposition=top');
@@ -110,14 +93,7 @@ angular.module('starter.checkout', [])
         };
 
         $scope.Clear = function () {
-            webStorage.session.remove('billing_address_id');
-            webStorage.session.remove('order_id');
-            webStorage.session.remove('payment_method_code');
-            webStorage.session.remove('products');
-            webStorage.session.remove('shipping_address_id');
-            webStorage.session.remove('shipping_method_code');
-            webStorage.session.remove('totals');
-            webStorage.session.remove('vouchers');
+            CartSession.clear();
         };
 
         $scope.Previous = function (state) {

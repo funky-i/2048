@@ -1,6 +1,6 @@
 angular.module('starter.account', [])
 
-    .controller("AccountCtrl", function ($scope, $cookieStore, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage) {
+    .controller("AccountCtrl", function ($scope, $cookieStore, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage, CartSession) {
 
         var isLog = false;
         var AccountObj = Restangular.all('login');
@@ -25,7 +25,7 @@ angular.module('starter.account', [])
         };
 
         ClearAll = function () {
-            webStorage.local.clear();
+            CartSession.clear();
         };
 
         Authenticate = function (token) {
@@ -54,8 +54,6 @@ angular.module('starter.account', [])
                         webStorage.local.add('customer', data);
                         isLog = true;
                     });
-
-
                 }
 
             }
@@ -71,8 +69,12 @@ angular.module('starter.account', [])
             });
             confirmPopup.then(function (res) {
                 if (res) {
-                    ClearAll();
-                    $location.path('/tab/dash');
+                    Restangular.all('logout').post().then(function(data) {
+                        console.log(data);
+                        ClearAll();
+                        $location.path('/tab/dash');
+                    });
+
                 } else {
                     console.log('You are not sure');
                 }

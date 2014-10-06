@@ -4,6 +4,23 @@ angular.module('starter.services', [])
  * A simple example service that returns some data.
  */
 
+    .factory('CartSession', function(Restangular, webStorage) {
+        return {
+            clear: function() {
+                webStorage.local.clear();
+                webStorage.session.clear();
+                webStorage.session.remove('billing_address_id');
+                webStorage.session.remove('order_id');
+                webStorage.session.remove('payment_method_code');
+                webStorage.session.remove('products');
+                webStorage.session.remove('shipping_address_id');
+                webStorage.session.remove('shipping_method_code');
+                webStorage.session.remove('totals');
+                webStorage.session.remove('vouchers');
+            }
+        }
+    })
+
     .factory('Orders', function (Restangular, webStorage) {
         var OrderObj = Restangular.all('cart/products');
         var products = {};
@@ -23,27 +40,27 @@ angular.module('starter.services', [])
         var vouchers = webStorage.session.get('vouchers');
 
         return {
-            getProducts: function() {
+            getProducts: function () {
                 return products;
             },
-            getVouchers: function() {
+            getVouchers: function () {
                 return vouchers;
             },
-            getTotals: function() {
+            getTotals: function () {
                 return totals;
             }
         }
     })
 
-    .factory('PaymentMethods', function(webStorage) {
+    .factory('PaymentMethods', function (webStorage) {
 //        var payment_methods = webStorage.session.get('payment_methods');
 
         return {
-            all: function() {
+            all: function () {
                 var payment_methods = webStorage.session.get('payment_methods');
                 return payment_methods;
             },
-            get: function(paymentCode) {
+            get: function (paymentCode) {
                 var payment_methods = webStorage.session.get('payment_methods');
                 return payment_methods[paymentCode];
             }
@@ -81,7 +98,7 @@ angular.module('starter.services', [])
             checkout: function () {
                 return checkout_step;
             },
-            payment_callback: function() {
+            payment_callback: function () {
                 return payment_callback;
             }
         }
