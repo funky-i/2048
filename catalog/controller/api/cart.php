@@ -268,7 +268,8 @@ class ControllerApiCart extends Controller {
 	public function clear() {
 		initHeader();
 
-		unset($this->session->data['cart']);
+		// unset($this->session->data['cart']);
+		$this->session->data['cart'] = [];
 		unset($this->session->data['shipping_address']);		
 		unset($this->session->data['shipping_method']);
 		unset($this->session->data['shipping_methods']);
@@ -276,5 +277,7 @@ class ControllerApiCart extends Controller {
 		unset($this->session->data['payment_method']);
 		unset($this->session->data['payment_methods']);
 		unset($this->session->data['reward']);
+
+		$this->products();
 	}
 }

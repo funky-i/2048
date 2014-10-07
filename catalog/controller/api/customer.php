@@ -2,10 +2,20 @@
 class ControllerApiCustomer extends Controller {
 	private $error;
 
+	private function clear() {
+		unset($this->session->data['cart']);
+		unset($this->session->data['shipping_address']);		
+		unset($this->session->data['shipping_method']);
+		unset($this->session->data['shipping_methods']);
+		unset($this->session->data['payment_address']);
+		unset($this->session->data['payment_method']);
+		unset($this->session->data['payment_methods']);
+		unset($this->session->data['reward']);
+	}
+
 	public function index() {
 		initHeader();
 		$Params = getParams();
-
 		$json = [];
 
 		$this->load->model('account/customer');
@@ -13,12 +23,15 @@ class ControllerApiCustomer extends Controller {
 		// if ($this->oauth2->verifyResourceRequest()) {
 		// $json = $this->oauth2->getUser();
 
+		/* Verify Token before return */
 
 		if ($this->customer->isLogged()) {
-			
+			$json['customer_id'] = $this->customer->getId();
 			$customer = $this->model_account_customer->getCustomer($this->customer->getId());
+			// $this->customer->login($customer['email'], '', true);
 			// $customer['token'] = $Params['data']['token'];
-			$json = $this->pattern($customer);
+			$json['customer'] = $this->pattern($customer);
+			// $this->clear();
 		} else {
 			$json['error'] = 'Token expire!';
 		}
@@ -54,6 +67,7 @@ class ControllerApiCustomer extends Controller {
 		);
 
 		$this->session->data['customer'] = $customer;
+		$this->session->data['customer_id'] = $data['customer_id'];
 
 		return $customer;
 	}

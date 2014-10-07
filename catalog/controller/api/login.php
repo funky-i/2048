@@ -7,11 +7,12 @@ class ControllerApiLogin extends Controller {
 
 		$this->load->language('api/login');
 
-		if (isset($Params['data']['username']) && isset($Params['data']['password']) && isset($Params['data']['token'])) {
+		if (isset($Params['data']['username']) && isset($Params['data']['password'])) {
 			$data = $Params['data'];
 			$this->customer->login($data['username'], $data['password']);
 
 			if ($this->customer->isLogged()) {
+				$token = $this->oauth2->handleTokenRequest();
 				// Custom field validation
 				$this->load->model('account/custom_field');
 
@@ -25,9 +26,10 @@ class ControllerApiLogin extends Controller {
 					'email'             => $this->customer->getEmail(),
 					'telephone'         => $this->customer->getTelephone(),
 					'fax'               => $this->customer->getFax(),
-					'custom_field'      => $custom_fields
+					'custom_field'      => $custom_fields,
+					'token' => $token
 				);
-
+				
 				$json['success'] = $this->language->get('text_success');
 			}else {
 				$json['error'] = $this->language->get('error_login');

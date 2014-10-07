@@ -33,7 +33,7 @@ class Oauth2 {
 		// ));
 		// $accessToken = new OAuth2\ResponseType\AccessToken($accessStorage, $refreshStorage, array(
 		//     'refresh_token_lifetime' => 2419200,
-		// ));		
+		// ));
 		
 		// $this->request->post['grant_type'] = 'client_credentials';
 		// print_r($this->request);
@@ -102,7 +102,7 @@ class Oauth2 {
 		// $user = $this->server->getAccessTokenData($this->OAuthRequest);
 		// $scope = $this->server->getScopeUtil()->checkScope($user['scope'], $this->available_scope);
 
-		if (isset($require_scope)) 
+		if (isset($require_scope))
 			$this->available_scope = $require_scope;
 		
 		if ($this->server->verifyResourceRequest($this->OAuthRequest, $this->OAuthResponse, $this->available_scope)) {
