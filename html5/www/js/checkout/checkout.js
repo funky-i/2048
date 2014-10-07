@@ -75,12 +75,6 @@ angular.module('starter.checkout', [])
             });
             ref.addEventListener('loadstop', function (event) {
                 alert("Stop:: " + event.url);
-                if (event.url == 'http://localhost/#/tab/cart/checkout') {
-                    ref.close();
-                }
-                if (event.url == 'http://localhost/#/tab/cart/complete') {
-                    alert('LoadError:: Complete');
-                }
             });
             ref.addEventListener('loaderror', function (event) {
                 alert('Error::' + event.url);
@@ -89,6 +83,13 @@ angular.module('starter.checkout', [])
             });
             ref.addEventListener('exit', function (event) {
                 alert('Exit::' + event.url);
+                if (event.url == 'http://localhost/#/tab/cart/checkout') {
+                    ref.close();
+                }
+                if (event.url == 'http://localhost/#/tab/cart/complete') {
+                    alert('LoadError:: Complete');
+                    $location.path('#tab/cart/complete');
+                }
             })
         };
 

@@ -4,15 +4,14 @@ angular.module('starter.order', [])
         var checkoutState = AppConfig.checkout();
 
         OrderObj.post().then(function (data) {
-
             if (data.products!=null) {
                 OrderCallback(data);
             }
         });
 
         OrderCallback = function (data) {
-            console.log('OrderCtrl');
-            console.log(data);
+//            console.log('OrderCtrl');
+//            console.log(data);
 
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;
@@ -29,11 +28,11 @@ angular.module('starter.order', [])
         }
 
         $scope.Clear = function () {
-//            var CartObj = Restangular.all('cart');
             Restangular.all('cart/clear').post().then(function (data) {
+//                console.log(data);
                 $scope.products = {};
                 $scope.vouchers = {};
-                $scope.totals = {};
+                $scope.totals = data.totals;
             })
         }
 

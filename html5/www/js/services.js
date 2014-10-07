@@ -7,8 +7,6 @@ angular.module('starter.services', [])
     .factory('CartSession', function(Restangular, webStorage) {
         return {
             clear: function() {
-                webStorage.local.clear();
-                webStorage.session.clear();
                 webStorage.session.remove('billing_address_id');
                 webStorage.session.remove('order_id');
                 webStorage.session.remove('payment_method_code');
@@ -17,15 +15,15 @@ angular.module('starter.services', [])
                 webStorage.session.remove('shipping_method_code');
                 webStorage.session.remove('totals');
                 webStorage.session.remove('vouchers');
+
+                webStorage.local.clear();
+                webStorage.session.clear();
             }
         }
     })
 
     .factory('Orders', function (Restangular, webStorage) {
         var OrderObj = Restangular.all('cart/products');
-        var products = {};
-        var totals = {};
-        var vouchers = {};
 
 //        OrderObj.post().then(function (data) {
 //            if (data.products != null) {
@@ -35,26 +33,23 @@ angular.module('starter.services', [])
 //            }
 //        });
 
-        var products = webStorage.session.get('products');
-        var totals = webStorage.session.get('totals');
-        var vouchers = webStorage.session.get('vouchers');
-
         return {
             getProducts: function () {
+                var products = webStorage.session.get('products');
                 return products;
             },
             getVouchers: function () {
+                var vouchers = webStorage.session.get('vouchers');
                 return vouchers;
             },
             getTotals: function () {
+                var totals = webStorage.session.get('totals');
                 return totals;
             }
         }
     })
 
     .factory('PaymentMethods', function (webStorage) {
-//        var payment_methods = webStorage.session.get('payment_methods');
-
         return {
             all: function () {
                 var payment_methods = webStorage.session.get('payment_methods');

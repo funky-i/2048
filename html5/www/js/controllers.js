@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, webStorage, Restangular) {
+    .controller('DashCtrl', function ($scope, webStorage, Restangular, CartSession) {
 
         if (webStorage.local.get('customer') != null) {
             var customerData = {
@@ -8,11 +8,16 @@ angular.module('starter.controllers', [])
             };
 
             Restangular.all('customer').post(customerData).then(function (data) {
-                webStorage.local.add('customer', data);
+//                console.log('DashCtrl');
+                if (data.error == null) {
+//                    console.log(data.customer);
+//                    webStorage.local.add('customer', data.customer);
+                } else {
+                    CartSession.clear();
+                    console.log(data.error);
+                }
+
             });
         }
 
-})
-
-.controller('AccountCtrl', function($scope) {
-});
+    })

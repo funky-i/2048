@@ -33,11 +33,16 @@ angular.module('starter.account', [])
             console.log(webStorage.local.get('customer'));
         };
 
+
+
         $scope.Login = function (input) {
+
             var inputData = {
                 username: 'mr.kaewdok@gmail.com',//input.username,
                 password: 'demo',//input.password,
-                token: 'ef9a22c416d5bd5f875407c156db31e59d342acd'
+                client_id: AppConfig.apps().client_id,
+                client_secret: AppConfig.apps().secret,
+                grant_type: AppConfig.apps().grant_type
             }
 
             AccountObj.post(inputData).then(function (data) {
