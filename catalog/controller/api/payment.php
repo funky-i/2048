@@ -115,7 +115,7 @@ class ControllerApiPayment extends Controller {
 
 			$this->language->load('payment/' . $payment_code);
 			$this->load->model('payment/' . $payment_code);
-			$data = $this->{'model_payment_' . $payment_code}->getConfig();
+			$data = $this->{'model_payment_' . $payment_code}->getConfig($order_info);
 			
 			$data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
@@ -186,6 +186,7 @@ class ControllerApiPayment extends Controller {
 			$data['return'] = $this->url->link('checkout/success');
 			$data['notify_url'] = $this->url->link('payment/pp_standard/callback', '', 'SSL');
 			$data['cancel_return'] = $this->url->link('checkout/checkout', '', 'SSL');	
+			$data['total'] = $order_info['total'];
 
 			$data['custom'] = $order_id;
 
