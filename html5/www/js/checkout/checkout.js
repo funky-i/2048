@@ -11,6 +11,7 @@ angular.module('starter.checkout', [])
         });
 
         OrderCallback = function (data) {
+            console.log('CheckOutCtrl');
             console.log(data);
 
             $scope.products = data.products;
@@ -27,7 +28,7 @@ angular.module('starter.checkout', [])
 
         $scope.OpenURL = function () {
 //            var ref = window.open('http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=api/payment/loaded', '_blank', 'toolbarposition=top');
-            var ref = window.open('templates/payment/pp_standard.html', '_blank', 'location=yes,toolbarposition=top');
+            var ref = window.open('templates/payment/paypal.html', '_blank', 'location=yes,toolbarposition=top');
 
             ref.addEventListener('loadstart', function (event) {
                 alert("Start:: " + event.url);
@@ -64,14 +65,13 @@ angular.module('starter.checkout', [])
 
         $scope.CreateOrderCallback = function (data) {
 
-            console.log(data);
 //            var ref = window.open('templates/payment/' + inputData.payment_method.code + '.html', '_blank', 'location=yes,toolbarposition=top');
-            var code = webStorage.session.get('payment_method_code');
-            var ref = window.open('http://localhost:8100/#/payment/paypal/' + data.order_id + '/' + code , '_blank', 'location=yes,toolbarposition=top');
+            var code = inputData.payment_method.code;
+//            var ref = window.open('http://localhost:8100/#/payment/' + code + '/' + data.order_id + '/' + code , '_blank', 'location=yes,toolbarposition=top');
+            var ref = window.open('#/payment/' + code + '/' + data.order_id + '/' + code , '_blank', 'location=yes,closebuttoncaption=cancel,toolbarposition=top');
 
             ref.addEventListener('loadstart', function (event) {
                 alert("Start:: " + event.url);
-
             });
             ref.addEventListener('loadstop', function (event) {
                 alert("Stop:: " + event.url);

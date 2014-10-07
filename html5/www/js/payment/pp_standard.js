@@ -11,7 +11,7 @@ angular.module('paypal', [])
             order_id: OrderId
         }
 
-        $scope.title = 'Paypal:';
+        $scope.title = 'Connection to Paypal:';
 
         var paypalData = {
             cmd: '_cart',

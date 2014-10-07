@@ -9,7 +9,7 @@ angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
     'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment',
-    'cod', 'paypal'])
+    'cod', 'paypal', 'paysbuy'])
 
     .constant('$ionicLoadingConfig', {
         template: 'Page loading...',
@@ -167,9 +167,14 @@ angular.module('starter', ['ionic',
             })
 
             .state('paypal', {
-                url: "/payment/paypal/:OrderId/:PaymentCode",
+                url: "/payment/pp_standard/:OrderId/:PaymentCode",
                 templateUrl: 'templates/payment/pp_standard.html',
                 controller: 'PaypalCtrl'
+            })
+            .state('paysbuy', {
+                url: "/payment/paysbuy/:OrderId/:PaymentCode",
+                templateUrl: 'templates/payment/paysbuy.html',
+                controller: 'PaySbuyCtrl'
             })
 
 
