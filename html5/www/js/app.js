@@ -9,6 +9,7 @@ angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
     'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment',
+    'starter.search',
     'cod', 'paypal', 'paysbuy'])
 
     .constant('$ionicLoadingConfig', {
@@ -95,7 +96,7 @@ angular.module('starter', ['ionic',
                 views: {
                     'tab-search': {
                         templateUrl: 'templates/tab-search.html',
-                        controller: 'ProductCtrl'
+                        controller: 'SearchCtrl'
                     }
                 }
             })
