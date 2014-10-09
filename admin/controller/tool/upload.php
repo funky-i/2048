@@ -25,7 +25,7 @@ class ControllerToolUpload extends Controller {
 				$upload_info = $this->model_tool_upload->getUpload($upload_id);
 
 				if ($upload_info && is_file(DIR_DOWNLOAD . $upload_info['filename'])) {
-					unlink(DIR_DOWNLOAD . $upload_info['filename']);
+					unlink(DIR_UPLOAD . $upload_info['filename']);
 				}
 
 				$this->model_tool_upload->deleteUpload($upload_id);
@@ -154,7 +154,8 @@ class ControllerToolUpload extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
 
@@ -269,7 +270,7 @@ class ControllerToolUpload extends Controller {
 		$upload_info = $this->model_tool_upload->getUploadByCode($code);
 
 		if ($upload_info) {
-			$file = DIR_DOWNLOAD . $upload_info['filename'];
+			$file = DIR_UPLOAD . $upload_info['filename'];
 			$mask = basename($upload_info['name']);
 
 			if (!headers_sent()) {
@@ -388,7 +389,7 @@ class ControllerToolUpload extends Controller {
 		if (!$json) {
 			$file = $filename . '.' . md5(mt_rand());
 
-			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_DOWNLOAD . $file);
+			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . $file);
 
 			// Hide the uploaded file name so people can not link to it directly.
 			$this->load->model('tool/upload');

@@ -261,7 +261,8 @@ class ControllerDesignBanner extends Controller {
 
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_form'] = !isset($this->request->get['banner_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_default'] = $this->language->get('text_default');
@@ -385,6 +386,8 @@ class ControllerDesignBanner extends Controller {
 				'sort_order'               => $banner_image['sort_order']
 			);
 		}
+
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

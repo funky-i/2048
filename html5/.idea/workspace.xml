@@ -86,8 +86,8 @@
       <file leaf-file-name="pp_standard.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/payment/pp_standard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37246963" vertical-offset="1164" max-vertical-offset="1905">
-              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.61538464" vertical-offset="1164" max-vertical-offset="1905">
+              <caret line="108" column="21" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -1092,8 +1092,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/payment/pp_standard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37246963" vertical-offset="1164" max-vertical-offset="1905">
-          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.61538464" vertical-offset="1164" max-vertical-offset="1905">
+          <caret line="108" column="21" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
           <folding />
         </state>
       </provider>

@@ -4,7 +4,9 @@ $_['heading_title']     = 'Reviews';
 
 // Text
 $_['text_success']      = 'Success: You have modified reviews!';
-$_['text_list']         = 'Attribute Group List';
+$_['text_list']         = 'Review List';
+$_['text_add']          = 'Add Review';
+$_['text_edit']         = 'Edit Review';
 
 // Column
 $_['column_product']    = 'Product';
