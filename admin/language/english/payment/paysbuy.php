@@ -8,7 +8,7 @@ $_['text_success']       = 'Success: You have modified PaySbuy Website Payment P
 $_['text_paysbuy']        = '<a target="_BLANK" href="http://www.paysbuy.com"><img src="view/image/payment/paysbuy.gif" alt="PaySbuy Website Payment Pro" title="PaySbuy Website Payment Pro" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_authorization'] = 'Authorization';
 $_['text_sale']          = 'Sale';
-
+$_['text_edit'] = 'Edit PaySbuy';
 $_['text_thai'] 			= 'Thai';
 $_['text_english']			= 'English';
 $_['text_japanese']			= 'Japanese';

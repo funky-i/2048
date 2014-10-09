@@ -10,6 +10,7 @@ class ModelPaymentPaysbuy extends Model {
     } else {
       $action = 'http://demo.paysbuy.com/paynow.aspx';
     }
+
     $action .= '?lang=' . $this->config->get('paysbuy_language');
     
     $result['action'] = $action;
@@ -54,7 +55,8 @@ class ModelPaymentPaysbuy extends Model {
     return $currencyCode;
   }
 
-	public function getMethod($address, $total) { 
+	public function getMethod($address, $total) {
+    
     $this->load->language('payment/paysbuy');
 
     $method_data = array();
