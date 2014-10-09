@@ -104,12 +104,11 @@ class ControllerApiPayment extends Controller {
 		$this->load->model('account/order');
 
 		if (isset($Params['data']['order_id'])) {
-			$order_id = $Params['data']['order_id'];
-			
+			$order_id = $Params['data']['order_id'];		
 			$order_info = $this->model_checkout_order->getOrder($order_id);
 		}
 
-		if (isset($order_info)) {
+		if (isset($order_info) && (!empty($order_info))) {			
 			$SubTotal = 0;
 			$payment_code = $order_info['payment_code'];
 

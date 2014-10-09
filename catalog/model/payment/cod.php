@@ -1,5 +1,8 @@
 <?php
 class ModelPaymentCOD extends Model {
+	public function getConfig($data = array()) {
+	}
+	
 	public function getMethod($address, $total) {
 		$this->load->language('payment/cod');
 

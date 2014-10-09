@@ -11,7 +11,7 @@ angular.module('paysbuy', [])
             order_id: OrderId
         }
 
-        $scope.title = 'Connection to PaySbuy';
+        $scope.title = 'Connecting to PaySbuy';
 
         var paysbuyData = {
             psb: '1',

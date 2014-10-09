@@ -162,7 +162,7 @@ angular.module('starter', ['ionic',
                 views: {
                     'tab-cart': {
                         templateUrl: 'templates/checkout/complete.html',
-                        controller: 'CheckoutCtrl'
+                        controller: 'CompleteCtrl'
                     }
                 }
             })

@@ -1,10 +1,22 @@
 angular.module('starter.checkout', [])
-    .controller('CheckoutCtrl', function ($scope, $http, $location, $ionicModal, Restangular, webStorage, DeliveryMethods, AppConfig, Addresses, PaymentMethods, CartSession) {
+    .controller('CompleteCtrl', function ($scope, webStorage, Restangular, CartSession) {
+
+    })
+
+    .controller('CheckoutCtrl', function ($scope, $state, $http, $location, $ionicModal, Restangular, webStorage, DeliveryMethods, AppConfig, Addresses, PaymentMethods, CartSession) {
         var OrderObj = Restangular.all('order');
         var checkoutState = AppConfig.checkout();
         var inputData = {};
 
-        Restangular.all('cart/products').post().then(function (data) {
+        var inputData = {
+            payment_address: Addresses.get(webStorage.session.get('billing_address_id')),
+            payment_method: PaymentMethods.get(webStorage.session.get('payment_method_code')),
+            shipping_address: Addresses.get(webStorage.session.get('shipping_address_id')),
+            shipping_method: DeliveryMethods.get(webStorage.session.get('shipping_method_code'))
+        };
+
+        Restangular.all('cart/products').post(inputData).then(function (data) {
+            console.log(data.totals);
             if (data.products != null) {
                 OrderCallback(data);
             }
@@ -12,18 +24,11 @@ angular.module('starter.checkout', [])
 
         OrderCallback = function (data) {
             console.log('CheckOutCtrl');
-            console.log(data);
+            console.log(data.totals);
 
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;
             $scope.totals = data.totals;
-        };
-
-        var inputData = {
-            payment_address: Addresses.get(webStorage.session.get('billing_address_id')),
-            payment_method: PaymentMethods.get(webStorage.session.get('payment_method_code')),
-            shipping_address: Addresses.get(webStorage.session.get('shipping_address_id')),
-            shipping_method: DeliveryMethods.get(webStorage.session.get('shipping_method_code'))
         };
 
         $scope.OpenURL = function () {
@@ -65,16 +70,20 @@ angular.module('starter.checkout', [])
 
         $scope.CreateOrderCallback = function (data) {
 
-//            var ref = window.open('templates/payment/' + inputData.payment_method.code + '.html', '_blank', 'location=yes,toolbarposition=top');
             var code = inputData.payment_method.code;
-//            var ref = window.open('http://localhost:8100/#/payment/' + code + '/' + data.order_id + '/' + code , '_blank', 'location=yes,toolbarposition=top');
             var ref = window.open('#/payment/' + code + '/' + data.order_id + '/' + code , '_blank', 'location=yes,closebuttoncaption=cancel,toolbarposition=top');
 
             ref.addEventListener('loadstart', function (event) {
                 alert("Start:: " + event.url);
             });
             ref.addEventListener('loadstop', function (event) {
-                alert("Stop:: " + event.url);
+                if (event.url == 'http://localhost/#/tab/cart/checkout') {
+                    ref.close();
+                }
+                if (event.url == 'http://localhost/#/tab/cart/complete') {
+                    alert('LoadError:: Complete');
+                    $state.go('tab.complete');
+                }
             });
             ref.addEventListener('loaderror', function (event) {
                 alert('Error::' + event.url);
@@ -83,13 +92,7 @@ angular.module('starter.checkout', [])
             });
             ref.addEventListener('exit', function (event) {
                 alert('Exit::' + event.url);
-                if (event.url == 'http://localhost/#/tab/cart/checkout') {
-                    ref.close();
-                }
-                if (event.url == 'http://localhost/#/tab/cart/complete') {
-                    alert('LoadError:: Complete');
-                    $location.path('#tab/cart/complete');
-                }
+//                $state.go('tab.complete');
             })
         };
 

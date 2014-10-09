@@ -1,10 +1,8 @@
 <?php
 class ControllerApiCart extends Controller {
-	public function index() {
-		
+	public function index() {	
 		initHeader();
 		$Params = getParams();
-
 		$json = [];
 
 		$this->load->language('api/cart');
@@ -146,10 +144,15 @@ class ControllerApiCart extends Controller {
 
 	public function products() {
 		initHeader();
-
+		$Params = getParams();
 		$this->load->language('api/cart');
+		$json = [];
 
-		$json = array();
+		unset($this->session->data['shipping_method']);
+
+		if (isset($Params['data']['shipping_method'])) {
+			$this->session->data['shipping_method'] = $Params['data']['shipping_method'];
+		}
 
 		// Stock
 		if (!$this->cart->hasStock() && (!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning'))) {
@@ -239,6 +242,7 @@ class ControllerApiCart extends Controller {
 
 		foreach ($results as $result) {
 			if ($this->config->get($result['code'] . '_status')) {
+				
 				$this->load->model('total/' . $result['code']);
 
 				$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);

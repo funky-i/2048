@@ -101,8 +101,6 @@ angular.module('starter.services', [])
     })
 
     .factory('DeliveryMethods', function (webStorage) {
-//        var delivery_methods = webStorage.session.get('delivery_methods');
-
         return {
             all: function () {
                 var delivery_methods = webStorage.session.get('delivery_methods');
@@ -116,9 +114,6 @@ angular.module('starter.services', [])
     })
 
     .factory('Addresses', function (webStorage) {
-
-        var addresses = webStorage.session.get('addresses');
-
         return {
             all: function () {
                 var addresses = webStorage.session.get('addresses');

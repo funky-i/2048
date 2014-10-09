@@ -1,17 +1,23 @@
 angular.module('starter.order', [])
-    .controller('OrderCtrl', function ($scope, $http, $location, Restangular, Orders, webStorage, AppConfig) {
+    .controller('OrderCtrl', function ($scope, $http, $location, Restangular, Orders, webStorage, AppConfig, DeliveryMethods) {
         var OrderObj = Restangular.all('cart/products');
         var checkoutState = AppConfig.checkout();
+        var inputData = {};
+
+//        inputData = {
+//            shipping_method: {}
+//        }
 
         OrderObj.post().then(function (data) {
+            console.log(data.totals);
             if (data.products!=null) {
                 OrderCallback(data);
             }
         });
 
         OrderCallback = function (data) {
-//            console.log('OrderCtrl');
-//            console.log(data);
+            console.log('OrderCtrl');
+            console.log(data.totals);
 
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;

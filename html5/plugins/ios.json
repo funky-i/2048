@@ -21,11 +21,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
                         },
                         {
@@ -45,15 +45,15 @@
             },
             "framework": {
                 "parents": {
-                    "CoreGraphics.framework": [
-                        {
-                            "xml": "false",
-                            "count": 1
-                        }
-                    ],
                     "AudioToolbox.framework": [
                         {
                             "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": "false",
                             "count": 1
                         }
                     ]
@@ -63,22 +63,22 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.html5820789"
+            "PACKAGE_NAME": "com.ionicframework.html5883335"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ionicframework.html5820789"
+            "PACKAGE_NAME": "com.ionicframework.html5883335"
         },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.html5820789"
-        },
-        "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.html5820789"
+            "PACKAGE_NAME": "com.ionicframework.html5883335"
         },
         "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "com.ionicframework.html5820789"
+            "PACKAGE_NAME": "com.ionicframework.html5883335"
+        },
+        "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.html5883335"
         },
         "org.apache.cordova.statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.html5820789"
+            "PACKAGE_NAME": "com.ionicframework.html5883335"
         }
     },
     "dependent_plugins": {}

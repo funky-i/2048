@@ -20,4 +20,4 @@ angular.module('starter.controllers', [])
             });
         }
 
-    })
+    });
