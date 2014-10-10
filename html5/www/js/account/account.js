@@ -1,8 +1,5 @@
 angular.module('starter.account', [])
-
-    .controller("AccountCtrl", function ($scope, $cookieStore, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage, CartSession) {
-
-        var isLog = false;
+    .controller("LoginCtrl", function ($scope, $ionicModal, $state, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage, ClearSession) {
         var AccountObj = Restangular.all('login');
 
         $scope.input = {
@@ -10,30 +7,48 @@ angular.module('starter.account', [])
             password: 'demo'
         };
 
-        if (webStorage.local.get('customer') != null) {
-            isLog = true;
+        $ionicModal.fromTemplateUrl('templates/login.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+        $scope.openModal = function() {
+            $scope.modal.show();
         };
-
-//        $scope.token = (webStorage.local.get('token') != null) ? webStorage.local.get('token') : null;
-        $scope.customer = (webStorage.local.get('customer') != null) ? webStorage.local.get('customer') : null;
-        $scope.Show = function (status) {
-            isLog = status;
+        $scope.closeModal = function() {
+            $scope.modal.hide();
         };
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+        // Execute action on hide modal
+        $scope.$on('modal.hidden', function() {
+            // Execute action
+        });
+        // Execute action on remove modal
+        $scope.$on('modal.removed', function() {
+            // Execute action
+        });
 
-        $scope.IsLogged = function (status) {
-            return isLog == status;
-        };
+        $scope.isLogged = function() {
+            if (webStorage.local.get('customer')!=null) {
+                $state.go('tab.account');
+            } else {
+                $scope.openModal();
+            }
+        }
 
-        ClearAll = function () {
-            CartSession.clear();
-        };
+        $scope.Cancellation = function() {
+            $scope.closeModal();
+            $state.go('tab.dash');
+        }
 
-        Authenticate = function (token) {
-            console.log('Authentication: ');
-            console.log(webStorage.local.get('customer'));
-        };
-
-
+        $scope.Registration = function() {
+            $scope.closeModal();
+            $state.go('tab.register');
+        }
 
         $scope.Login = function (input) {
 
@@ -58,13 +73,44 @@ angular.module('starter.account', [])
                     CustomerObj.post().then(function (data) {
                         webStorage.local.add('customer', data);
                         isLog = true;
+                        $scope.closeModal();
+                        $state.go('tab.account');
                     });
                 }
 
             }
 
-            input = {};
+
         };
+
+
+    })
+    .controller("AccountCtrl", function ($scope, $ionicModal, $state, $ionicPopup, $timeout, $location, AppConfig, Restangular, webStorage, ClearSession) {
+
+        var isLog = false;
+        var AccountObj = Restangular.all('login');
+
+
+//        $scope.token = (webStorage.local.get('token') != null) ? webStorage.local.get('token') : null;
+        $scope.customer = (webStorage.local.get('customer') != null) ? webStorage.local.get('customer') : null;
+        $scope.Show = function (status) {
+            isLog = status;
+        };
+
+        $scope.IsLogged = function (status) {
+            return isLog == status;
+        };
+
+        ClearAll = function () {
+            ClearSession.all();
+        };
+
+        Authenticate = function (token) {
+            console.log('Authentication: ');
+            console.log(webStorage.local.get('customer'));
+        };
+
+
 
         $scope.Logout = function () {
 
@@ -74,10 +120,10 @@ angular.module('starter.account', [])
             });
             confirmPopup.then(function (res) {
                 if (res) {
-                    Restangular.all('logout').post().then(function(data) {
+                    Restangular.all('logout').post().then(function (data) {
                         console.log(data);
                         ClearAll();
-                        $location.path('/tab/dash');
+                        $state.go('tab.dash');
                     });
 
                 } else {

@@ -1,9 +1,10 @@
 angular.module('starter.checkout', [])
-    .controller('CompleteCtrl', function ($scope, webStorage, Restangular, CartSession) {
 
+    .controller('CompleteCtrl', function ($scope, webStorage, Restangular, ClearSession) {
+        ClearSession.cart();
     })
 
-    .controller('CheckoutCtrl', function ($scope, $state, $http, $location, $ionicModal, Restangular, webStorage, DeliveryMethods, AppConfig, Addresses, PaymentMethods, CartSession) {
+    .controller('CheckoutCtrl', function ($scope, $state, $http, $ionicLoading, $location, $ionicModal, Restangular, webStorage, DeliveryMethods, AppConfig, Addresses, PaymentMethods, ClearSession) {
         var OrderObj = Restangular.all('order');
         var checkoutState = AppConfig.checkout();
         var inputData = {};
@@ -31,37 +32,8 @@ angular.module('starter.checkout', [])
             $scope.totals = data.totals;
         };
 
-        $scope.OpenURL = function () {
-//            var ref = window.open('http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=api/payment/loaded', '_blank', 'toolbarposition=top');
-            var ref = window.open('templates/payment/paypal.html', '_blank', 'location=yes,toolbarposition=top');
-
-            ref.addEventListener('loadstart', function (event) {
-                alert("Start:: " + event.url);
-                if (event.url == 'http://localhost:8100/#/tab/cart') {
-                    ref.close();
-                }
-            });
-            ref.addEventListener('loadstop', function (event) {
-                alert("Stop:: " + event.url);
-            });
-            ref.addEventListener('loaderror', function (event) {
-                alert('Error::' + event.url);
-                console.log(event);
-
-                if (event.url == 'http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=payment/pp_standard/callback') {
-                    alert('LoadError:: Complete');
-                }
-                ref.close();
-            });
-            ref.addEventListener('exit', function (event) {
-                alert('Exit::' + event.url);
-            })
-        }
-
         $scope.CreateOrder = function () {
-
             Restangular.all('order/add').post(inputData).then(function (data) {
-
                 if (data.success != null) {
                     $scope.CreateOrderCallback(data);
                 }
@@ -71,33 +43,33 @@ angular.module('starter.checkout', [])
         $scope.CreateOrderCallback = function (data) {
 
             var code = inputData.payment_method.code;
-            var ref = window.open('#/payment/' + code + '/' + data.order_id + '/' + code , '_blank', 'location=yes,closebuttoncaption=cancel,toolbarposition=top');
+            var ref = window.open('#/payment/' + code + '/' + data.order_id + '/' + code, '_blank', 'location=no,closebuttoncaption=cancel,toolbarposition=top');
 
             ref.addEventListener('loadstart', function (event) {
                 alert("Start:: " + event.url);
+                console.log(event);
             });
             ref.addEventListener('loadstop', function (event) {
-                if (event.url == 'http://localhost/#/tab/cart/checkout') {
-                    ref.close();
-                }
-                if (event.url == 'http://localhost/#/tab/cart/complete') {
-                    alert('LoadError:: Complete');
-                    $state.go('tab.complete');
-                }
+                alert('Stop::' + event.type + '-' + event.url);
             });
             ref.addEventListener('loaderror', function (event) {
                 alert('Error::' + event.url);
-                console.log(event);
-                ref.close();
+                if (event.url == 'http://localhost/#/tab/cart/complete') {
+                    ref.close();
+                    $state.go('tab.complete');
+                }
+                if (event.url == 'http://localhost/#/tab/cart/checkout') {
+                    ref.close();
+                }
             });
             ref.addEventListener('exit', function (event) {
-                alert('Exit::' + event.url);
-//                $state.go('tab.complete');
-            })
+                alert('Exit::' + event.type);
+            });
+
         };
 
         $scope.Clear = function () {
-            CartSession.clear();
+            ClearSession.all();
         };
 
         $scope.Previous = function (state) {

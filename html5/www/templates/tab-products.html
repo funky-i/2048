@@ -1,7 +1,5 @@
 <ion-view title="Products">
     <ion-content >
-        <h1 class="padding">Products</h1>
-
         <div class="list">
             <div ng-repeat="product in products">
                 <a class="item item-thumbnail-left" href="#/tab/product/{{ product.product_id }}" ng-show="{{ product.product_id != null}}">
@@ -11,6 +9,5 @@
                 </a>
             </div>
         </div>
-
     </ion-content>
 </ion-view>

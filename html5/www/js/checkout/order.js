@@ -1,5 +1,5 @@
 angular.module('starter.order', [])
-    .controller('OrderCtrl', function ($scope, $http, $location, Restangular, Orders, webStorage, AppConfig, DeliveryMethods) {
+    .controller('OrderCtrl', function ($scope, $http, $location, $ionicPopover, Restangular, Orders, webStorage, AppConfig, DeliveryMethods) {
         var OrderObj = Restangular.all('cart/products');
         var checkoutState = AppConfig.checkout();
         var inputData = {};
@@ -7,6 +7,32 @@ angular.module('starter.order', [])
 //        inputData = {
 //            shipping_method: {}
 //        }
+        $ionicPopover.fromTemplateUrl('templates/popover.html', function(popover) {
+            $scope.popover = popover;
+        });
+
+        $scope.data = {
+            showDelete: false
+        };
+
+        $scope.up = function(item) {
+            alert('Edit Item: ' + item.product_id);
+        };
+        $scope.down = function(item) {
+            alert('Share Item: ' + item.product_id);
+        };
+        $scope.del = function(item) {
+            alert('Share Item: ' + item.product_id);
+        };
+
+        $scope.moveItem = function(item, fromIndex, toIndex) {
+            $scope.items.splice(fromIndex, 1);
+            $scope.items.splice(toIndex, 0, item);
+        };
+
+        $scope.onItemDelete = function(item) {
+            $scope.items.splice($scope.items.indexOf(item), 1);
+        };
 
         OrderObj.post().then(function (data) {
             console.log(data.totals);
@@ -17,7 +43,7 @@ angular.module('starter.order', [])
 
         OrderCallback = function (data) {
             console.log('OrderCtrl');
-            console.log(data.totals);
+            console.log(data.products);
 
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;

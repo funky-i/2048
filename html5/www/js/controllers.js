@@ -1,6 +1,11 @@
 angular.module('starter.controllers', [])
-
-    .controller('DashCtrl', function ($scope, webStorage, Restangular, CartSession) {
+    .controller('BodyCtrl', function($scope) {
+        ionic.Platform.ready(function() {
+            // hide the status bar using the StatusBar plugin
+            StatusBar.hide();
+        });
+    })
+    .controller('DashCtrl', function ($scope, webStorage, Restangular, ClearSession) {
 
         if (webStorage.local.get('customer') != null) {
             var customerData = {
@@ -13,7 +18,7 @@ angular.module('starter.controllers', [])
 //                    console.log(data.customer);
 //                    webStorage.local.add('customer', data.customer);
                 } else {
-                    CartSession.clear();
+                    ClearSession.all();
                     console.log(data.error);
                 }
 

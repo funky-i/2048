@@ -6,15 +6,14 @@ angular.module('cod', [])
             order_id: webStorage.session.get('order_id')
         }
 
+        $scope.title = 'Cash On Delivery';
+
         $scope.Confirm = function () {
-            $scope.modal.hide();
+
 //            PaymentObj.post(inputData).then(function (data) {
 //                console.log(data);
 //            })
         }
 
-        $scope.$on('modal.hidden', function() {
-            console.log('modal:  hidden');
-            alert('Modal:: Hidden');
-        });
+
     });

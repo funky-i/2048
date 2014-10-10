@@ -1,17 +1,47 @@
-<ion-view title="Cart">
-    <ion-content class="padding">
-        <h1>Cart</h1>
+<ion-view title="Cart" hide-nav-bar="true">
+    <!--<ion-header-bar>-->
+        <!--<h1 class="title">Login or Register</h1>-->
+        <!--<div class="bar bar-header">-->
+            <!--&lt;!&ndash;<button class="button icon ion-navicon"></button>&ndash;&gt;-->
+            <!--<h1 class="title">Cart</h1>-->
+            <!--<button class="button button-icon ion-more" ng-click="popover.show($event)">-->
+            <!--</button>-->
+        <!--</div>-->
+        <!--<div class="padding-bottom"></div>-->
+    <!--</ion-header-bar>-->
+    <ion-content ng-show="products.length">
 
-        <div class="list">
-            <div ng-repeat="product in products">
-                <a class="item item-icon-left" href="#/tab/product/{{ product.product_id }}">
-                    <i class="icon ion-bag"></i>
-                    {{ product.name }} : {{ product.quantity }}
-                    <span class="badge badge-stable">{{ product.price }}</span>
-                </a>
-            </div>
-        </div>
-        <div class="list">
+        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+            <div class="item item-divider">Products</div>
+            <ion-item ng-repeat="item in products" item="item">
+                <div class="row">
+                    <div class="col col-50">
+                        <i class="icon ion-music-note"></i> {{ item.name }}
+                    </div>
+                    <div class="col"><span class="item-note"> {{ item.price }} </span></div>
+                    <div class="col"><span class="item-note"> {{ item.quantity }} </span></div>
+                </div>
+
+                <!--<ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>-->
+                <ion-option-button class="button-calm" ng-click="up(item)"> Up </ion-option-button>
+                <ion-option-button class="button-balanced" ng-click="down(item)"> Down </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="del(item)"> Delete </ion-option-button>
+                <!--<ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>-->
+            </ion-item>
+
+        </ion-list>
+
+        <!--<div class="list">-->
+            <!--<div ng-repeat="product in products">-->
+                <!--<a class="item item-icon-left" href="#/tab/product/{{ product.product_id }}">-->
+                    <!--<i class="icon ion-bag"></i>-->
+                    <!--{{ product.name }} : {{ product.quantity }}-->
+                    <!--<span class="badge badge-stable">{{ product.price }}</span>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="item item-divider">Totals</div>
+        <div class="list" ng-show="products.length">
             <label class="item item-input" ng-repeat="total in totals">
                 <span class="input-label">{{ total.title }}:</span>
                 <span class="badge font-15">{{ total.text }}</span>
@@ -31,3 +61,17 @@
 
     </ion-content>
 </ion-view>
+<script id="templates/popover.html" type="text/ng-template">
+    <ion-popover-view>
+        <ion-content>
+            <div class="list">
+                <a class="item">
+                    Learn Ionic
+                </a>
+                <a class="item" ng-click="Clear()">
+                    Clear All
+                </a>
+            </div>
+        </ion-content>
+    </ion-popover-view>
+</script>

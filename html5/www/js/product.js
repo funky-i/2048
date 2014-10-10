@@ -7,6 +7,13 @@ angular.module('starter.product', [])
 //            'filter_limit': 10
         }
 
+        $scope.leftButtons = [{
+            type: 'button-icon icon ion-navicon',
+            tap: function(e) {
+                alert('tabs');
+            }
+        }];
+
         ProductObj.post(inputData).then(function (data) {
             $scope.products = data;
         });

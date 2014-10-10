@@ -4,9 +4,9 @@ angular.module('starter.services', [])
  * A simple example service that returns some data.
  */
 
-    .factory('CartSession', function(Restangular, webStorage) {
+    .factory('ClearSession', function(Restangular, webStorage) {
         return {
-            clear: function() {
+            all: function() {
                 webStorage.session.remove('billing_address_id');
                 webStorage.session.remove('order_id');
                 webStorage.session.remove('payment_method_code');
@@ -18,6 +18,19 @@ angular.module('starter.services', [])
 
                 webStorage.local.clear();
                 webStorage.session.clear();
+            },
+            cart: function() {
+                webStorage.session.remove('billing_address_id');
+                webStorage.session.remove('order_id');
+                webStorage.session.remove('payment_method_code');
+                webStorage.session.remove('products');
+                webStorage.session.remove('shipping_address_id');
+                webStorage.session.remove('shipping_method_code');
+                webStorage.session.remove('totals');
+                webStorage.session.remove('vouchers');
+
+                webStorage.session.clear();
+
             }
         }
     })

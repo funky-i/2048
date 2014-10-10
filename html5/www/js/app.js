@@ -9,7 +9,7 @@ angular.module('starter', ['ionic',
     'restangular', 'ngCookies', 'ngRoute', 'ngStorage', 'LocalStorageModule', 'webStorageModule',
     'starter.controllers', 'starter.services', 'starter.product', 'starter.account', 'starter.cart', 'starter.order',
     'starter.checkout', 'starter.address', 'starter.shipping', 'starter.payment',
-    'starter.search',
+    'starter.search', 'starter.dummy',
     'cod', 'paypal', 'paysbuy'])
 
     .constant('$ionicLoadingConfig', {
@@ -34,7 +34,7 @@ angular.module('starter', ['ionic',
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
         var index = 'index.php?route=api';
-        RestangularProvider.setBaseUrl('http://192.168.1.34/Projects/Opencart/Present/2.0/' + index);
+        RestangularProvider.setBaseUrl('http://192.168.1.35/Projects/Opencart/Present/2.0/' + index);
         RestangularProvider.setDefaultHeaders({
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
@@ -42,9 +42,6 @@ angular.module('starter', ['ionic',
         RestangularProvider.setDefaultHttpFields({
             'withCredentials': true
         });
-
-//        $routeProvider
-//            .when('/profile', {templateUrl: 'templates/account.html',   controller: 'ProductCtrl'})
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
@@ -167,6 +164,11 @@ angular.module('starter', ['ionic',
                 }
             })
 
+            .state('cod', {
+                url: "/payment/cod/:OrderId/:PaymentCode",
+                templateUrl: 'templates/payment/cod.html',
+                controller: 'CODCtrl'
+            })
             .state('paypal', {
                 url: "/payment/pp_standard/:OrderId/:PaymentCode",
                 templateUrl: 'templates/payment/pp_standard.html',
@@ -177,6 +179,7 @@ angular.module('starter', ['ionic',
                 templateUrl: 'templates/payment/paysbuy.html',
                 controller: 'PaySbuyCtrl'
             })
+
 
 
 //      .state('tab.information', {
@@ -204,6 +207,15 @@ angular.module('starter', ['ionic',
                 views: {
                     'tab-account': {
                         templateUrl: 'templates/account/transaction.html',
+                        controller: 'AccountCtrl'
+                    }
+                }
+            })
+            .state('tab.register', {
+                url: "/account/registration",
+                views: {
+                    'tab-account': {
+                        templateUrl: 'templates/account/register.html',
                         controller: 'AccountCtrl'
                     }
                 }

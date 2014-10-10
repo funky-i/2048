@@ -1,0 +1,44 @@
+<ion-modal-view>
+
+    <ion-header-bar>
+        <h1 class="title">Login or Register</h1>
+        <div class="bar bar-header">
+            <!--<button class="button icon ion-navicon"></button>-->
+            <h1 class="title">Sign-In</h1>
+            <div class="button button-clear" ng-click="Cancellation()"><i class="icon ion-close-circled"></i> </div>
+
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+
+        <div class="row">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </div>
+
+        <form name="loginForm" ng-submit="loginForm.$valid && Login(input)" onvalidate>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Username:</span>
+                    <input ng-model="input.username" type="text" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password:</span>
+                    <input ng-model="input.password" type="password" required>
+                </label>
+            </div>
+
+            <div class="row">
+                <button class="button button-block button-positive activated">Login</button>
+            </div>
+        </form>
+
+        <div class="row">
+            <button class="button button-block button-positive activated" ng-click="Registration()">Register</button>
+        </div>
+        <div class="row">
+            <!--<button class="button button-block button-positive activated" ng-click="Cancellation()">Cancel</button>-->
+        </div>
+
+    </ion-content>
+</ion-modal-view>
