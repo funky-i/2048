@@ -5,13 +5,6 @@
 
 ## Overview
 
-## Feature
- 1. Forum
- 2. Easy Language
- 3. APIs
- 4. OAuth 2.0
- 5. HTML5
-
 ## Screenshots
 
 ## Making a suggestion
