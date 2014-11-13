@@ -76,17 +76,19 @@ angular.module('starter.services', [])
     })
 
     .factory('AppConfig', function () {
+        var url = 'http://localhost/Projects/Opencart/Present/2.0/';
+
         var app_config = {
             client_id: '4',
             secret: 'abc',
             grant_type: 'password',
-            baseURL: 'http://localhost/Projects/Opencart/Present/2.0/index.php?route=',
-            imageURL: 'http://localhost/Projects/Opencart/Present/2.0/image/'
+            baseURL: url + 'index.php?route=',
+            imageURL: url + 'image/'
         };
 
         var payment_callback = {
             return: 'http://localhost/#/tab/cart/complete',
-            notify_url: 'http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=payment/pp_standard/callback',
+            notify_url: url + 'index.php?route=api/payment/callback',
             cancel_return: 'http://localhost/#/tab/cart/checkout'
         };
 
@@ -142,7 +144,7 @@ angular.module('starter.services', [])
     .factory('Products', function ($http) {
         var products = {};
         var status = false;
-        var url = 'http://192.168.1.34/Projects/Opencart/Present/2.0/index.php?route=api/product';
+        var url = AppConfig.app_config.baseURL + 'api/product';
 
         return {
             all: function () {

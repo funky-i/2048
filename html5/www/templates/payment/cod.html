@@ -1,14 +1,7 @@
-<ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">{{ title }}</h1>
-    </ion-header-bar>
-    <ion-content>
+<ion-view title="{{ title }}">
+    <ion-content class="padding">
 
-    <div class="padding">
-        <i class="padding-horizontal padding-vertical icon ion-loading-c"></i>
-    </div>
-        <div class="row">
+        <div ng-bind-html="html"></div>
 
-        </div>
     </ion-content>
-</ion-modal-view>
+</ion-view>

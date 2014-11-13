@@ -34,7 +34,7 @@ angular.module('starter', ['ionic',
     .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, $routeProvider) {
 
         var index = 'index.php?route=api';
-        RestangularProvider.setBaseUrl('http://192.168.1.35/Projects/Opencart/Present/2.0/' + index);
+        RestangularProvider.setBaseUrl('http://192.168.1.72/Projects/Opencart/Present/2.0/' + index);
         RestangularProvider.setDefaultHeaders({
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'

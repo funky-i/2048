@@ -24,8 +24,7 @@ angular.module('starter.checkout', [])
         });
 
         OrderCallback = function (data) {
-            console.log('CheckOutCtrl');
-            console.log(data.totals);
+            console.log(data.products);
 
             $scope.products = data.products;
             $scope.vouchers = data.vouchers;
@@ -54,11 +53,11 @@ angular.module('starter.checkout', [])
             });
             ref.addEventListener('loaderror', function (event) {
                 alert('Error::' + event.url);
-                if (event.url == 'http://localhost/#/tab/cart/complete') {
+                if (event.url == AppConfig.payment_callback().return) {
                     ref.close();
                     $state.go('tab.complete');
                 }
-                if (event.url == 'http://localhost/#/tab/cart/checkout') {
+                if (event.url == AppConfig.payment_callback().cancel_return) {
                     ref.close();
                 }
             });
