@@ -15,6 +15,7 @@ class ModelPaymentPPStandard extends Model {
 		$result['degug'] = $this->config->get('pp_standard_debug');
 		// $result['total'] = $this->config->get('pp_standard_total');
 		
+		$result['notify_url'] = $this->url->link('payment/pp_standard/callback', '', 'SSL');
 		$result['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
 		if (!$this->config->get('pp_standard_transaction')) {

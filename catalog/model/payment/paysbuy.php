@@ -25,6 +25,8 @@ class ModelPaymentPaysbuy extends Model {
       $result['currencyCode'] = $this->currency_code($this->config->get('paysbuy_currency'));
     }
 
+    $result['notify_url'] = $this->url->link('payment/paysbuy/callback', '', 'SSL');
+
     $result['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');    
 
     return $result;

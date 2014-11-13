@@ -70,26 +70,35 @@ class ControllerApiPayment extends Controller {
 	}
 
 	public function callback() {
+		$isComplete = false;
 		initHeader();
 		$Params = getParams();
 		$json = [];
 
 		if (isset($Params['data']['order_id'])) {
 			$order_id = $Params['data']['order_id'];
-			$code = isset($this->session->data['payment_method']['code'])? $this->session->data['payment_method']['code'] : '';
+			$payment_code = $Params['data']['payment_code'];			
 
-			if ($code == 'cod') {
+			if ($payment_code == 'cod') {
 				$this->load->model('checkout/order');
 
 				$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('cod_order_status_id'));
 
-				$json['success'] = $order_id;
-			}
-
-			if ($code == 'pp_standard') {
+				$isComplete = true;
 
 			}
+
+			if ($payment_code == 'pp_standard') {
+
+			}
+
+			if ($payment_code == 'paysbuy') {
+
+			}
+			
 		}	
+
+		$json['success'] = $isComplete;
 		
 		$this->response->setOutput(json_encode($json));
 
@@ -170,7 +179,7 @@ class ControllerApiPayment extends Controller {
 			} else {
 				$data['discount_amount_cart'] -= $total;
 			}
-
+			
 			$data['currency_code'] = $order_info['currency_code'];
 			$data['first_name'] = html_entity_decode($order_info['payment_firstname'], ENT_QUOTES, 'UTF-8');
 			$data['last_name'] = html_entity_decode($order_info['payment_lastname'], ENT_QUOTES, 'UTF-8');
@@ -182,9 +191,9 @@ class ControllerApiPayment extends Controller {
 			$data['email'] = $order_info['email'];
 			$data['invoice'] = $order_id . ' - ' . html_entity_decode($order_info['payment_firstname'], ENT_QUOTES, 'UTF-8') . ' ' . html_entity_decode($order_info['payment_lastname'], ENT_QUOTES, 'UTF-8');
 			$data['lc'] = $this->session->data['language'];
-			$data['return'] = $this->url->link('checkout/success');
-			$data['notify_url'] = $this->url->link('payment/pp_standard/callback', '', 'SSL');
-			$data['cancel_return'] = $this->url->link('checkout/checkout', '', 'SSL');	
+			$data['return'] = $this->url->link('api/payment/success');
+			// $data['notify_url'] = $this->url->link('api/payment/callback', '', 'SSL');
+			$data['cancel_return'] = $this->url->link('api/payment/checkout', '', 'SSL');	
 			$data['total'] = $order_info['total'];
 
 			$data['custom'] = $order_id;
@@ -194,6 +203,18 @@ class ControllerApiPayment extends Controller {
 
 		$this->response->setOutput(json_encode($json));
 
+	}
+
+	public function success() {
+		if ($this->customer->isLogged()) {
+			$activity_data = array(
+				'customer_id' => $this->customer->getId(),
+				'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'order_id'    => $this->session->data['order_id']
+			);
+
+			$this->model_account_activity->addActivity('order_account', $activity_data);
+		}
 	}
 	
 	/*

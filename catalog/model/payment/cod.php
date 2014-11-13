@@ -1,6 +1,9 @@
 <?php
 class ModelPaymentCOD extends Model {
 	public function getConfig($data = array()) {
+		$result['notify_url'] = $this->url->link('api/payment/callback', '', 'SSL');
+
+		return $result;
 	}
 	
 	public function getMethod($address, $total) {
