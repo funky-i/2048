@@ -92,4 +92,3 @@ require_once(modification(DIR_SYSTEM . 'engine/registry.php'));
 // Helper
 require_once(DIR_SYSTEM . 'helper/json.php');
 require_once(DIR_SYSTEM . 'helper/utf8.php');
-require_once(DIR_SYSTEM . 'helper/output.php');

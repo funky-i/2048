@@ -1,72 +1,5 @@
 <?php
 class ControllerApiShipping extends Controller {
-	public function index() {
-		initHeader();
-		$Params = getParams();
-		$json = [];
-
-		if (isset($Params['data']['shipping_address'])) {
-			$this->session->data['shipping_address'] = $Params['data']['shipping_address'];
-		}
-
-		$this->load->language('api/shipping');
-
-		// Delete past shipping methods and method just in case there is an error
-		unset($this->session->data['shipping_methods']);
-		unset($this->session->data['shipping_method']);		
-
-		if ($this->cart->hasShipping() && isset($this->session->data['shipping_address'])) {
-
-		// 	// if (!isset($this->session->data['shipping_address'])) {
-		// 	// 	$json['error'] = $this->language->get('error_address');
-		// 	// }
-
-			if (!$json) {
-
-				// Shipping Methods
-				$json['shipping_methods'] = array();
-
-				$this->load->model('extension/extension');
-
-				$results = $this->model_extension_extension->getExtensions('shipping');
-
-				foreach ($results as $result) {
-					if ($this->config->get($result['code'] . '_status')) {
-						$this->load->model('shipping/' . $result['code']);
-
-						$quote = $this->{'model_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
-
-						if ($quote) {
-							$json['shipping_methods'][$result['code']] = array(
-								'title'      => $quote['title'],
-								'quote'      => $quote['quote'],
-								'sort_order' => $quote['sort_order'],
-								'error'      => $quote['error']
-							);
-						}
-					}
-				}
-
-				$sort_order = array();
-
-				foreach ($json['shipping_methods'] as $key => $value) {
-					$sort_order[$key] = $value['sort_order'];
-				}
-
-				array_multisort($sort_order, SORT_ASC, $json['shipping_methods']);
-
-				if ($json['shipping_methods']) {
-					$this->session->data['shipping_methods'] = $json['shipping_methods'];
-				} else {
-					$json['error'] = $this->language->get('error_no_shipping');
-				}
-			}
-		
-		}
-
-		$this->response->setOutput(json_encode($json));
-	}
-/*
 	public function address() {
 		$this->load->language('api/shipping');
 
@@ -311,5 +244,4 @@ class ControllerApiShipping extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
-	*/
 }
