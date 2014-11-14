@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '2.0.0');
+define('VERSION', '2.0.0.0');
 
 // Configuration
 if (is_file('config.php')) {
@@ -12,10 +12,6 @@ if (!defined('DIR_APPLICATION')) {
 	header('Location: install/index.php');
 	exit;
 }
-
-// OAuth 2.0
-require_once(DIR_SYSTEM . 'oauth-server/src/OAuth2/Autoloader.php');
-OAuth2\Autoloader::register();
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
@@ -232,12 +228,6 @@ $registry->set('encryption', new Encryption($config->get('config_encryption')));
 
 //OpenBay Pro
 $registry->set('openbay', new Openbay($registry));
-
-// OAuth
-$registry->set('oauth2', new Oauth2($registry));
-
-// Image Resize
-$registry->set('image', new Resize($registry));
 
 // Event
 $event = new Event($registry);
