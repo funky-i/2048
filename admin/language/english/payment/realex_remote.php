@@ -2,15 +2,10 @@
 // Heading
 $_['heading_title']					= 'Realex Remote';
 
-// Tab
-$_['tab_account']					= 'API info';
-$_['tab_sub_account']				= 'Accounts';
-$_['tab_order_status']				= 'Order Status';
-$_['tab_payment']					= 'Payment Settings';
-
 // Text
 $_['text_payment']					= 'Payment';
 $_['text_success']					= 'Success: You have modified Realex account details!';
+$_['text_edit']                     = 'Edit Realex Remote';
 $_['text_card_type']				= 'Card type';
 $_['text_enabled']					= 'Enabled';
 $_['text_use_default']				= 'Use default';
@@ -62,13 +57,13 @@ $_['entry_debug']					= 'Debug logging';
 $_['entry_auto_settle']				= 'Settlement type';
 $_['entry_tss_check']				= 'TSS checks';
 $_['entry_card_data_status']		= 'Card info logging';
-$_['entry_3d']						= 'Enable 3D secure form';
-$_['entry_liability_shift']			= 'Accept liability shift';
+$_['entry_3d']						= 'Enable 3D secure';
+$_['entry_liability_shift']			= 'Accept non-liability shifting scenarios';
 $_['entry_status_success_settled']	= 'Success - settled';
 $_['entry_status_success_unsettled'] = 'Success - not settled';
 $_['entry_status_decline']			= 'Decline';
 $_['entry_status_decline_pending']	= 'Decline - offline auth';
-$_['entry_status_decline_stolen']	= 'Decline - stolen card';
+$_['entry_status_decline_stolen']	= 'Decline - lost or stolen card';
 $_['entry_status_decline_bank']		= 'Decline - bank error';
 $_['entry_status_void']				= 'Voided';
 $_['entry_status_rebate']			= 'Rebated';
@@ -80,6 +75,12 @@ $_['help_notification']				= 'You need to supply this URL to Realex to get payme
 $_['help_debug']					= 'Enabling debug will write sensitive data to a log file. You should always disable unless instructed otherwise.';
 $_['help_liability']				= 'Accepting liability means you will still accept payments when a user fails 3D secure.';
 $_['help_card_data_status']			= 'Logs last 4 cards digits, expire, name, type and issuing bank information';
+
+// Tab
+$_['tab_account']					= 'API info';
+$_['tab_sub_account']				= 'Accounts';
+$_['tab_order_status']				= 'Order Status';
+$_['tab_payment']					= 'Payment Settings';
 
 // Button
 $_['button_capture']				= 'Capture';

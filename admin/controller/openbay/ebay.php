@@ -4,7 +4,7 @@ class ControllerOpenbayEbay extends Controller {
 		$this->load->language('openbay/ebay');
 		$this->load->model('openbay/ebay');
 		$this->load->model('setting/setting');
-		$this->load->model('setting/extension');
+		$this->load->model('extension/extension');
 		$this->load->model('tool/event');
 
 		$this->model_user_user_group->addPermission($this->user->getId(), 'access', 'openbay/ebay_profile');
@@ -18,11 +18,11 @@ class ControllerOpenbayEbay extends Controller {
 	public function uninstall() {
 		$this->load->model('openbay/ebay');
 		$this->load->model('setting/setting');
-		$this->load->model('setting/extension');
+		$this->load->model('extension/extension');
 		$this->load->model('tool/event');
 
 		$this->model_openbay_ebay->uninstall();
-		$this->model_setting_extension->uninstall('openbay', $this->request->get['extension']);
+		$this->model_extension_extension->uninstall('openbay', $this->request->get['extension']);
 		$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 	}
 
@@ -30,7 +30,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay');
 
 		$this->document->setTitle($this->language->get('text_dashboard'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -71,7 +71,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['links_template']           = $this->url->link('openbay/ebay_template/listAll', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay.tpl', $data));
@@ -93,7 +93,7 @@ class ControllerOpenbayEbay extends Controller {
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -361,7 +361,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['measurement_types'] = $this->openbay->ebay->getSetting('measurement_types');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_settings.tpl', $data));
@@ -482,7 +482,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_summary');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -511,7 +511,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_summary.tpl', $data));
@@ -541,7 +541,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_import');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -573,7 +573,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['image_import_link'] = $this->url->link('openbay/ebay/getImportImages', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_item_import.tpl', $data));
@@ -715,7 +715,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_subscription');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -744,7 +744,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['obp_token']    = $this->config->get('ebay_token');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_subscription.tpl', $data));
@@ -754,7 +754,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_usage');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -783,7 +783,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['obp_token']    = $this->config->get('ebay_token');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_usage.tpl', $data));
@@ -805,7 +805,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_orders');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -834,7 +834,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['token']        = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_order_import.tpl', $data));
@@ -844,7 +844,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_syncronise');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -879,7 +879,7 @@ class ControllerOpenbayEbay extends Controller {
 		}
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_syncronise.tpl', $data));
@@ -891,7 +891,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data = $this->load->language('openbay/ebay_links');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -946,7 +946,7 @@ class ControllerOpenbayEbay extends Controller {
 		$data['linked_items'] = $this->model_openbay_ebay->loadLinked($linked_item_limit, $linked_item_page);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_item_link.tpl', $data));
@@ -1063,7 +1063,7 @@ class ControllerOpenbayEbay extends Controller {
 				$this->load->model('openbay/ebay_product');
 
 				$this->document->setTitle($data['heading_title']);
-				$this->document->addScript('view/javascript/openbay/faq.js');
+				$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 				$data['action']       = $this->url->link('openbay/ebay/create', 'token=' . $this->session->data['token'], 'SSL');
 				$data['cancel']       = $this->url->link('extension/openbay/itemList', 'token=' . $this->session->data['token'], 'SSL');
@@ -1094,7 +1094,7 @@ class ControllerOpenbayEbay extends Controller {
 				);
 
 				$data['header'] = $this->load->controller('common/header');
-				$data['menu'] = $this->load->controller('common/menu');
+				$data['column_left'] = $this->load->controller('common/column_left');
 				$data['footer'] = $this->load->controller('common/footer');
 
 				$this->response->setOutput($this->load->view('openbay/ebay_edit.tpl', $data));
@@ -1248,7 +1248,7 @@ class ControllerOpenbayEbay extends Controller {
 				$this->load->model('openbay/ebay_profile');
 
 				$this->document->setTitle($data['heading_title']);
-				$this->document->addScript('view/javascript/openbay/faq.js');
+				$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 				$data['action']   = $this->url->link('openbay/ebay/create', 'token=' . $this->session->data['token'], 'SSL');
 				$data['cancel']   = $this->url->link('extension/openbay/itemList', 'token=' . $this->session->data['token'], 'SSL');
@@ -1411,7 +1411,7 @@ class ControllerOpenbayEbay extends Controller {
 					$data['error_warning'] = $this->language->get('error_no_stock');
 				}
 
-				$data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+				$data['no_image'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
 				$weight_parts = explode(' . ', $product_info['weight']);
 				$product_info['weight_major'] = $weight_parts[0];
@@ -1420,7 +1420,7 @@ class ControllerOpenbayEbay extends Controller {
 				$data['product'] = $product_info;
 
 				$data['header'] = $this->load->controller('common/header');
-				$data['menu'] = $this->load->controller('common/menu');
+				$data['column_left'] = $this->load->controller('common/column_left');
 				$data['footer'] = $this->load->controller('common/footer');
 
 				$this->response->setOutput($this->load->view('openbay/ebay_new.tpl', $data));
@@ -1484,7 +1484,7 @@ class ControllerOpenbayEbay extends Controller {
 								if ($prod['image'] && file_exists(DIR_IMAGE . $prod['image'])) {
 									$prod['image'] = $this->model_tool_image->resize($prod['image'], 80, 80);
 								} else {
-									$prod['image'] = $this->model_tool_image->resize('no_image.jpg', 80, 80);
+									$prod['image'] = $this->model_tool_image->resize('no_image.png', 80, 80);
 								}
 
 								$products[] = $prod;
@@ -1599,11 +1599,11 @@ class ControllerOpenbayEbay extends Controller {
 				}
 
 				$this->document->setTitle($data['text_page_title']);
-				$this->document->addScript('view/javascript/openbay/faq.js');
-				$this->document->addScript('view/javascript/openbay/openbay.js');
+				$this->document->addScript('view/javascript/openbay/js/faq.js');
+				$this->document->addScript('view/javascript/openbay/js/openbay.js');
 
 				$data['header'] = $this->load->controller('common/header');
-				$data['menu'] = $this->load->controller('common/menu');
+				$data['column_left'] = $this->load->controller('common/column_left');
 				$data['footer'] = $this->load->controller('common/footer');
 
 				$this->response->setOutput($this->load->view('openbay/ebay_new_bulk.tpl', $data));

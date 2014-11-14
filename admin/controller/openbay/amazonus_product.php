@@ -8,7 +8,7 @@ class ControllerOpenbayAmazonusProduct extends Controller{
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');
 
-		$this->document->addScript('view/javascript/openbay/openbay.js');
+		$this->document->addScript('view/javascript/openbay/js/openbay.js');
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['breadcrumbs'] = array();
@@ -188,7 +188,7 @@ class ControllerOpenbayAmazonusProduct extends Controller{
 		$data['saved_listings_url'] = $this->url->link('openbay/amazonus/savedListings', 'token=' . $this->session->data['token'], 'SSL');
 		$data['main_url'] = $this->url->link('openbay/amazonus_product', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$data['token'] = $this->session->data['token'];
-		$data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		$data['no_image'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
 		if ($this->openbay->addonLoad('openstock')) {
 			$this->load->model('openstock/openstock');
@@ -198,7 +198,7 @@ class ControllerOpenbayAmazonusProduct extends Controller{
 		}
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazonus_listing_advanced.tpl', $data));

@@ -8,7 +8,7 @@ class ControllerOpenbayEbayTemplate extends Controller {
 		$this->load->model('openbay/ebay_template');
 
 		$this->document->setTitle($data['heading_title']);
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -51,7 +51,7 @@ class ControllerOpenbayEbayTemplate extends Controller {
 		);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_template_list.tpl', $data));
@@ -130,9 +130,9 @@ class ControllerOpenbayEbayTemplate extends Controller {
 		}
 
 		$this->document->setTitle($data['page_title']);
-		$this->document->addStyle('view/stylesheet/codemirror.css');
-		$this->document->addScript('view/javascript/openbay/codemirror.js');
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addStyle('view/javascript/openbay/css/codemirror.css');
+		$this->document->addScript('view/javascript/openbay/js/codemirror.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -179,7 +179,7 @@ class ControllerOpenbayEbayTemplate extends Controller {
 		}
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_template_form.tpl', $data));

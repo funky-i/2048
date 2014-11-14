@@ -23,7 +23,6 @@ $_['text_name']						= 'Name';
 $_['text_buyer_info']				= 'Buyer information';
 $_['text_view']						= 'View';
 $_['text_format']					= 'Format';
-$_['text_no_results']				= 'No results found';
 
 // Entry
 $_['entry_trans_all']				= 'All';
@@ -72,7 +71,3 @@ $_['entry_status_processing']		= 'Processing';
 $_['entry_status_success']			= 'Success';
 $_['entry_status_denied']			= 'Denied';
 $_['entry_status_reversed']			= 'Reversed';
-
-// Button
-$_['btn_search']					= 'Search';
-$_['btn_edit_search']				= 'Edit search';

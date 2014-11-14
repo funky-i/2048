@@ -3,7 +3,7 @@ class ControllerOpenbayAmazon extends Controller {
 	public function install() {
 		$this->load->model('openbay/amazon');
 		$this->load->model('setting/setting');
-		$this->load->model('setting/extension');
+		$this->load->model('extension/extension');
 		$this->load->model('tool/event');
 
 		$this->model_user_user_group->addPermission($this->user->getId(), 'access', 'openbay/amazon_listing');
@@ -17,11 +17,11 @@ class ControllerOpenbayAmazon extends Controller {
 	public function uninstall() {
 		$this->load->model('openbay/amazon');
 		$this->load->model('setting/setting');
-		$this->load->model('setting/extension');
+		$this->load->model('extension/extension');
 		$this->load->model('tool/event');
 
 		$this->model_openbay_amazon->uninstall();
-		$this->model_setting_extension->uninstall('openbay', $this->request->get['extension']);
+		$this->model_extension_extension->uninstall('openbay', $this->request->get['extension']);
 		$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 	}
 
@@ -34,7 +34,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon');
 
 		$this->document->setTitle($this->language->get('text_dashboard'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 		$data['breadcrumbs'][] = array(
@@ -68,7 +68,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['link_bulk_linking'] = $this->url->link('openbay/amazon/bulklinking', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon.tpl', $data));
@@ -78,7 +78,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_stockupdates');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 		$data['breadcrumbs'][] = array(
@@ -148,7 +148,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_stock_updates.tpl', $data));
@@ -159,7 +159,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_subscription');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 		$data['breadcrumbs'][] = array(
@@ -223,7 +223,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['link_register'] = 'https://account.openbaypro.com/amazon/apiRegister/';
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_subscription.tpl', $data));
@@ -233,7 +233,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_settings');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$this->load->model('setting/setting');
 		$this->load->model('localisation/order_status');
@@ -353,7 +353,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['API_auth'] = $api_auth;
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_settings.tpl', $data));
@@ -363,7 +363,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_links');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -396,7 +396,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['get_openstock_options_ajax'] = $this->url->link('openbay/amazon/getOpenstockOptionsAjax', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_item_links.tpl', $data));
@@ -406,7 +406,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_listingsaved');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['link_overview'] = $this->url->link('openbay/amazon', 'token=' . $this->session->data['token'], 'SSL');
 
@@ -451,7 +451,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['uploadSavedAjax'] = $this->url->link('openbay/amazon_product/uploadSavedAjax', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_saved_listings.tpl', $data));
@@ -702,7 +702,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_bulk_listing');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 		$data['breadcrumbs'][] = array(
@@ -791,7 +791,7 @@ class ControllerOpenbayAmazon extends Controller {
 				if ($product['image'] && file_exists(DIR_IMAGE . $product['image'])) {
 					$image = $this->model_tool_image->resize($product['image'], 40, 40);
 				} else {
-					$image = $this->model_tool_image->resize('no_image.jpg', 40, 40);
+					$image = $this->model_tool_image->resize('no_image.png', 40, 40);
 				}
 
 				if ($result['status'] == 'searching') {
@@ -842,7 +842,7 @@ class ControllerOpenbayAmazon extends Controller {
 		}
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_bulk_listing.tpl', $data));
@@ -854,7 +854,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data = $this->load->language('openbay/amazon_bulk_linking');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 		$data['breadcrumbs'][] = array(
@@ -982,7 +982,7 @@ class ControllerOpenbayAmazon extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_bulk_linking.tpl', $data));

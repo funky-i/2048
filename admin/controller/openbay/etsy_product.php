@@ -8,7 +8,7 @@ class ControllerOpenbayEtsyProduct extends Controller {
 		$this->load->model('tool/image');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['action']   = $this->url->link('openbay/etsy_product/create', 'token=' . $this->session->data['token'], 'SSL');
 		$data['cancel']   = $this->url->link('extension/openbay/itemList', 'token=' . $this->session->data['token'], 'SSL');
@@ -107,7 +107,7 @@ class ControllerOpenbayEtsyProduct extends Controller {
 		$data['setting'] = $setting;
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/etsy_create.tpl', $data));
@@ -313,7 +313,7 @@ class ControllerOpenbayEtsyProduct extends Controller {
 		$data = $this->load->language('openbay/etsy_links');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -368,7 +368,7 @@ class ControllerOpenbayEtsyProduct extends Controller {
 		$data['items'] = $this->model_openbay_etsy_product->loadLinked($limit, $page);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/etsy_links.tpl', $data));
@@ -378,7 +378,7 @@ class ControllerOpenbayEtsyProduct extends Controller {
 		$data = $this->load->language('openbay/etsy_listings');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$this->load->model('openbay/etsy_product');
 
@@ -513,7 +513,7 @@ class ControllerOpenbayEtsyProduct extends Controller {
 		}
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/etsy_listings.tpl', $data));

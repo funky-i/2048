@@ -37,6 +37,7 @@ class ControllerPaymentAmazonCheckout extends Controller {
 
 		$data['heading_title'] = $this->language->get('heading_title');
 		
+		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_amazon_join'] = $this->language->get('text_amazon_join');
 		$data['text_sandbox'] = $this->language->get('text_sandbox');
 		$data['text_live'] = $this->language->get('text_live');
@@ -291,7 +292,7 @@ class ControllerPaymentAmazonCheckout extends Controller {
 		);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('payment/amazon_checkout.tpl', $data));

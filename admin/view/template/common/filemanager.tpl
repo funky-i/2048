@@ -25,7 +25,7 @@
         <?php foreach ($image as $image) { ?>
         <div class="col-sm-3 text-center">
           <?php if ($image['type'] == 'directory') { ?>
-          <div style="width: 100px; height: 80px; padding-top: 20px;"><a href="<?php echo $image['href']; ?>" class="directory" style="vertical-align: middle;"><i class="fa fa-folder fa-5x"></i></a></div>
+          <div class="text-center"><a href="<?php echo $image['href']; ?>" class="directory" style="vertical-align: middle;"><i class="fa fa-folder fa-5x"></i></a></div>
           <label>
             <input type="checkbox" name="path[]" value="<?php echo $image['path']; ?>" />
             <?php echo $image['name']; ?></label>
@@ -50,7 +50,7 @@ $('a.thumbnail').on('click', function(e) {
 	e.preventDefault();
 
 	<?php if ($thumb) { ?>
-	$('#<?php echo $thumb; ?>').html('<img src="' + $(this).find('img').attr('src') + '" alt="" title="" />');
+	$('#<?php echo $thumb; ?>').find('img').attr('src', $(this).find('img').attr('src'));
 	<?php } ?>
 	
 	<?php if ($target) { ?>
@@ -66,6 +66,8 @@ $('a.thumbnail').on('click', function(e) {
 		range = sel.getRangeAt(0); 
 		range.insertNode(img); 
 	}
+	
+	$('#modal-image').modal('hide');
 });
 
 $('a.directory').on('click', function(e) {

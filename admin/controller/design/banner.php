@@ -181,7 +181,8 @@ class ControllerDesignBanner extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
 
@@ -252,7 +253,7 @@ class ControllerDesignBanner extends Controller {
 		$data['order'] = $order;
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('design/banner_list.tpl', $data));
@@ -260,7 +261,8 @@ class ControllerDesignBanner extends Controller {
 
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_form'] = !isset($this->request->get['banner_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_default'] = $this->language->get('text_default');
@@ -370,21 +372,25 @@ class ControllerDesignBanner extends Controller {
 		foreach ($banner_images as $banner_image) {
 			if (is_file(DIR_IMAGE . $banner_image['image'])) {
 				$image = $banner_image['image'];
+				$thumb = $banner_image['image'];
 			} else {
 				$image = '';
+				$thumb = 'no_image.png';
 			}
 
 			$data['banner_images'][] = array(
 				'banner_image_description' => $banner_image['banner_image_description'],
 				'link'                     => $banner_image['link'],
 				'image'                    => $image,
-				'thumb'                    => $this->model_tool_image->resize($image, 100, 100),
+				'thumb'                    => $this->model_tool_image->resize($thumb, 100, 100),
 				'sort_order'               => $banner_image['sort_order']
 			);
 		}
 
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('design/banner_form.tpl', $data));

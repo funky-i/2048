@@ -8,7 +8,7 @@ class ControllerOpenbayEbayProfile extends Controller {
 		$this->load->model('openbay/ebay_profile');
 
 		$this->document->setTitle($data['heading_title']);
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -52,7 +52,7 @@ class ControllerOpenbayEbayProfile extends Controller {
 		);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/ebay_profile_list.tpl', $data));
@@ -162,7 +162,7 @@ class ControllerOpenbayEbayProfile extends Controller {
 			$this->response->redirect($this->url->link('openbay/ebay_profile/profileall&token=' . $this->session->data['token']));
 		}
 
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$data['breadcrumbs'] = array();
 
@@ -269,7 +269,7 @@ class ControllerOpenbayEbayProfile extends Controller {
 		$this->document->setTitle($data['heading_title']);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view($data['types'][$type]['template'], $data));

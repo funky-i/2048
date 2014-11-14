@@ -8,7 +8,7 @@ class ControllerOpenbayAmazonListing extends Controller {
 		$this->load->model('localisation/country');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -114,17 +114,18 @@ class ControllerOpenbayAmazonListing extends Controller {
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_amazon_price'] = $this->language->get('button_amazon_price');
 		$data['button_list'] = $this->language->get('button_list');
-
+		$data['heading_title'] = $this->language->get('heading_title');
 		$data['text_not_in_catalog'] = $this->language->get('text_not_in_catalog');
-		$data['text_title'] = $this->language->get('text_title');
 		$data['text_no_results'] = $this->language->get('text_no_results');
-
+		$data['button_view_on_amazon'] = $this->language->get('button_view_on_amazon');
+		$data['text_list'] = $this->language->get('text_list');
+		$data['text_placeholder_search'] = $this->language->get('text_placeholder_search');
+		$data['text_placeholder_condition'] = $this->language->get('text_placeholder_condition');
 		$data['column_image'] = $this->language->get('column_image');
 		$data['column_asin'] = $this->language->get('column_asin');
 		$data['column_name'] = $this->language->get('column_name');
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_action'] = $this->language->get('column_action');
-
 		$data['entry_sku'] = $this->language->get('entry_sku');
 		$data['entry_condition'] = $this->language->get('entry_condition');
 		$data['entry_condition_note'] = $this->language->get('entry_condition_note');
@@ -136,20 +137,11 @@ class ControllerOpenbayAmazonListing extends Controller {
 		$data['entry_restock_date'] = $this->language->get('entry_restock_date');
 		$data['entry_from'] = $this->language->get('entry_from');
 		$data['entry_to'] = $this->language->get('entry_to');
-
 		$data['help_restock_date'] = $this->language->get('help_restock_date');
 		$data['help_sku'] = $this->language->get('help_sku');
 		$data['help_sale_price'] = $this->language->get('help_sale_price');
-
-		$data['text_view_on_amazon'] = $this->language->get('text_view_on_amazon');
-		$data['text_list'] = $this->language->get('text_list');
-
 		$data['tab_required'] = $this->language->get('tab_required');
 		$data['tab_additional'] = $this->language->get('tab_additional');
-
-		$data['text_placeholder_search'] = $this->language->get('text_placeholder_search');
-		$data['text_placeholder_condition'] = $this->language->get('text_placeholder_condition');
-
 		$data['error_price'] = $this->language->get('error_price');
 		$data['error_sku'] = $this->language->get('error_sku');
 		$data['error_stock'] = $this->language->get('error_stock');
@@ -223,7 +215,7 @@ class ControllerOpenbayAmazonListing extends Controller {
 		);
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_listing.tpl', $data));
@@ -235,7 +227,7 @@ class ControllerOpenbayAmazonListing extends Controller {
 		$this->load->language('openbay/amazon_listing');
 
 		$this->document->setTitle($this->language->get('text_edit_heading'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$url = '';
 
@@ -348,7 +340,7 @@ class ControllerOpenbayAmazonListing extends Controller {
 		$data['text_has_saved_listings'] = $this->language->get('text_has_saved_listings');
 		$data['button_create_new_listing'] = $this->language->get('button_create_new_listing');
 		$data['button_remove_links'] = $this->language->get('button_remove_links');
-		$data['button_return'] = $this->language->get('button_return');
+		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_saved_listings'] = $this->language->get('button_saved_listings');
 		$data['column_name'] = $this->language->get('column_name');
 		$data['column_model'] = $this->language->get('column_model');
@@ -358,7 +350,7 @@ class ControllerOpenbayAmazonListing extends Controller {
 		$data['text_no_results'] = $this->language->get('text_no_results');
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('openbay/amazon_listing_edit.tpl', $data));

@@ -6,7 +6,7 @@ class ControllerModuleEbaydisplay extends Controller {
 		$this->load->language('module/ebaydisplay');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('view/javascript/openbay/faq.js');
+		$this->document->addScript('view/javascript/openbay/js/faq.js');
 
 		$this->load->model('setting/setting');
 
@@ -21,13 +21,10 @@ class ControllerModuleEbaydisplay extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
-		$data['text_content_top'] = $this->language->get('text_content_top');
-		$data['text_content_bottom'] = $this->language->get('text_content_bottom');
-		$data['text_column_left'] = $this->language->get('text_column_left');
-		$data['text_column_right'] = $this->language->get('text_column_right');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_start_newest'] = $this->language->get('text_start_newest');
@@ -35,14 +32,12 @@ class ControllerModuleEbaydisplay extends Controller {
 
 		$data['entry_limit'] = $this->language->get('entry_limit');
 		$data['entry_image'] = $this->language->get('entry_image');
-		$data['entry_layout'] = $this->language->get('entry_layout');
-		$data['entry_position'] = $this->language->get('entry_position');
-		$data['entry_status'] = $this->language->get('entry_status');
-		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$data['entry_username'] = $this->language->get('entry_username');
 		$data['entry_keywords'] = $this->language->get('entry_keywords');
 		$data['entry_description'] = $this->language->get('entry_description');
 		$data['entry_site'] = $this->language->get('entry_site');
+		$data['entry_status'] = $this->language->get('entry_status');
+
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_module_add'] = $this->language->get('button_module_add');
@@ -143,18 +138,20 @@ class ControllerModuleEbaydisplay extends Controller {
 			101 => 'Italy',
 			186 => 'Spain',
 			205 => 'Ireland',
-			16 => 'Austria',
+			16  => 'Austria',
 			146 => 'Netherlands',
-			23 => 'Belgium (French)',
+			23  => 'Belgium (French)',
 			123 => 'Belgium (Dutch)',
 		);
 
-		$this->load->model('design/layout');
-
-		$data['layouts'] = $this->model_design_layout->getLayouts();
+		if (isset($this->request->post['ebaydisplay_status'])) {
+			$data['ebaydisplay_status'] = $this->request->post['ebaydisplay_status'];
+		} else {
+			$data['ebaydisplay_status'] = $this->config->get('ebaydisplay_status');
+		}
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('module/ebaydisplay.tpl', $data));

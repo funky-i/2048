@@ -202,6 +202,7 @@ class ControllerCatalogCategory extends Controller {
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
+		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
 
@@ -273,7 +274,7 @@ class ControllerCatalogCategory extends Controller {
 		$data['order'] = $order;
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('catalog/category_list.tpl', $data));
@@ -281,7 +282,8 @@ class ControllerCatalogCategory extends Controller {
 
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$data['text_form'] = !isset($this->request->get['category_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_default'] = $this->language->get('text_default');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -459,8 +461,10 @@ class ControllerCatalogCategory extends Controller {
 		} elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['image'])) {
 			$data['thumb'] = $this->model_tool_image->resize($category_info['image'], 100, 100);
 		} else {
-			$data['thumb'] = '';
+			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
+
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
 		if (isset($this->request->post['top'])) {
 			$data['top'] = $this->request->post['top'];
@@ -507,7 +511,7 @@ class ControllerCatalogCategory extends Controller {
 		$data['layouts'] = $this->model_design_layout->getLayouts();
 
 		$data['header'] = $this->load->controller('common/header');
-		$data['menu'] = $this->load->controller('common/menu');
+		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('catalog/category_form.tpl', $data));
