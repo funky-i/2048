@@ -16,6 +16,9 @@ if (!defined('DIR_APPLICATION')) {
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
+//Facebook 4.0.0
+require_once(DIR_SYSTEM . 'facebook/4.0/autoload.php');
+
 // Registry
 $registry = new Registry();
 
@@ -228,6 +231,12 @@ $registry->set('encryption', new Encryption($config->get('config_encryption')));
 
 //OpenBay Pro
 $registry->set('openbay', new Openbay($registry));
+
+// Image Resize
+$registry->set('resize', new Resize($registry));
+
+// Facebook
+$registry->set('facebook', new Facebook($registry));
 
 // Event
 $event = new Event($registry);
