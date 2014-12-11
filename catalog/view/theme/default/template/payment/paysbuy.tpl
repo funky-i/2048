@@ -3,16 +3,13 @@
 <?php } ?>
 
 <form action="<?php echo $action; ?>" method="post">
-  
   <input type="hidden" name="psb" value="<?php echo $psbid; ?>" />
   <input Type="Hidden" Name="biz" value="<?php echo $username; ?>"/>
   <input type="hidden" name="currencyCode" value="<?php echo $currencyCode; ?>" />
-  <input Type="Hidden" Name="inv" value="<?php echo $invoice; ?>"/>
- 
+  <input Type="Hidden" Name="inv" value="<?php echo $custom; ?>"/>
   <input type="hidden" name="postURL" value="<?php echo $resp_front_url; ?>" />
   <input type="hidden" name="reqURL" value="<?php echo $resp_back_url; ?>" />
-
-  <input Type="Hidden" Name="itm" value="<?php echo $text_heading; ?>"/>
+  <input Type="Hidden" Name="itm" value="<?php echo $invoice; ?>"/>
   <input Type="Hidden" Name="amt" value="<?php echo $total; ?>"/>
 
   <div class="buttons">
