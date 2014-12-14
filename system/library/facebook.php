@@ -21,9 +21,9 @@ class Facebook {
 	private $appsecret;
 	private $isLogged;
 	private $token;
-	private $user;	
+	private $user;
+	private $route;
 	private $status;
-	private $route_uri;
 
 	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -32,62 +32,42 @@ class Facebook {
 		$this->db = $registry->get('db');
 		$this->url = $registry->get('url');
 		
-		$this->appid = '912881628722070';
-		$this->appsecret = 'c7ae661d29045adf056c2baa82fa8a22';
-		
-		$this->isLogged = false;
-		$this->route_uri = 'rest/facebook';
+		$this->appid = $this->config->get('facebook_id'); //883370688342549';
+		$this->appsecret = $this->config->get('facebook_secret'); //'63c77ad85278331d091c0572d38db673';
+		$this->route = $this->config->get('facebook_uri'); //'facebook/facebook';
+		$this->status = $this->config->get('facebook_status');
 
-		FacebookSession::setDefaultApplication($this->appid, $this->appsecret);
-
-		if ($this->valid()) {
-			$this->init();
+		if (isset($this->status)) {
+			$this->status = $this->config->get('facebook_status');
 		} else {
-			$route = $this->url->link(urlencode($this->route_uri));
-			$helper = new FacebookRedirectLoginHelper($route);
-			try {
-			    $session = $helper->getSessionFromRedirect();
-			} catch(FacebookRequestException $ex) {
-			    // When Facebook returns an error
-			} catch(\Exception $ex) {
-			    // When validation fails or other local issues			    
-			}
+			$this->status = false;
+		}
 
-			if (isset($session)) {
-				$this->token($session);
+		$this->isLogged = false;
+
+		if (isset($this->status) && $this->status) {
+			FacebookSession::setDefaultApplication($this->appid, $this->appsecret);
+
+			if ($this->valid()) {
 				$this->init();
+			} else {				
+				$route = $this->url->link(urlencode($this->route));
+				$helper = new FacebookRedirectLoginHelper($route);
+				try {		    
+				    $session = $helper->getSessionFromRedirect();
+				} catch(FacebookRequestException $ex) {
+				    // When Facebook returns an error
+				} catch(\Exception $ex) {
+				    // When validation fails or other local issues			    
+				}
+
+				if (isset($session)) {
+					$this->token($session);
+					$this->init();
+				}
 			}
 		}
 		
-	}
-
-	public function accessByToken($token) {
-		$session = new FacebookSession($token);
-		try {
-		  $session->validate();
-		} catch (FacebookRequestException $ex) {
-		  // Session not valid, Graph API returned an exception with the reason.
-		} catch (\Exception $ex) {
-		  // Graph API returned info, but it may mismatch the current app or have expired.
-		}
-
-
-		if ($session) {
-			
-			$request = new FacebookRequest($session, 'GET', '/me');
-			$response = $request->execute();
-			$graphObject = $response->getGraphObject();
-			$user = $response->getGraphObject(GraphUser::className());
-			$location = $response->getGraphObject(GraphLocation::className());
-
-			$data = array(
-				'user' => $user,
-				'location' => $location
-			);
-
-			$user_data = $this->pattern($data);
-			return $user_data;
-		}
 	}
 
 	public function init() {
@@ -109,18 +89,19 @@ class Facebook {
 		return $this->user;
 	}
 
-	public function uri($uri = '') {
+	public function uri() {
 		$loginUrl = '';
 
-		$permissions = $this->permissions;
+		if(empty($permissions))
+			$permissions = $this->permissions;		
 
-		if (!empty($uri))
-			$this->route_uri = $uri;
+		$route = $this->url->link(urlencode($this->route()));
 
-		$route = $this->url->link(urlencode($this->route_uri));
-
-		$helper = new FacebookRedirectLoginHelper($route);
-		$loginUrl = $helper->getLoginUrl($permissions);			
+		if (isset($this->status) && $this->status) {
+			$helper = new FacebookRedirectLoginHelper($route);
+			$loginUrl = $helper->getLoginUrl($permissions);	
+		}
+		
 
 		return $loginUrl;
 	}
@@ -152,7 +133,7 @@ class Facebook {
 		$response['city'] = '';
 		$response['postcode'] = '';
 		$response['country_id'] = 209;
-		$response['zone_id'] = 3192;
+		$response['zone_id'] = 0;
 		$response['company_id'] = 0;
 		$response['tax_id'] = 0;
 
@@ -163,12 +144,10 @@ class Facebook {
 		$response['username'] = '';
 		$response['birthday'] = '';
 		$response['gender'] = '';
-		$response['token'] = '';
+		$response['token'] = $this->token();
 		$response['optional'] = array($user, $local);
 
-		$this->user = $response;
-
-		return $response;
+		$this->user = $response;		
 		
 	}
 
@@ -182,12 +161,9 @@ class Facebook {
 	}
 
 	public function token($session = '') {
-		
 		if ($session) {
 			$this->session->data['facebook_token'] = $session->getToken();
 			$this->session->data['facebook_session'] = $session;
-		} else {
-			$this->session->data['facebook_token'] = '';
 		}
 
 		return $this->session->data['facebook_token'];
