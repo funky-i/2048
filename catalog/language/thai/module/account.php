@@ -1,21 +1,21 @@
 <?php
 // Heading
-$_['heading_title']    = 'Account';
+$_['heading_title']    = 'บัญชีผู้ใช้งาน';
 
 // Text
-$_['text_register']    = 'Register';
-$_['text_login']       = 'Login';
-$_['text_logout']      = 'Logout';
-$_['text_forgotten']   = 'Forgotten Password';
-$_['text_account']     = 'My Account';
-$_['text_edit']        = 'Edit Account';
-$_['text_password']    = 'Password';
-$_['text_address']     = 'Address Books';
-$_['text_wishlist']    = 'Wish List';
-$_['text_order']       = 'Order History';
-$_['text_download']    = 'Downloads';
-$_['text_reward']      = 'Reward Points';
-$_['text_return']      = 'Returns';
-$_['text_transaction'] = 'Transactions';
-$_['text_newsletter']  = 'Newsletter';
-$_['text_recurring']   = 'Recurring payments';
+$_['text_register']    = 'ลงทะเบียน';
+$_['text_login']       = 'เข้าสู่ระบบ';
+$_['text_logout']      = 'ออกจากระบบ';
+$_['text_forgotten']   = 'ลืมรหัสผ่าน';
+$_['text_account']     = 'บัญชีผู้ใช้งาน';
+$_['text_edit']        = 'แก้ไขข้อมูลส่วนตัว';
+$_['text_password']    = 'รหัสผ่าน';
+$_['text_address']     = 'ข้อมูลที่อยู่';
+$_['text_wishlist']    = 'รายการโปรด';
+$_['text_order']       = 'ประวัติการสั่งซื้อ';
+$_['text_download']    = 'ไฟล์ดาวน์โหลด';
+$_['text_reward']      = 'คะแนนสะสม';
+$_['text_return']      = 'รายการคืนสินค้า';
+$_['text_transaction'] = 'ข้อมูลการทำธุรกรรม';
+$_['text_newsletter']  = 'รับข่าวสาร';
+$_['text_recurring']   = 'การคืนเงิน';

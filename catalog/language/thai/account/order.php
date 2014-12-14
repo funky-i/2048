@@ -1,37 +1,37 @@
 <?php
 // Heading
-$_['heading_title']         = 'Order History';
+$_['heading_title']         = 'ประวัติการสั่งซื้อ';
 
 // Text
-$_['text_account']          = 'Account';
-$_['text_order']            = 'Order Information';
-$_['text_order_detail']     = 'Order Details';
-$_['text_invoice_no']       = 'Invoice No.:';
-$_['text_order_id']         = 'Order ID:';
-$_['text_date_added']       = 'Date Added:';
-$_['text_shipping_address'] = 'Shipping Address';
-$_['text_shipping_method']  = 'Shipping Method:';
-$_['text_payment_address']  = 'Payment Address';
-$_['text_payment_method']   = 'Payment Method:';
-$_['text_comment']          = 'Order Comments';
-$_['text_history']          = 'Order History';
-$_['text_success']          = 'Success: You have added <a href="%s">%s</a> to your <a href="%s">shopping cart</a>!';
+$_['text_account']          = 'บัญชีผู้ใช้งาน';
+$_['text_order']            = 'รายการสั่งซื้อ';
+$_['text_order_detail']     = 'รายละเอียด';
+$_['text_invoice_no']       = 'ใบสั่งซื้อ No.:';
+$_['text_order_id']         = 'รหัสการสั่งซื้อ:';
+$_['text_date_added']       = 'วันที่:';
+$_['text_shipping_address'] = 'ที่อยู่ในการจัดส่ง';
+$_['text_shipping_method']  = 'วิธีการจัดส่ง:';
+$_['text_payment_address']  = 'ที่อยู่ในการออกใบเสร็จ';
+$_['text_payment_method']   = 'วิธีชำระเงิน:';
+$_['text_comment']          = 'เพิ่มเติม';
+$_['text_history']          = 'สถานะ';
+$_['text_success']          = 'Success: ทำการเพิ่มรายการ <a href="%s">%s</a> เข้าใน <a href="%s">ตะกร้าสินค้า</a>!';
 $_['text_empty']            = 'You have not made any previous orders!';
-$_['text_error']            = 'The order you requested could not be found!';
+$_['text_error']            = 'ไม่พบรายสินค้าที่คุณหา!';
 
 // Column
-$_['column_order_id']       = 'Order ID';
-$_['column_product']        = 'No. of Products';
-$_['column_customer']       = 'Customer';
-$_['column_name']           = 'Product Name';
-$_['column_model']          = 'Model';
-$_['column_quantity']       = 'Quantity';
-$_['column_price']          = 'Price';
-$_['column_total']          = 'Total';
+$_['column_order_id']       = 'รหัสสั่งซื้อ';
+$_['column_product']        = 'จำนวนสินค้า';
+$_['column_customer']       = 'ลูกค้า';
+$_['column_name']           = 'ชื่อสินค้า';
+$_['column_model']          = 'โมเดล';
+$_['column_quantity']       = 'จำนวน';
+$_['column_price']          = 'ราคา';
+$_['column_total']          = 'รวม';
 $_['column_action']         = 'Action';
-$_['column_date_added']     = 'Date Added';
-$_['column_status']         = 'Order Status';
-$_['column_comment']        = 'Comment';
+$_['column_date_added']     = 'วันที่';
+$_['column_status']         = 'สถานะการสั่งซื้อ';
+$_['column_comment']        = 'เพิ่มเติม';
 
 // Error
 $_['error_reorder']         = '%s is not currently available to be reordered.';

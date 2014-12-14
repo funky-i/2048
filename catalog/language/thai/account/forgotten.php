@@ -1,16 +1,16 @@
 <?php
 // Heading
-$_['heading_title']   = 'Forgot Your Password?';
+$_['heading_title']   = 'ลืมรหัสผ่าน?';
 
 // Text
-$_['text_account']    = 'Account';
-$_['text_forgotten']  = 'Forgotten Password';
-$_['text_your_email'] = 'Your E-Mail Address';
-$_['text_email']      = 'Enter the e-mail address associated with your account. Click submit to have your password e-mailed to you.';
-$_['text_success']    = 'Success: A new password has been sent to your e-mail address.';
+$_['text_account']    = 'บัญชีผู้ใช้งาน';
+$_['text_forgotten']  = 'ลืมรหัสผ่าน';
+$_['text_your_email'] = 'อีเมล์ของคุณ';
+$_['text_email']      = 'กรุณากรอกอีเมล์ที่ได้ทำการสมัครไว้กับระบบ. และดำเนินการต่อ ระบบจะทำการส่งรหัสผ่านไปยังอีเมล์ที่ได้ระบุไว้.';
+$_['text_success']    = 'Success: รหัสผ่านใหม่ของคุณ ได้ทำการส่งไปยังอีเมล์ที่ได้ระบุไว้เรียบร้อยแล้ว.';
 
 // Entry
-$_['entry_email']     = 'E-Mail Address';
+$_['entry_email']     = 'อีเมล์';
 
 // Error
-$_['error_email']     = 'Warning: The E-Mail Address was not found in our records, please try again!';
+$_['error_email']     = 'Warning: ไม่พบอีเมล์ที่คุณขอไว้ในระบบ, กรุณาลองใหม่อีกครั้ง!';

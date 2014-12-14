@@ -1,37 +1,37 @@
 <?php
 // Heading
-$_['heading_title']        = 'Address Book';
+$_['heading_title']        = 'ที่อยู่';
 
 // Text
-$_['text_account']         = 'Account';
-$_['text_address_book']    = 'Address Book Entries';
-$_['text_edit_address']    = 'Edit Address';
-$_['text_add']             = 'Your address has been successfully inserted';
-$_['text_edit']            = 'Your address has been successfully updated';
-$_['text_delete']          = 'Your address has been successfully deleted';
-$_['text_empty']           = 'You have no addresses in your account.';
+$_['text_account']         = 'บัญชีผู้ใช้งาน';
+$_['text_address_book']    = 'รายการที่อยู่';
+$_['text_edit_address']    = 'แก้ไขที่อยู่';
+$_['text_add']             = 'ทำการบันทึกที่อยู่ใหม่เรียบร้อยแล้ว';
+$_['text_edit']            = 'ทำการอัปเดทที่อยู่ใหม่เรียบร้อยแล้ว';
+$_['text_delete']          = 'ทำการลบที่อยู่เรียบร้อยแล้ว';
+$_['text_empty']           = 'คุณไม่มีรายการที่อยู่ บันทึกไว้.';
 
 // Entry
-$_['entry_firstname']      = 'First Name';
-$_['entry_lastname']       = 'Last Name';
-$_['entry_company']        = 'Company';
-$_['entry_address_1']      = 'Address 1';
-$_['entry_address_2']      = 'Address 2';
-$_['entry_postcode']       = 'Post Code';
-$_['entry_city']           = 'City';
-$_['entry_country']        = 'Country';
-$_['entry_zone']           = 'Region / State';
-$_['entry_default']        = 'Default Address';
+$_['entry_firstname']      = 'ชื่อ';
+$_['entry_lastname']       = 'นามสกุล';
+$_['entry_company']        = 'บริษัท';
+$_['entry_address_1']      = 'ที่อยู่ 1';
+$_['entry_address_2']      = 'ที่อยู่ 2';
+$_['entry_postcode']       = 'รหัสไปรษณีย์';
+$_['entry_city']           = 'เมือง';
+$_['entry_country']        = 'ประเทศ';
+$_['entry_zone']           = 'เขต / จังหวัด';
+$_['entry_default']        = 'ที่อยู่ใช้งานหลัก';
 
 // Error
-$_['error_delete']         = 'Warning: You must have at least one address!';
-$_['error_default']        = 'Warning: You can not delete your default address!';
-$_['error_firstname']      = 'First Name must be between 1 and 32 characters!';
-$_['error_lastname']       = 'Last Name must be between 1 and 32 characters!';
+$_['error_delete']         = 'Warning: คุณจำเป็นต้องมีที่อยู่อย่างน้อย 1 รายการ!';
+$_['error_default']        = 'Warning: คุณไม่สามารถลบที่อยู่หลักได้!';
+$_['error_firstname']      = 'ชื่อ ควรมีความยาวระหว่าง 1 ถึง 32 ตัวอักษร!';
+$_['error_lastname']       = 'นามสกุล ควรมีความยาวระหว่าง 1 ถึง 32 ตัวอักษร!';
 $_['error_vat']            = 'VAT number is invalid!';
-$_['error_address_1']      = 'Address must be between 3 and 128 characters!';
-$_['error_postcode']       = 'Postcode must be between 2 and 10 characters!';
-$_['error_city']           = 'City must be between 2 and 128 characters!';
-$_['error_country']        = 'Please select a country!';
-$_['error_zone']           = 'Please select a region / state!';
-$_['error_custom_field']   = '%s required!';
+$_['error_address_1']      = 'ที่อยู่ควรมีความยาวระหว่าง 3 ถึง 128 ตัวอักษร!';
+$_['error_postcode']       = 'รหัสไปรษณีย์ควรมีความยาวระหว่าง 2 ถึง 10 ตัวอักษร!';
+$_['error_city']           = 'เมืองควรมีความยาวระหว่าง 2 ถึง 128 ตัวอักษร!';
+$_['error_country']        = 'กรุณาเลือกประเทศ!';
+$_['error_zone']           = 'กรุณาเลือกเขต / จังหวัด!';
+$_['error_custom_field']   = '%s ต้องการ!';

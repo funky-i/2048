@@ -1,24 +1,24 @@
 <?php
 // Heading
-$_['heading_title']      = 'My Account Information';
+$_['heading_title']      = 'แก้ไขข้อมูลส่วนตัว';
 
 // Text
-$_['text_account']       = 'Account';
-$_['text_edit']          = 'Edit Information';
-$_['text_your_details']  = 'Your Personal Details';
-$_['text_success']       = 'Success: Your account has been successfully updated.';
+$_['text_account']       = 'บัญชีผู้ใช้งาน';
+$_['text_edit']          = 'แก้ไขข้อมูล';
+$_['text_your_details']  = 'ข้อมูลส่วนตัว';
+$_['text_success']       = 'Success: ทำการแก้ไขข้อมูลส่วนตัว เรียบร้อยแล้ว.';
 
 // Entry
-$_['entry_firstname']    = 'First Name';
-$_['entry_lastname']     = 'Last Name';
-$_['entry_email']        = 'E-Mail';
-$_['entry_telephone']    = 'Telephone';
-$_['entry_fax']          = 'Fax';
+$_['entry_firstname']    = 'ชื่อ';
+$_['entry_lastname']     = 'นามสกุล';
+$_['entry_email']        = 'อีเมล์';
+$_['entry_telephone']    = 'เบอร์โทรศัพท์';
+$_['entry_fax']          = 'แฟกส์';
 
 // Error
-$_['error_exists']       = 'Warning: E-Mail address is already registered!';
-$_['error_firstname']    = 'First Name must be between 1 and 32 characters!';
-$_['error_lastname']     = 'Last Name must be between 1 and 32 characters!';
-$_['error_email']        = 'E-Mail Address does not appear to be valid!';
-$_['error_telephone']    = 'Telephone must be between 3 and 32 characters!';
-$_['error_custom_field'] = '%s required!';
+$_['error_exists']       = 'Warning: อีเมล์นี้มีการลงทะเบียนไว้แล้ว!';
+$_['error_firstname']      = 'ชื่อ ควรมีความยาวระหว่าง 1 ถึง 32 ตัวอักษร!';
+$_['error_lastname']       = 'นามสกุล ควรมีความยาวระหว่าง 1 ถึง 32 ตัวอักษร!';
+$_['error_email']          = 'กรุณากรอกอีเมล์ที่ใช้ในการสมัคร!';
+$_['error_telephone']      = 'หมายเลขโทรศัทพ์ควรมีความยาว ระหว่าง 3 ถึง 32 ตัวอักษร!';
+$_['error_custom_field'] = '%s ต้องการ!';

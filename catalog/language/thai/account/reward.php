@@ -1,14 +1,14 @@
 <?php
 // Heading
-$_['heading_title']      = 'Your Reward Points';
+$_['heading_title']      = 'คะแนนสะสม';
 
 // Column
-$_['column_date_added']  = 'Date Added';
-$_['column_description'] = 'Description';
-$_['column_points']      = 'Points';
+$_['column_date_added']  = 'วันที่';
+$_['column_description'] = 'รายละเอียด';
+$_['column_points']      = 'คะแนน';
 
 // Text
-$_['text_account']       = 'Account';
-$_['text_reward']        = 'Reward Points';
-$_['text_total']         = 'Your total number of reward points is:';
-$_['text_empty']         = 'You do not have any reward points!';
+$_['text_account']       = 'บัญชีผู้ใช้งาน';
+$_['text_reward']        = 'คะแนนสะสม';
+$_['text_total']         = 'คะแนนรวมของคุณคือ:';
+$_['text_empty']         = 'คุณไม่มีคะแนนสะสม!';

@@ -1,15 +1,15 @@
 <?php
-$_['heading_title'] = 'Recurring Payments';
-$_['button_continue'] = 'Continue';
-$_['button_view'] = 'View';
-$_['text_empty'] = 'No recurring payments found';
-$_['text_product'] = 'Product: ';
-$_['text_order'] = 'Order: ';
-$_['text_quantity'] = 'Quantity: ';
-$_['text_account'] = 'Account';
+$_['heading_title'] = 'การคืนเงิน';
+$_['button_continue'] = 'ดำเนินการต่อ';
+$_['button_view'] = 'ดูรายการ';
+$_['text_empty'] = 'ไม่พบรายการคืนเงิน';
+$_['text_product'] = 'สินค้า: ';
+$_['text_order'] = 'รายการสั่งซื้อ: ';
+$_['text_quantity'] = 'จำนวน: ';
+$_['text_account'] = 'บัญชี';
 $_['text_action'] = 'Action';
-$_['text_recurring'] = 'Recurring payment';
-$_['text_transactions'] = 'Transactions';
+$_['text_recurring'] = 'การคืนเงิน';
+$_['text_transactions'] = 'ธุรกรรม';
 $_['button_return'] = 'Return';
 $_['text_empty_transactions'] = 'No transactions for this recurring profile';
 

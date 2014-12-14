@@ -1,16 +1,16 @@
 <?php
 // Heading
-$_['heading_title']  = 'Change Password';
+$_['heading_title']  = 'แก้ไขรหัสผ่าน';
 
 // Text
-$_['text_account']   = 'Account';
-$_['text_password']  = 'Your Password';
-$_['text_success']   = 'Success: Your password has been successfully updated.';
+$_['text_account']   = 'บัญชีผู้ใช้งาน';
+$_['text_password']  = 'รหัสผ่าน';
+$_['text_success']   = 'Success: ทำการแก้ไขรหัสผ่านใหม่ เรียบร้อยแล้ว.';
 
 // Entry
-$_['entry_password'] = 'Password';
-$_['entry_confirm']  = 'Password Confirm';
+$_['entry_password'] = 'รหัสผ่าน';
+$_['entry_confirm']  = 'ยืนยันรหัสผ่าน';
 
 // Error
-$_['error_password'] = 'Password must be between 4 and 20 characters!';
-$_['error_confirm']  = 'Password confirmation does not match password!';
+$_['error_password'] = 'รหัสผ่านควรมีความยาวระหว่าง 4 ถึง 20 ตัวอักษร!';
+$_['error_confirm']  = 'รหัสผ่านไม่ตรงกัน!';
