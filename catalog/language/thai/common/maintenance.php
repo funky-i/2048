@@ -1,7 +1,7 @@
 <?php
 // Heading
-$_['heading_title']    = 'Maintenance';
+$_['heading_title']    = 'ปรับปรุงระบบ';
 
 // Text
-$_['text_maintenance'] = 'Maintenance';
-$_['text_message']     = '<h1 style="text-align:center;">We are currently performing some scheduled maintenance. <br/>We will be back as soon as possible. Please check back soon.</h1>';
+$_['text_maintenance'] = 'ปรับปรุงระบบ';
+$_['text_message']     = '<h1 style="text-align:center;">กำลังทำการปรับปรุงระบบเพื่อการทำงานที่ดียิ่งขึ้น, เราจะปรับปรุงระบบและใช้เวลาให้น้อยที่สุด. กรุณาทดลองเข้าใหม่อีกครั้ง</h1>';
