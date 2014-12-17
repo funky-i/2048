@@ -1,29 +1,29 @@
 <?php
 // Heading
-$_['heading_title']  = 'Contact Us';
+$_['heading_title']  = 'ติดต่อเรา';
 
 // Text
-$_['text_location']  = 'Our Location';
-$_['text_store']     = 'Our Stores';
-$_['text_contact']   = 'Contact Form';
-$_['text_address']   = 'Address';
-$_['text_telephone'] = 'Telephone';
-$_['text_fax']       = 'Fax';
-$_['text_open']      = 'Opening Times';
-$_['text_comment']   = 'Comments';
-$_['text_success']   = '<p>Your enquiry has been successfully sent to the store owner!</p>';
+$_['text_location']  = 'ที่ตั้ง';
+$_['text_store']     = 'ที่อยู่';
+$_['text_contact']   = 'แบบฟอร์ม';
+$_['text_address']   = 'ที่อยู่';
+$_['text_telephone'] = 'โทรศัพท์';
+$_['text_fax']       = 'แฟกส์';
+$_['text_open']      = 'เวลาทำการ';
+$_['text_comment']   = 'เพิ่มเตอม';
+$_['text_success']   = '<p>ทำการส่งเรื่องติดต่อสอบถามเรียบร้อยแล้ว!</p>';
 
 // Entry
-$_['entry_name']     = 'Your Name';
-$_['entry_email']    = 'E-Mail Address';
-$_['entry_enquiry']  = 'Enquiry';
-$_['entry_captcha']  = 'Enter the code in the box below';
+$_['entry_name']     = 'ชื่อผู้ติดต่อ';
+$_['entry_email']    = 'อีเมล์';
+$_['entry_enquiry']  = 'ติดต่อสอบถาม';
+$_['entry_captcha']  = 'กรุณากรอกรหัสที่แสดงอยู่ด้านล่าง';
 
 // Email
-$_['email_subject']  = 'Enquiry %s';
+$_['email_subject']  = 'หัวข้อ %s';
 
 // Errors
-$_['error_name']     = 'Name must be between 3 and 32 characters!';
-$_['error_email']    = 'E-Mail Address does not appear to be valid!';
-$_['error_enquiry']  = 'Enquiry must be between 10 and 3000 characters!';
-$_['error_captcha']  = 'Verification code does not match the image!';
+$_['error_name']     = 'ชื่อ ควรมีความยาวระหว่าง 1 ถึง 32 ตัวอักษร!';
+$_['error_email']    = 'กรุณากรอกอีเมล์ที่ใช้ในการติดต่อ!';
+$_['error_enquiry']  = 'ข้อมูลสอบถามควรมีความยาวระหว่าง 10 ถึง 3000 ตัวอักษร!';
+$_['error_captcha']  = 'รหัสภาพไม่ถูกต้อง!';

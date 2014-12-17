@@ -1,17 +1,17 @@
 <?php
 // Heading
-$_['heading_title']    = 'Site Map';
+$_['heading_title']    = 'แผนผังเวปไซต์';
 
 // Text
-$_['text_special']     = 'Special Offers';
-$_['text_account']     = 'My Account';
-$_['text_edit']        = 'Account Information';
-$_['text_password']    = 'Password';
-$_['text_address']     = 'Address Book';
-$_['text_history']     = 'Order History';
-$_['text_download']    = 'Downloads';
-$_['text_cart']        = 'Shopping Cart';
-$_['text_checkout']    = 'Checkout';
-$_['text_search']      = 'Search';
-$_['text_information'] = 'Information';
-$_['text_contact']     = 'Contact Us';
+$_['text_special']     = 'แนะนำพิเศษ';
+$_['text_account']     = 'บัญชีผู้ใช้งาน';
+$_['text_edit']        = 'ข้อมูลผู้ใช้งาน';
+$_['text_password']    = 'รหัสผ่าน';
+$_['text_address']     = 'ที่อยู่';
+$_['text_history']     = 'ประวัติการซื้อขาย';
+$_['text_download']    = 'ไฟล์ดาวน์โหลด';
+$_['text_cart']        = 'ตะกร้าสินค้า';
+$_['text_checkout']    = 'ดำเนินการสั่งซื้อ';
+$_['text_search']      = 'ค้นหา';
+$_['text_information'] = 'ข้อมูลข่าวสาร';
+$_['text_contact']     = 'ติดต่อเรา';
