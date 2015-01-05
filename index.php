@@ -19,6 +19,9 @@ require_once(DIR_SYSTEM . 'startup.php');
 //Facebook 4.0.0
 require_once(DIR_SYSTEM . 'facebook/4.0/autoload.php');
 
+//Push Notification
+require_once(DIR_SYSTEM . 'ApnsPHP/autoload.php');
+
 // Registry
 $registry = new Registry();
 
@@ -232,11 +235,14 @@ $registry->set('encryption', new Encryption($config->get('config_encryption')));
 //OpenBay Pro
 $registry->set('openbay', new Openbay($registry));
 
-// Image Resize
+//Image Resize
 $registry->set('resize', new Resize($registry));
 
-// Facebook
+//Facebook
 $registry->set('facebook', new Facebook($registry));
+
+//Push
+$registry->set('push', new Push($registry));
 
 // Event
 $event = new Event($registry);
