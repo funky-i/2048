@@ -26,15 +26,15 @@
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-account" class="form-horizontal">
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_id; ?></label>
+            <label class="col-sm-2 control-label" for="input-id"><?php echo $entry_id; ?></label>
             <div class="col-sm-10"><input type="text" name="facebook_id" value="<?php echo $facebook_id; ?>" placeholder="<?php echo $entry_id; ?>" id="entry-secret" class="form-control"/></div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_secret; ?></label>
+            <label class="col-sm-2 control-label" for="input-secret"><?php echo $entry_secret; ?></label>
             <div class="col-sm-10"><input type="text" name="facebook_secret" value="<?php echo $facebook_secret; ?>" placeholder="<?php echo $entry_secret; ?>" id="entry-secret" class="form-control"/></div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status"><span data-toggle="tooltip" title="<?php echo $help_uri; ?>"><?php echo $entry_uri; ?></span></label>
+            <label class="col-sm-2 control-label" for="input-uri"><span data-toggle="tooltip" title="<?php echo $help_uri; ?>"><?php echo $entry_uri; ?></span></label>
             <div class="col-sm-10"><input type="text" name="facebook_uri" value="<?php echo $facebook_uri; ?>" placeholder="<?php echo $help_route; ?>" id="entry-secret" class="form-control"/></div>
           </div>
           <div class="form-group">
