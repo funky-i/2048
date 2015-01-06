@@ -28,6 +28,7 @@ class ControllerModulePush extends Controller {
 		$data['entry_password'] = $this->language->get('entry_password');
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_mode'] = $this->language->get('entry_mode');
+		$data['entry_authentication'] = $this->language->get('entry_authentication');
 
 		$data['help_pem'] = $this->language->get('help_pem');
 		$data['help_password'] = $this->language->get('help_password');
@@ -72,6 +73,12 @@ class ControllerModulePush extends Controller {
 			$data['push_status'] = $this->request->post['push_status'];
 		} else {
 			$data['push_status'] = $this->config->get('push_status');
+		}
+
+		if (isset($this->request->post['push_authentication'])) {
+			$data['push_authentication'] = $this->request->post['push_authentication'];
+		} else {
+			$data['push_authentication'] = $this->config->get('push_authentication');
 		}
 
 		if (isset($this->request->post['push_pem'])) {

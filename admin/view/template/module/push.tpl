@@ -32,6 +32,20 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-secret"><span data-toggle="tooltip" data-html="true" data-trigger="click" title="<?php echo htmlspecialchars($help_password); ?>"><?php echo $entry_password; ?></span></label>
             <div class="col-sm-10"><input type="password" name="push_password" value="<?php echo $push_password; ?>" placeholder="<?php echo $entry_password; ?>" id="entry-secret" class="form-control"/></div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-authentication"><?php echo $entry_authentication; ?></label>
+            <div class="col-sm-10">
+              <select name="push_authentication" id="input-authentication" class="form-control">
+                <?php if ($push_authentication) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select>
+            </div>
           </div>          
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-mode"><?php echo $entry_mode; ?></label>
