@@ -203,14 +203,19 @@ class ControllerCommonMenu extends Controller {
 			'etsy' => $this->config->get('etsy_status'),
 		);
 
-		//Article Menu
+		// Article Menu
 		$data['text_article'] = $this->language->get('text_article');
 		$data['text_article_category'] = $this->language->get('text_article_category');
 
 		$data['article'] = $this->url->link('article/information', 'token=' . $this->session->data['token'], 'SSL');
 		$data['article_category'] = $this->url->link('article/category', 'token=' . $this->session->data['token'], 'SSL');
 
-		//Forum Menu
+		// Media
+		$data['text_media'] = $this->language->get('text_media');
+
+		$data['media'] = $this->url->link('media/image', 'token=' . $this->session->data['token'], 'SSL');
+
+		// Forum Menu
 		$data['text_forum'] = $this->language->get('text_forum');
 
 		$data['forum'] = $this->url->link('forum/information', 'token=' . $this->session->data['token'], 'SSL');

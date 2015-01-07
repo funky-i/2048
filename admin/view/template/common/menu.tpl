@@ -203,6 +203,8 @@
         <li><a href="<?php echo $article; ?>"><?php echo $text_article; ?></a></li>
       </ul>
   </li>
+  <li id="extension"><a class="parent"><i class="fa fa-youtube-play fa-fw"></i> <span><?php echo $text_media; ?></span></a>
+  </li>
   <li id="extension"><a class="parent"><i class="fa fa-thumb-tack fa-fw"></i> <span><?php echo $text_forum; ?></span></a>
   </li>
 </ul>
