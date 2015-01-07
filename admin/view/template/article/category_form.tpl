@@ -181,7 +181,7 @@ $('#input-description<?php echo $language['language_id']; ?>').summernote({
 $('input[name=\'path\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
-			url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+			url: 'index.php?route=article/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
 			dataType: 'json',
 			success: function(json) {
 				json.unshift({
@@ -202,35 +202,6 @@ $('input[name=\'path\']').autocomplete({
 		$('input[name=\'path\']').val(item['label']);
 		$('input[name=\'parent_id\']').val(item['value']);
 	}
-});
-//--></script> 
-  <script type="text/javascript"><!--
-$('input[name=\'filter\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/filter/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['filter_id']
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'filter\']').val('');
-
-		$('#category-filter' + item['value']).remove();
-
-		$('#category-filter').append('<div id="category-filter' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="category_filter[]" value="' + item['value'] + '" /></div>');
-	}
-});
-
-$('#category-filter').delegate('.fa-minus-circle', 'click', function() {
-	$(this).parent().remove();
 });
 //--></script> 
   <script type="text/javascript"><!--
