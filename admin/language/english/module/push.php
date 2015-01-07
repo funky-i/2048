@@ -8,7 +8,7 @@ $_['text_edit']        = 'Edit push notification Module';
 
 // Entry
 $_['entry_pem']     			= 'Cert Pem';
-$_['entry_password']    		= 'Cert Password';
+$_['entry_password']    		= 'Private key password';
 $_['entry_authentication']     	= 'Require Authentication';
 $_['entry_status']     			= 'Status';
 $_['entry_mode']     			= 'Test Mode';
