@@ -18,7 +18,7 @@
       <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
       <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
     </ul>
-  </li>
+  </li>  
   <li id="extension"><a class="parent"><i class="fa fa-puzzle-piece fa-fw"></i> <span><?php echo $text_extension; ?></span></a>
     <ul>
       <li><a href="<?php echo $installer; ?>"><?php echo $text_installer; ?></a></li>
@@ -196,5 +196,13 @@
         </ul>
       </li>
     </ul>
+  </li>
+  <li id="extension"><a class="parent"><i class="fa fa-quote-right fa-fw"></i> <span><?php echo $text_article; ?></span></a>
+      <ul>
+        <li><a href="<?php echo $article_category; ?>"><?php echo $text_article_category; ?></a></li>
+        <li><a href="<?php echo $article; ?>"><?php echo $text_article; ?></a></li>
+      </ul>
+  </li>
+  <li id="extension"><a class="parent"><i class="fa fa-thumb-tack fa-fw"></i> <span><?php echo $text_forum; ?></span></a>
   </li>
 </ul>
