@@ -214,12 +214,75 @@
                 </table>
               </div>
             </div>
-            <div class="tab-pane fade" id="tab-related">
+            <div class="tab-pane" id="tab-related">
+              <div class="form-group">
+                <label class="col-lg-2 control-label" for="input-related"><span data-toggle="tooltip" title="<?php echo $help_related; ?>"><?php echo $entry_related; ?></span></label>
+                <div class="col-lg-10">
+                  <input type="text" name="related" value="" placeholder="<?php echo $entry_related; ?>" id="input-related" class="form-control" />                  
+                </div>
+              </div>
               <div class="table-responsive">
+                <table id="related" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left"><?php echo $entry_name; ?></td>
+                      <td class="text-right"><?php echo $entry_sort_order; ?></td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $related_row = 0; ?>
+                    <?php foreach ($article_relates as $related) { ?>
+                      <tr id="image-row<?php echo $related_row; ?>">
+                        <td class="text-left"><?php echo $related['title']; ?><input type="hidden" name="article_related[<?php echo $related_row; ?>][article_id]" value="<?php echo $related['article_id']; ?>" /></td>                        
+                        <td class="text-right"><input type="text" name="article_related[<?php echo $related_row; ?>][sort_order]" value="<?php echo $related['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
+                        <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $related_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                      </tr>
+                    <?php $related_row++; ?>
+                    <?php } ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3"></td>
+                    </tr>
+                  </tfoot>                  
+                </table>
               </div>
             </div>
-            <div class="tab-pane fade" id="tab-youtube">
+            <div class="tab-pane" id="tab-youtube">
               <div class="table-responsive">
+                <table id="youtubes" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left"><?php echo $entry_image; ?></td>
+                      <td class="text-left"><span data-toggle="tooltip" title="<?php echo $help_youtube; ?>"><?php echo $entry_youtube_url; ?></span></td>
+                      <td class="text-left"><?php echo $entry_youtube_controls; ?></td>
+                      <td class="text-left"><?php echo $entry_youtube_autoplay; ?></td>
+                      <td class="text-right"><?php echo $entry_sort_order; ?></td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $youtube_row = 0; ?>
+                    <?php foreach ($article_youtubes as $article_youtube) { ?>
+                    <tr id="image-row<?php echo $youtube_row; ?>">
+                      <td class="text-left"><a href="" id="youtube-thumb-image<?php echo $youtube_row; ?>" data-toggle="image" class="img-thumbnail"><img src="<?php echo $article_youtube['thumb']; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="article_youtube[<?php echo $youtube_row; ?>][image]" value="<?php echo $article_youtube['image']; ?>" id="youtube-input-image<?php echo $youtube_row; ?>" /></td>
+                      <td class="text-right"><input type="text" name="article_youtube[<?php echo $youtube_row; ?>][url]" value="<?php echo $article_youtube['url']; ?>" placeholder="<?php echo $help_youtube; ?>" class="form-control" /></td>
+                      <td class="text-right"><input type="checkbox" name="article_youtube[<?php echo $youtube_row; ?>][controls]" value="1" placeholder="<?php echo $entry_youtube_controls; ?>" class="form-control" <?php echo ($article_youtube['controls']==1)? 'checked="checked"' : ''; ?> /></td>
+                      <td class="text-right"><input type="checkbox" name="article_youtube[<?php echo $youtube_row; ?>][autoplay]" value="1" placeholder="<?php echo $entry_youtube_autoplay; ?>" class="form-control" <?php echo ($article_youtube['autoplay']==1)? 'checked="checked"' : ''; ?> /></td>
+                      <td class="text-right"><input type="text" name="article_youtube[<?php echo $youtube_row; ?>][sort_order]" value="<?php echo $article_youtube['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
+                      <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $youtube_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                    </tr>
+                    <?php $youtube_row++; ?>
+                    <?php } ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="5"></td>
+                      <td class="text-left"><button type="button" onclick="addYoutube();" data-toggle="tooltip" title="<?php echo $button_youtube_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
             </div>
           </div>
@@ -227,6 +290,61 @@
       </div>
     </div>
   </div>
+<script type="text/javascript"><!--
+var related_row = <?php echo $related_row; ?>;
+
+$('input[name=\'related\']').autocomplete({
+  'source': function(request, response) {
+    $.ajax({
+      url: 'index.php?route=article/information/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {
+        json.unshift({
+          article_id: 0,
+          name: '<?php echo $text_none; ?>'
+        });
+
+        response($.map(json, function(item) {
+          return {
+            label: item['name'],
+            value: item['article_id']
+          }
+        }));
+      }
+    });
+  },
+  'select': function(item) {
+    console.log(item);
+    html  = '<tr id="related_row' + related_row + '">';
+    html += '  <td class="text-left">' + item['label'] + '<input type="hidden" name="article_related[' + related_row + '][article_id]" value="' + item['value'] + '" /></td>';
+    html += '  <td class="text-right"><input type="text" name="article_related[' + related_row + '][sort_order]" value="0" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>';
+    html += '  <td class="text-left"><button type="button" onclick="$(\'#related_row' + related_row  + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+    html += '</tr>';
+
+    $('#related tbody').append(html);
+
+    related_row++;
+  }
+});
+//--></script> 
+<script type="text/javascript"><!--
+var youtube_row = <?php echo $youtube_row; ?>;
+
+function addYoutube() {
+  html  = '<tr id="youtube_row' + youtube_row + '">';
+  html += '  <td class="text-left"><a href="" id="youtube-thumb-image' + youtube_row + '"data-toggle="image" class="img-thumbnail"><img src="<?php echo $placeholder; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /><input type="hidden" name="article_youtube[' + youtube_row + '][image]" value="" id="youtube-input-image' + youtube_row + '" /></td>';
+  html += '  <td class="text-right"><input type="text" name="article_youtube[' + youtube_row + '][url]" value="" placeholder="<?php echo $help_youtube; ?>" class="form-control" /></td>';
+  html += '  <td class="text-right"><input type="checkbox" name="article_youtube[' + youtube_row + '][controls]" value="1" placeholder="<?php echo $entry_youtube_controls; ?>" class="form-control" /></td>';
+  html += '  <td class=""><input type="checkbox" name="article_youtube[' + youtube_row + '][autoplay]" value="" placeholder="<?php echo $entry_youtube_autoplay; ?>" class="form-control" /></td>';
+  html += '  <td class="text-right"><input type="text" name="article_youtube[' + youtube_row + '][sort_order]" value="1" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>';
+  html += '  <td class="text-left"><button type="button" onclick="$(\'#youtube_row' + youtube_row  + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+  html += '</tr>';
+
+  $('#youtubes tbody').append(html);
+  
+  youtube_row++;
+}
+//--></script>
 <script type="text/javascript"><!--
 var image_row = <?php echo $image_row; ?>;
 

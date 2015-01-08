@@ -273,6 +273,7 @@ class ControllerArticleInformation extends Controller {
 		$data['text_default'] = $this->language->get('text_default');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_no_results'] = $this->language->get('text_no_results');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
@@ -290,14 +291,19 @@ class ControllerArticleInformation extends Controller {
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_categories'] = $this->language->get('entry_categories');
-
-		$data['help_filter'] = $this->language->get('help_filter');
+		$data['entry_related'] = $this->language->get('entry_related');
+		$data['entry_youtube_url'] = $this->language->get('entry_youtube_url');
+		$data['entry_youtube_controls'] = $this->language->get('entry_youtube_controls');
+		$data['entry_youtube_autoplay'] = $this->language->get('entry_youtube_autoplay');
+		
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_top'] = $this->language->get('help_top');
-		$data['help_column'] = $this->language->get('help_column');
+		$data['help_related'] = $this->language->get('help_related');
+		$data['help_youtube'] = $this->language->get('help_youtube');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
+		$data['button_youtube_add'] = $this->language->get('button_youtube_add');
 
 		$data['tab_general'] = $this->language->get('tab_general');
 		$data['tab_data'] = $this->language->get('tab_data');
@@ -431,7 +437,37 @@ class ControllerArticleInformation extends Controller {
 			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
 
-		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);		
+
+		// Youtube
+		if (isset($this->request->post['article_youtube'])) {
+			$youtubes = $this->request->post['article_youtube'];
+		} elseif (isset($this->request->get['article_id'])) {
+			$youtubes = $this->model_article_information->getArticleYoutubes($this->request->get['article_id']);
+		} else {
+			$youtubes = array();
+		}
+
+		$data['article_youtubes'] = array();
+
+		foreach ($youtubes as $youtube) {
+			if (is_file(DIR_IMAGE . $youtube['image'])) {
+				$image = $youtube['image'];
+				$thumb = $youtube['image'];
+			} else {
+				$image = '';
+				$thumb = 'no_image.png';
+			}
+
+			$data['article_youtubes'][] = array(
+				'image' => $image,
+				'url' => $youtube['url'],
+				'controls' => $youtube['controls'],
+				'autoplay' => $youtube['auto_play'],
+				'thumb'      => $this->model_tool_image->resize($thumb, 100, 100),
+				'sort_order' => $youtube['sort_order']
+			);
+		}
 
 		// Images
 		if (isset($this->request->post['article_image'])) {
@@ -457,6 +493,26 @@ class ControllerArticleInformation extends Controller {
 				'image'      => $image,
 				'thumb'      => $this->model_tool_image->resize($thumb, 100, 100),
 				'sort_order' => $article_image['sort_order']
+			);
+		}
+
+		if (isset($this->request->post['article_related'])) {
+			$article_related = $this->request->post['article_related'];
+		} elseif (isset($this->request->get['article_id'])) {
+			$article_related = $this->model_article_information->getArticleRelated($this->request->get['article_id']);
+		} else {
+			$article_related = array();
+		}
+
+		$data['article_relates'] = array();
+
+		foreach ($article_related as $related) {
+			$article = $this->model_article_information->getArticle($related['article_related_id']);
+
+			$data['article_relates'][] = array(
+				'title' => $article['name'],
+				'article_id' => $related['article_related_id'],
+				'sort_order' => $related['sort_order']
 			);
 		}
 
@@ -531,7 +587,7 @@ class ControllerArticleInformation extends Controller {
 				'limit'       => 5
 			);
 
-			$results = $this->model_article_information->getCategories($filter_data);
+			$results = $this->model_article_information->getArticles($filter_data);
 
 			foreach ($results as $result) {
 				$json[] = array(

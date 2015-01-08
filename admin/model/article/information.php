@@ -14,10 +14,10 @@ class ModelArticleInformation extends Model {
 	}
 
 	public function getArticles($data = array()) {
-		$sql = "SELECT a.article_id AS article_id, a.*, ac.name FROM " . DB_PREFIX . "article a LEFT JOIN " . DB_PREFIX . "article_description ac ON (a.article_id = ac.article_id) WHERE ac.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT a.article_id AS article_id, a.*, ad.name FROM " . DB_PREFIX . "article a LEFT JOIN " . DB_PREFIX . "article_description ad ON (a.article_id = ad.article_id) WHERE ad.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND cd2.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND ad.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sql .= " GROUP BY a.article_id";
@@ -94,6 +94,38 @@ class ModelArticleInformation extends Model {
 			}
 		}
 
+		if (isset($data['article_youtube'])) {
+			foreach ($data['article_youtube'] as $article_youtube) {
+				if (isset($article_youtube['url']) && (!empty($article_youtube['url']))) {
+
+					$url = html_entity_decode($article_youtube['url']);
+					parse_str(parse_url($url, PHP_URL_QUERY ),$youtube_url);			
+
+					if (isset($youtube_url['v'])) {
+						$video = $youtube_url['v'];
+					} else if (strpos($url, 'v=') !== false) {
+						$video = str_replace('v=', '', $url);
+					} else {
+						$video = $article_youtube['url'];
+					}
+
+					$controls = (isset($article_youtube['controls']))? $article_youtube['controls'] : 0;
+					$autoplay = (isset($article_youtube['autoplay']))? $article_youtube['autoplay'] : 0;
+
+					$this->db->query("INSERT INTO " . DB_PREFIX . "article_youtube SET article_id = '" . (int)$article_id . "', image = '" . $this->db->escape($article_youtube['image']) . "', url = '" . $this->db->escape($video) . "', `controls` = '" . (int)$controls . "', `auto_play` = '" . (int)$autoplay . "', sort_order = '" . (int)$article_youtube['sort_order'] . "'");
+				}
+			}
+		}		
+
+		if (isset($data['article_related'])) {
+			
+			foreach ($data['article_related'] as $article_related) {
+
+				$this->db->query("DELETE FROM " . DB_PREFIX . "article_related WHERE article_id = '" . (int)$article_id . "' AND article_related_id = '" . (int)$article_related['article_id'] . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "article_related SET article_id = '" . (int)$article_id . "', article_related_id = '" . (int)$article_related['article_id'] . "', sort_order = '" . (int)$article_related['sort_order'] . "'");
+			}
+		}
+
 		$this->cache->delete('article');		
 
 		return $article_id;
@@ -143,6 +175,42 @@ class ModelArticleInformation extends Model {
 			}
 		}
 
+		$this->db->query("DELETE FROM " . DB_PREFIX . "article_youtube WHERE article_id = '" . (int)$article_id . "'");
+
+		if (isset($data['article_youtube'])) {
+			foreach ($data['article_youtube'] as $article_youtube) {
+				if (isset($article_youtube['url']) && (!empty($article_youtube['url']))) {
+
+					$url = html_entity_decode($article_youtube['url']);
+					parse_str(parse_url($url, PHP_URL_QUERY ),$youtube_url);			
+
+					if (isset($youtube_url['v'])) {
+						$video = $youtube_url['v'];
+					} else if (strpos($url, 'v=') !== false) {
+						$video = str_replace('v=', '', $url);
+					} else {
+						$video = $article_youtube['url'];
+					}
+
+					$controls = (isset($article_youtube['controls']))? $article_youtube['controls'] : 0;
+					$autoplay = (isset($article_youtube['autoplay']))? $article_youtube['autoplay'] : 0;
+
+					$this->db->query("INSERT INTO " . DB_PREFIX . "article_youtube SET article_id = '" . (int)$article_id . "', image = '" . $this->db->escape($article_youtube['image']) . "', url = '" . $this->db->escape($video) . "', `controls` = '" . (int)$controls . "', `auto_play` = '" . (int)$autoplay . "', sort_order = '" . (int)$article_youtube['sort_order'] . "'");
+				}
+			}
+		}
+
+		$this->db->query("DELETE FROM " . DB_PREFIX . "article_related WHERE article_id = '" . (int)$article_id . "'");
+
+		if (isset($data['article_related'])) {
+
+			foreach ($data['article_related'] as $article_related) {
+
+				$this->db->query("DELETE FROM " . DB_PREFIX . "article_related WHERE article_id = '" . (int)$article_id . "' AND article_related_id = '" . (int)$article_related['article_id'] . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "article_related SET article_id = '" . (int)$article_id . "', article_related_id = '" . (int)$article_related['article_id'] . "', sort_order = '" . (int)$article_related['sort_order'] . "'");
+			}
+		}
+
 		$this->cache->delete('article');
 		
 	}
@@ -189,8 +257,20 @@ class ModelArticleInformation extends Model {
 		return $article_store_data;
 	}
 
+	public function getArticleRelated($article_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "article_related WHERE article_id = '" . (int)$article_id . "' ORDER BY sort_order ASC");
+
+		return $query->rows;
+	}
+
 	public function getArticleImages($article_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "article_image WHERE article_id = '" . (int)$article_id . "' ORDER BY sort_order ASC");
+
+		return $query->rows;
+	}
+
+	public function getArticleYoutubes($article_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "article_youtube WHERE article_id = '" . (int)$article_id . "' ORDER BY sort_order ASC");
 
 		return $query->rows;
 	}

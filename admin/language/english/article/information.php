@@ -32,10 +32,19 @@ $_['entry_image']            = 'Image';
 $_['entry_top']              = 'Top';
 $_['entry_sort_order']       = 'Sort Order';
 $_['entry_status']           = 'Status';
+$_['entry_related']          = 'Related Articles';
+$_['entry_youtube_url']		 = 'Youtube URL';
+$_['entry_youtube_controls']		 = 'Show Controls';
+$_['entry_youtube_autoplay']		 = 'Auto Play';
+
+// Button
+$_['button_youtube_add'] 	 = 'Add Youtube';
 
 // Help
 $_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the keyword is globally unique.';
 $_['help_top']               = 'Display in the top menu bar. Only works for the top parent article.';
+$_['help_related']			 = '(Autocomplete)';
+$_['help_youtube']			 = 'e.g. https://www.youtube.com/watch?v=gzx3jzZ1lgk';
 
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';
