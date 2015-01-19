@@ -33,8 +33,11 @@ class ControllerRestCustomer extends Controller {
 			$json['error'] = error(array('status' => false));
 			
 		} else {
-			$json['error'] = error(array('status' => true, 'description' => $this->language->get('error_login')));
+			$errStatus = true;
+			$errMessage = $this->language->get('error_login');			
 		}
+
+		$json['error'] = error(array('status' => $errStatus, 'description' => $errMessage));
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

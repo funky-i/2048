@@ -22,13 +22,20 @@ class ControllerRestEvent extends Controller {
 
 			if (!$event) {			
 				$this->model_extension_event->addEvent($name, $trigger, $route);
+				
+				$errStatus = false;
+				$errMessage = 'Success: has been add this event!!';	
+
 				$json['error'] = error(array('status' => false, 'description' => 'Success: has been add this event!!'));
 			} else {
-				$json['error'] = error(array('status' => true, 'description' => 'Error: already add this event!!'));
+				$errStatus = true;
+				$errMessage = 'Error: already add this event!!';				
 			}
 			
 			// $this->event->trigger('post.rest.event.add',  $filter);
 		}
+
+		$json['error'] = error(array('status' => $errStatus, 'description' => $errMessage));
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

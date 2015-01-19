@@ -15,11 +15,17 @@ class ControllerRestLogin extends Controller {
 				
 				$this->pattern();				
 				
+				$errStatus = false;
+				$errMessage = $this->language->get('text_success');	
+
 				$json['error'] = error(array('status' => false, 'description' => $this->language->get('text_success')));
 			}else {
-				$json['error'] = error(array('status' => true, 'description' => $this->language->get('error_login')));
+				$errStatus = true;
+				$errMessage = $this->language->get('error_login');				
 			}
 		}
+
+		$json['error'] = error(array('status' => $errStatus, 'description' => $errMessage));
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

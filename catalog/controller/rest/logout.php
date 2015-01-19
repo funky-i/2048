@@ -18,8 +18,12 @@ class ControllerRestLogout extends Controller {
 		unset($this->session->data['facebook_token']);
 		unset($this->session->data['facebook_session']);
 
-		$this->load->language('rest/logout');
-		$json['error'] = error(array('status' => false, 'description' => $this->language->get('text_success')));
+		$this->load->language('rest/logout');		
+
+		$errStatus = false;
+		$errMessage = $this->language->get('text_success');	
+
+		$json['error'] = error(array('status' => $errStatus, 'description' => $errMessage));
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
