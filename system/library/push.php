@@ -45,16 +45,25 @@ class Push {
 		$sql .= " WHERE device_token = '" . $this->db->escape($data['device_token']). "'";
 		$query = $this->db->query($sql);
 
-		//if no record for the latest one, insert it
 		if (empty($query->rows)) {
-
-			//DO INSERT new record
+			
 			$sql = "INSERT INTO " . DB_PREFIX . "customer_to_device SET device_token = '" . $this->db->escape($data['device_token']) . "'";
 			$sql .= ", customer_id = '" . (int)$data['customer_id'] . "'";
 			$sql .= ", os = '" . $this->db->escape($data['os']) . "'";
+
+			if (isset($data['device_type']))
+				$sql .= ", device_type = '" . $this->db->escape($data['device_type']) . "'";
+
+			if (isset($data['version']))
+				$sql .= ", `version` = '" . $this->db->escape($data['version']) . "'";
+
 			$sql .= ", status = 1, date_added = NOW(), date_modified = NOW()";
 
 			$this->db->query($sql);
+
+			return true;
+		} else {
+			return false;
 		}
 
 	}
@@ -65,10 +74,8 @@ class Push {
 		$sql .= " WHERE device_token = '" . $this->db->escape($data['device_token']). "'";
 		$sql .= " AND customer_id = '" . (int)$data['customer_id'] . "'";
 		$query = $this->db->query($sql);
-
-		//if no record for the latest one, insert it
-		if (!empty($query->rows)) {
-			//DO INSERT new record
+		
+		if (!empty($query->rows)) {			
 			$sql = "UPDATE customer_to_device SET customer_id = '" . $data['customer_id'] . "' WHERE device_token = '" . $this->db->escape($data['device_token']) . "'";
 			$this->db->query($sql);
 		}
@@ -82,21 +89,29 @@ class Push {
 		return $query->rows;
 	}
 
-	public function send($data) {
+	public function send($data = array()) {
+		$message = "";		
+
+		if (isset($data['message']))
+			$message = $data['message'];
+
+		if (isset($data['devices'])) {
+			$devices = $data['devices'];
+		} else {
+			$results = $this->getDeviceToken('ios');
+
+			foreach ($results as $result) {
+				$devices[] = array(
+					'device_token' => $result['device_token'],
+					'message' => $message
+				);
+			}
+		}
 		
-		// $this->PUSH_PERMISSION = PRODUCTION_ENV ? PUSH_PERMISSION_PROD : PUSH_PERMISSION_DEV;
-		// $this->PUSH_PASSPHRASE = PRODUCTION_ENV ? PUSH_PASSPHRASE_PROD : PUSH_PASSPHRASE_DEV;
-
-		$ios = $this->getDeviceToken('ios');
-		// $android = $this->getDeviceToken('android');
-
-		// $log_id = $this->addLogMessage($data);		
-		// $this->sendGoogleCloudMessage($android,$data,$log_id);		
-
-		$this->pushToAPNS($ios, $data);
+		$this->pushToAPNS($devices);
 	}
 
-	public function pushToAPNS($devices, $msg, $data = array()) {
+	protected function pushToAPNS($devices) {
 		
 		$push = new ApnsPHP_Push(
 			$this->push_environment,
@@ -104,9 +119,8 @@ class Push {
 		);
 
 		if ($this->config->get('push_authentication')) {
-			$push->setProviderCertificatePassphrase($this->push_cert_pass);
-			// $push->setRootCertificationAuthority('cert/scboffice_aps_dev_key.pem');		
-		}		
+			$push->setProviderCertificatePassphrase($this->push_cert_pass);			
+		}
 		
 		$push->connect();		
 
